@@ -36,8 +36,8 @@ export default function Hero() {
     <section ref={ref} id="top" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Dynamic Parallax Background Gradients */}
       <motion.div style={{ y: yBg, scale: scaleImage }} className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-radial-gradient opacity-80" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 blur-[130px] rounded-full" />
+        <div className="absolute inset-0 bg-radial-gradient opacity-50" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-950/40 blur-[150px] rounded-full" />
       </motion.div>
       
       <motion.div 
@@ -48,9 +48,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center px-5 py-2 mb-8 text-sm font-bold rounded-full bg-blue-900/10 border border-blue-500/20 text-cyan-400 backdrop-blur-md shadow-[0_0_20px_rgba(34,211,238,0.1)] uppercase tracking-widest"
+          className="inline-flex items-center px-4 py-2 mb-8 text-xs sm:text-sm font-bold rounded-full bg-blue-950/30 border border-blue-900/50 text-blue-300 backdrop-blur-md uppercase tracking-widest"
         >
-          <span className="w-2 h-2 mr-3 rounded-full bg-cyan-400 animate-pulse" />
+          <span className="w-2 h-2 mr-3 rounded-full bg-blue-500 animate-pulse" />
           Full Stack Developer & Part-Time Vibe Coder 👨‍💻
         </motion.div>
 
@@ -58,16 +58,16 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-6xl md:text-8xl lg:text-[7rem] font-extrabold tracking-tighter text-white mb-6 leading-normal md:leading-[1.2]"
+          className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-6 leading-tight md:leading-[1.1] pb-2"
         >
-          I'm <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 text-glow pb-2">Sautrik Roy</span>.
+          I'm <span className="inline-block text-transparent bg-clip-text bg-gradient-to-br from-white via-blue-400 to-indigo-900 text-glow pb-2">Sautrik Roy</span>.
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-2xl mb-12 text-xl md:text-2xl text-zinc-300 font-medium leading-relaxed tracking-tight"
+          className="max-w-2xl mb-12 text-lg sm:text-xl md:text-2xl text-zinc-400 font-medium leading-relaxed tracking-tight"
         >
           I architect fast, scalable systems and pixel-perfect interfaces. 
           Turning complex problems into seamless digital experiences.
@@ -77,18 +77,18 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6"
+          className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full sm:w-auto"
         >
           <a
             href="#projects"
-            className="group flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all bg-white/5 rounded-full hover:bg-white/10 backdrop-blur-xl border border-white/10 hover:border-cyan-400/30"
+            className="group flex items-center justify-center w-full sm:w-auto px-8 py-4 text-sm sm:text-base md:text-lg font-bold text-white transition-all bg-white/5 rounded-2xl hover:bg-white/10 backdrop-blur-xl border border-white/5 hover:border-blue-500/30"
           >
             Explore Work
             <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2" />
           </a>
           <a
             href="#contact"
-            className="flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full hover:shadow-[0_0_40px_rgba(34,211,238,0.4)] hover:scale-105 active:scale-95"
+            className="flex items-center justify-center w-full sm:w-auto px-8 py-4 text-sm sm:text-base md:text-lg font-bold text-white transition-all bg-zinc-900 border border-zinc-800 rounded-2xl hover:bg-blue-950/40 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(37,99,235,0.15)] active:scale-95"
           >
             Get in Touch
           </a>
@@ -100,18 +100,18 @@ export default function Hero() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-16 w-full flex justify-center items-center space-x-10 text-zinc-500 z-20"
+        className="absolute bottom-10 sm:bottom-16 w-full flex justify-center items-center space-x-10 text-zinc-600 z-20"
       >
-        <a href="https://github.com/sautrikroy17" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 hover:scale-110 transition-all duration-300 cursor-pointer p-2">
-          <GithubIcon className="w-7 h-7" />
+        <a href="https://github.com/sautrikroy17" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 hover:scale-110 transition-all duration-300 cursor-pointer p-2">
+          <GithubIcon className="w-6 h-6 sm:w-7 sm:h-7" />
           <span className="sr-only">GitHub</span>
         </a>
-        <a href="https://www.linkedin.com/in/sautrik-roy-1779r" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 hover:scale-110 transition-all duration-300 cursor-pointer p-2">
-          <LinkedinIcon className="w-7 h-7" />
+        <a href="https://www.linkedin.com/in/sautrik-roy-1779r" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 hover:scale-110 transition-all duration-300 cursor-pointer p-2">
+          <LinkedinIcon className="w-6 h-6 sm:w-7 sm:h-7" />
           <span className="sr-only">LinkedIn</span>
         </a>
-        <a href="mailto:sautrikroy2006@gmail.com" className="hover:text-cyan-400 hover:scale-110 transition-all duration-300 cursor-pointer p-2">
-          <Mail className="w-7 h-7" />
+        <a href="mailto:sautrikroy2006@gmail.com" className="hover:text-blue-400 hover:scale-110 transition-all duration-300 cursor-pointer p-2">
+          <Mail className="w-6 h-6 sm:w-7 sm:h-7" />
           <span className="sr-only">Email</span>
         </a>
       </motion.div>

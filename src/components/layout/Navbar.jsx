@@ -52,9 +52,9 @@ export default function Navbar() {
       >
         <a
           href="#top"
-          className="text-lg font-bold tracking-tight text-white hover:text-purple-400 transition-colors"
+          className="text-lg font-bold tracking-tight text-white hover:text-blue-400 transition-colors"
         >
-          Sautrik<span className="text-purple-500">.</span>
+          Sautrik<span className="text-blue-500">.</span>
         </a>
 
         <div className="hidden md:flex items-center space-x-8">
@@ -71,7 +71,7 @@ export default function Navbar() {
 
         <a
           href="#contact"
-          className="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-white transition-all bg-purple-600 rounded-full hover:bg-purple-700 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+          className="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-white transition-all bg-zinc-900 border border-zinc-800 rounded-full hover:bg-blue-950/40 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)]"
         >
           Contact Me
         </a>
