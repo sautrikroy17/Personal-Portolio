@@ -26,7 +26,9 @@
   }
   
   body {
-    @apply bg-zinc-950 text-zinc-100 font-sans antialiased overflow-x-hidden selection:bg-purple-900 selection:text-white;
+    @apply text-zinc-100 font-sans antialiased overflow-x-hidden selection:bg-blue-900 selection:text-white;
+    background: radial-gradient(circle at top, theme('colors.zinc.900') 0%, theme('colors.zinc.950') 40%, #000000 100%);
+    background-attachment: fixed;
   }
   
   html {
@@ -37,7 +39,7 @@
 /* Custom Gradients / Glows */
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 50px theme('colors.cyan.400/40');
+    text-shadow: 0 0 30px theme('colors.blue.500/20');
   }
   .bg-radial-gradient {
     background: radial-gradient(circle at 50% -20%, theme('colors.blue.900/40'), transparent 65%);
