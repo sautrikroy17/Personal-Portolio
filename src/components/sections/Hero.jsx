@@ -36,8 +36,7 @@ export default function Hero() {
     <section ref={ref} id="top" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Dynamic Parallax Background Gradients */}
       <motion.div style={{ y: yBg, scale: scaleImage }} className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-radial-gradient opacity-50" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-950/40 blur-[150px] rounded-full" />
+        {/* Intentionally left blank to allow global App.jsx animated gradient mesh to shine through */}
       </motion.div>
       
       <motion.div 

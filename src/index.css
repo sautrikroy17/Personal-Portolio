@@ -26,9 +26,7 @@
   }
   
   body {
-    @apply text-zinc-100 font-sans antialiased overflow-x-hidden selection:bg-blue-900 selection:text-white;
-    background: radial-gradient(circle at top, theme('colors.zinc.900') 0%, theme('colors.zinc.950') 40%, #000000 100%);
-    background-attachment: fixed;
+    @apply text-zinc-100 font-sans antialiased overflow-x-hidden selection:bg-cyan-900 selection:text-white bg-transparent;
   }
   
   html {
