@@ -47,10 +47,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center px-4 py-2 mb-8 text-xs sm:text-sm font-bold rounded-full bg-blue-950/30 border border-blue-900/50 text-blue-300 backdrop-blur-md uppercase tracking-widest"
+          className="inline-flex items-center px-4 py-2 mb-8 text-xs sm:text-sm font-bold rounded-full bg-blue-950/30 border border-blue-900/50 text-blue-300 backdrop-blur-md tracking-widest uppercase shadow-[0_0_15px_rgba(30,58,138,0.3)]"
         >
           <span className="w-2 h-2 mr-3 rounded-full bg-blue-500 animate-pulse" />
-          Full Stack Developer & Part-Time Vibe Coder 👨‍💻
+          Full Stack Developer • Where Code Meets Creativity
         </motion.div>
 
         <motion.h1
@@ -62,15 +62,19 @@ export default function Hero() {
           I'm <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-100 via-blue-400 to-indigo-600 font-display text-glow pb-2">Sautrik Roy</span>.
         </motion.h1>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-2xl mb-12 text-lg sm:text-xl md:text-2xl text-zinc-400 font-medium leading-relaxed tracking-tight"
+          className="max-w-2xl mb-12 flex flex-col items-center space-y-3"
         >
-          I architect fast, scalable systems and pixel-perfect interfaces. 
-          Turning complex problems into seamless digital experiences.
-        </motion.p>
+          <p className="text-xl sm:text-2xl text-zinc-300 font-medium tracking-tight">
+            I turn ideas into experiences you can feel.
+          </p>
+          <p className="text-lg sm:text-xl font-display font-medium tracking-[0.2em] text-blue-400/80 uppercase">
+            Simple. Fast. Intentional.
+          </p>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
