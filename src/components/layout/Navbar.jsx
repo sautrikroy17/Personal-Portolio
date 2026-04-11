@@ -52,9 +52,10 @@ export default function Navbar() {
       >
         <a
           href="#top"
-          className="text-lg font-bold tracking-tight text-white hover:text-blue-400 transition-colors"
+          className="flex items-center space-x-2 text-lg font-bold tracking-tight text-white hover:text-blue-400 transition-colors"
         >
-          Sautrik<span className="text-blue-500">.</span>
+          <img src="/logo.png" alt="Sautrik Logo" className="w-8 h-8 rounded-lg" />
+          <span>Sautrik<span className="text-blue-500">.</span></span>
         </a>
 
         <div className="hidden md:flex items-center space-x-8">
