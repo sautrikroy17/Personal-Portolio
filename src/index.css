@@ -39,7 +39,7 @@
 /* Custom Gradients / Glows */
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 30px theme('colors.blue.500/20');
+    text-shadow: 0 0 40px theme('colors.cyan.400/30');
   }
   .bg-radial-gradient {
     background: radial-gradient(circle at 50% -20%, theme('colors.blue.900/40'), transparent 65%);

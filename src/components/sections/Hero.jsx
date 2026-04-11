@@ -60,7 +60,7 @@ export default function Hero() {
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-6 leading-tight md:leading-[1.1] pb-2"
         >
-          I'm <span className="inline-block text-transparent bg-clip-text bg-gradient-to-br from-white via-blue-200 to-blue-600 text-glow pb-2">Sautrik Roy</span>.
+          I'm <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 text-glow pb-2">Sautrik Roy</span>.
         </motion.h1>
 
         <motion.p
