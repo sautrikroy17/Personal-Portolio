@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
 
 @theme {
   --color-zinc-900: #121212;
@@ -37,7 +38,10 @@
 /* Custom Gradients / Glows */
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 40px theme('colors.cyan.400/30');
+    text-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+  }
+  .font-display {
+    font-family: 'Space Grotesk', sans-serif;
   }
   .bg-radial-gradient {
     background: radial-gradient(circle at 50% -20%, theme('colors.blue.900/40'), transparent 65%);
