@@ -18,8 +18,8 @@ const projects = [
     tags: ["React", "Node.js", "Gemini AI", "MongoDB", "MySQL"],
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
     featured: true,
-    liveUrl: "#",
-    githubUrl: "https://github.com/sautrikroy17",
+    liveUrl: "https://legacy-lens-beta.vercel.app",
+    githubUrl: "https://github.com/sautrikroy17/LegacyLens-2.O",
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const projects = [
     tags: ["Next.js", "C++", "Tailwind", "Gemini API"],
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop",
     featured: false,
-    liveUrl: "#",
+    liveUrl: "https://quizzify-ai.vercel.app",
     githubUrl: "https://github.com/sautrikroy17/Quizzify",
   },
   {
