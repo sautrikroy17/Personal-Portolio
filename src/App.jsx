@@ -27,7 +27,7 @@ function App() {
         </main>
       </div>
 
-      {/* MIT License Copyright Footer */}
+      {/* MIT Copyright Footer */}
       <footer className="relative z-10 border-t border-white/5 py-6 text-center">
         <p className="text-zinc-600 text-sm font-medium tracking-wide">
           © {new Date().getFullYear()} Sautrik Roy &mdash; Licensed under the MIT License
