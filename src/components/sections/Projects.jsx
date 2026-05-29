@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Music2 } from "lucide-react";
 
 function GithubIcon(props) {
   return (
@@ -12,70 +12,182 @@ function GithubIcon(props) {
 
 const projects = [
   {
+    id: 0,
+    title: "Loop — Feel the Waves",
+    description:
+      "A production-grade music streaming platform with a mood-adaptive intelligence engine, real-time cross-device sync, synchronized lyrics, 5 dynamic themes, and a buttery-smooth mobile-first UI. Streams millions of tracks instantly — zero ads, zero buffering. Built end-to-end in TypeScript with full CSP hardening, rate limiting, and HSTS.",
+    tags: ["React 19", "TanStack Start", "Supabase", "TypeScript", "Vercel", "Framer Motion"],
+    image:
+      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop",
+    featured: true,
+    liveUrl: "https://loop-feel.vercel.app",
+    githubUrl: "https://github.com/sautrikroy17/Loop-Feel-the-waves",
+    accent: "from-purple-500 to-pink-500",
+    glowColor: "rgba(168,85,247,0.15)",
+    glowBorder: "purple-500/40",
+    badge: "🎵 New",
+  },
+  {
     id: 1,
     title: "Legacy Lens",
-    description: "Built for a competitive hackathon, an AI-powered tool that converts natural language into complex database queries, bridging the gap between non-technical users and databases.",
+    description:
+      "Built for a competitive hackathon, an AI-powered tool that converts natural language into complex database queries, bridging the gap between non-technical users and databases.",
     tags: ["React", "Node.js", "Gemini AI", "MongoDB", "MySQL"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-    featured: true,
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+    featured: false,
     liveUrl: "https://legacy-lens-beta.vercel.app",
     githubUrl: "https://github.com/sautrikroy17/LegacyLens-2.O",
+    accent: "from-blue-400 to-cyan-400",
+    glowColor: "rgba(34,211,238,0.15)",
+    glowBorder: "cyan-400/40",
   },
   {
     id: 2,
     title: "Quizzify AI",
-    description: "An AI-driven quiz generator built with a resilient C++ backend for complex scheduling and dynamic scaling. Full stack implementation with Next.js frontend.",
+    description:
+      "An AI-driven quiz generator built with a resilient C++ backend for complex scheduling and dynamic scaling. Full stack implementation with Next.js frontend.",
     tags: ["Next.js", "C++", "Tailwind", "Gemini API"],
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop",
     featured: false,
     liveUrl: "https://quizzify-ai.vercel.app",
     githubUrl: "https://github.com/sautrikroy17/Quizzify",
+    accent: "from-emerald-400 to-teal-400",
+    glowColor: "rgba(52,211,153,0.15)",
+    glowBorder: "emerald-400/40",
   },
   {
     id: 3,
     title: "Credit Card Validator",
-    description: "A robust credit card validation engine utilizing the Luhn algorithm for fast, secure, and offline checking. Highly optimized logic.",
+    description:
+      "A robust credit card validation engine utilizing the Luhn algorithm for fast, secure, and offline checking. Highly optimized C++ logic.",
     tags: ["C++", "Algorithms", "Terminal"],
-    image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop",
     featured: false,
-    liveUrl: "#",
+    liveUrl: "https://github.com/sautrikroy17",
     githubUrl: "https://github.com/sautrikroy17",
+    accent: "from-orange-400 to-amber-400",
+    glowColor: "rgba(251,146,60,0.15)",
+    glowBorder: "orange-400/40",
   },
   {
     id: 4,
     title: "Future Venture: Fintech Engine",
-    description: "An upcoming project researching quantitative development, algorithmic logic, and high-frequency data structures for DeFi and banking tech.",
+    description:
+      "An upcoming project researching quantitative development, algorithmic logic, and high-frequency data structures for DeFi and banking tech.",
     tags: ["Fintech", "Go / Rust", "Analytics"],
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&auto=format&fit=crop",
     featured: false,
     liveUrl: "#",
     githubUrl: "#",
+    accent: "from-blue-400 to-cyan-400",
+    glowColor: "rgba(34,211,238,0.15)",
+    glowBorder: "cyan-400/40",
   },
 ];
 
-function ProjectCard({ project, index }) {
+function FeaturedProjectCard({ project }) {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["0 1", "1.3 1"],
-  });
-
-  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
-  const yImage = useTransform(scrollYProgress, [0, 1], ["20%", "0%"]);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["0 1", "1.2 1"] });
+  const scaleProgress   = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
+  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.2, 1]);
 
   return (
     <motion.div
       ref={ref}
       style={{ scale: scaleProgress, opacity: opacityProgress }}
-      whileHover={{ y: -10 }}
-      className={`group relative overflow-hidden rounded-[2.5rem] glass-card transition-all duration-500 hover:shadow-[0_0_50px_rgba(34,211,238,0.15)] hover:border-cyan-400/40 ${
-        project.featured ? "md:col-span-2 md:flex md:h-[450px]" : "h-[500px] flex flex-col"
-      }`}
+      className="group relative col-span-1 md:col-span-2 overflow-hidden rounded-[2.5rem] glass-card border border-white/5 transition-all duration-700"
+      style={{ scale: scaleProgress, opacity: opacityProgress, boxShadow: `0 0 0 0 ${project.glowColor}` }}
+      whileHover={{ boxShadow: `0 0 80px ${project.glowColor}` }}
     >
-      {/* Image Section */}
-      <div className={`relative overflow-hidden ${project.featured ? "md:w-[55%] h-64 md:h-full" : "h-60"}`}>
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/40 to-transparent z-10 md:bg-gradient-to-r" />
+      {/* Background image with strong gradient overlay */}
+      <div className="absolute inset-0">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover scale-105 transition-transform duration-1000 group-hover:scale-110 opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-zinc-950/30" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 p-10 md:p-14 flex flex-col justify-end min-h-[480px]">
+        {/* Badge */}
+        {project.badge && (
+          <span className={`inline-flex items-center gap-2 px-4 py-1.5 mb-6 w-fit text-xs font-bold rounded-full bg-gradient-to-r ${project.accent} text-black tracking-widest uppercase shadow-lg`}>
+            {project.badge}
+          </span>
+        )}
+
+        <div className="flex items-center gap-3 mb-4">
+          <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${project.accent} flex items-center justify-center shadow-lg`}>
+            <Music2 className="w-5 h-5 text-black" />
+          </div>
+          <h3 className={`text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${project.accent} tracking-tight`}>
+            {project.title}
+          </h3>
+        </div>
+
+        <p className="text-zinc-300 text-base md:text-lg leading-relaxed mb-8 max-w-3xl font-medium">
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-2 mb-8">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className={`px-3 py-1 text-xs font-bold rounded-full border backdrop-blur-md bg-white/5 text-white border-white/10`}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-8">
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold text-black bg-gradient-to-r ${project.accent} hover:opacity-90 transition-all shadow-lg hover:scale-105 active:scale-95`}
+          >
+            <ExternalLink className="w-4 h-4" />
+            Live App
+          </a>
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-sm font-bold text-zinc-400 hover:text-white transition-colors"
+          >
+            <GithubIcon className="w-5 h-5" />
+            Source Code
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function ProjectCard({ project }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["0 1", "1.3 1"] });
+  const scaleProgress   = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
+  const yImage          = useTransform(scrollYProgress, [0, 1], ["20%", "0%"]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ scale: scaleProgress, opacity: opacityProgress }}
+      whileHover={{ y: -10, boxShadow: `0 0 50px ${project.glowColor}` }}
+      className={`group relative overflow-hidden rounded-[2.5rem] glass-card h-[500px] flex flex-col transition-all duration-500 border border-white/5 hover:border-${project.glowBorder}`}
+    >
+      {/* Image */}
+      <div className="relative overflow-hidden h-60">
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/40 to-transparent z-10" />
         <motion.img
           style={{ y: yImage }}
           src={project.image}
@@ -84,21 +196,20 @@ function ProjectCard({ project, index }) {
         />
       </div>
 
-      {/* Content Section */}
-      <div className={`p-8 md:p-10 flex flex-col justify-between z-20 relative ${project.featured ? "md:w-[45%]" : "flex-1"}`}>
+      {/* Content */}
+      <div className="p-8 flex flex-col flex-1 justify-between z-20 relative">
         <div>
-          <h3 className="text-3xl font-extrabold text-white mb-4 group-hover:text-cyan-400 transition-colors duration-300">
+          <h3 className={`text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${project.accent} mb-3 transition-colors duration-300`}>
             {project.title}
           </h3>
-          <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-6 font-medium">
+          <p className="text-zinc-400 text-sm leading-relaxed mb-5 font-medium">
             {project.description}
           </p>
-          
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-2 mb-4">
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 text-xs font-semibold text-cyan-300 bg-cyan-500/10 rounded-full border border-cyan-500/20 backdrop-blur-md"
+                className="px-3 py-1 text-xs font-semibold text-zinc-300 bg-white/5 rounded-full border border-white/10 backdrop-blur-md"
               >
                 {tag}
               </span>
@@ -107,11 +218,21 @@ function ProjectCard({ project, index }) {
         </div>
 
         <div className="flex items-center gap-6 mt-auto">
-          <a href={project.liveUrl} className="flex items-center text-sm font-bold text-white hover:text-cyan-400 transition-colors">
-            <ExternalLink className="w-5 h-5 mr-2" />
-            Live Demo
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-sm font-bold text-white hover:text-cyan-400 transition-colors"
+          >
+            <ExternalLink className="w-4 h-4 mr-2" />
+            {project.liveUrl === "#" ? "Coming Soon" : "Live Demo"}
           </a>
-          <a href={project.githubUrl} className="flex items-center text-sm font-bold text-zinc-400 hover:text-white transition-colors">
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-sm font-bold text-zinc-400 hover:text-white transition-colors"
+          >
             <GithubIcon className="w-5 h-5 mr-2" />
             Source
           </a>
@@ -122,6 +243,8 @@ function ProjectCard({ project, index }) {
 }
 
 export default function Projects() {
+  const [featured, ...rest] = projects;
+
   return (
     <section id="projects" className="py-32 relative">
       <div className="max-w-6xl px-6 mx-auto">
@@ -135,8 +258,12 @@ export default function Projects() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+          {/* Loop as featured hero card spanning full width */}
+          <FeaturedProjectCard project={featured} />
+
+          {/* Rest of projects as regular cards */}
+          {rest.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </div>
