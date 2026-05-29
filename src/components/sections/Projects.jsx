@@ -13,7 +13,7 @@ function GithubIcon(props) {
 const projects = [
   {
     id: 0,
-    title: "Loop — Feel the Waves",
+    title: "Loop — Beyond Limits",
     description:
       "A next-generation, hyper-personalized music streaming ecosystem powered by an adaptive AI intelligence engine. It dynamically analyzes listening patterns to predict and curate your exact mood in real-time. Features an insane 60FPS fluid UI, ultra-low latency playback, instantaneous cross-device cloud sync, and 5 breathtaking visual themes. Built completely from the ground up for the ultimate auditory experience.",
     tags: ["React 19", "TanStack Start", "Supabase", "TypeScript", "Vercel", "Framer Motion"],
