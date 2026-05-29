@@ -20,7 +20,7 @@ const projects = [
     image:
       "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop",
     featured: true,
-    liveUrl: "https://loop-feel-the-beat.vercel.app",
+    liveUrl: "https://loop-feel.vercel.app",
     githubUrl: "https://github.com/sautrikroy17/Loop-Feel-the-waves",
     accent: "from-purple-500 to-pink-500",
     glowColor: "rgba(168,85,247,0.15)",
