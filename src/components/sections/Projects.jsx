@@ -15,17 +15,17 @@ const projects = [
     id: 0,
     title: "Loop — Feel the Waves",
     description:
-      "A production-grade music streaming platform with a mood-adaptive intelligence engine, real-time cross-device sync, synchronized lyrics, 5 dynamic themes, and a buttery-smooth mobile-first UI. Streams millions of tracks instantly — zero ads, zero buffering. Built end-to-end in TypeScript with full CSP hardening, rate limiting, and HSTS.",
+      "A next-generation, hyper-personalized music streaming ecosystem powered by an adaptive AI intelligence engine. It dynamically analyzes listening patterns to predict and curate your exact mood in real-time. Features an insane 60FPS fluid UI, ultra-low latency playback, instantaneous cross-device cloud sync, and 5 breathtaking visual themes. Built completely from the ground up for the ultimate auditory experience.",
     tags: ["React 19", "TanStack Start", "Supabase", "TypeScript", "Vercel", "Framer Motion"],
     image:
       "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop",
     featured: true,
-    liveUrl: "https://loop-feel.vercel.app",
+    liveUrl: "https://loop-feel-the-beat.vercel.app",
     githubUrl: "https://github.com/sautrikroy17/Loop-Feel-the-waves",
     accent: "from-purple-500 to-pink-500",
     glowColor: "rgba(168,85,247,0.15)",
     glowBorder: "purple-500/40",
-    badge: "🎵 New",
+    badge: "🎵 Masterpiece",
   },
   {
     id: 1,
