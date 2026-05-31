@@ -9,6 +9,10 @@
 
 <br/>
 
+![Portfolio Screenshot](public/portfolio_screenshot.png)
+
+<br/>
+
 Built with modern web technologies, it features immersive parallax animations, deep custom aesthetics, and incredibly crisp performance.
 
 ## 🚀 Live Demo
