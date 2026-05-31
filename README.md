@@ -1,6 +1,16 @@
-# Sautrik Roy — Personal Portfolio
+<div align="center">
+  <h1>✨ Sautrik Roy — Personal Portfolio</h1>
+  <p><strong>An ultra-premium, highly interactive full-stack developer portfolio.</strong></p>
+  
+  [![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
+  [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+  [![GSSoC'26](https://img.shields.io/badge/GSSoC'26-Applicant-orange?style=for-the-badge&logo=girlscript)](https://gssoc.girlscript.tech/)
+</div>
 
-An ultra-premium, highly interactive full-stack developer portfolio. Built with modern web technologies, it features immersive parallax animations, deep custom aesthetics, and incredibly crisp performance.
+<br/>
+
+Built with modern web technologies, it features immersive parallax animations, deep custom aesthetics, and incredibly crisp performance.
 
 ## 🚀 Live Demo
 Visit the live site here: [https://sautrikroy.me](https://sautrikroy.me/)
