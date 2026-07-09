@@ -3,8 +3,6 @@ import { useRef } from "react";
 import { ArrowRight, Mail } from "lucide-react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import MagneticButton from "../ui/MagneticButton";
-import PhysicsText from "../ui/PhysicsText";
-import InteractiveGrid from "../ui/InteractiveGrid";
 
 function GithubIcon(props) {
   return (
@@ -40,8 +38,6 @@ export default function Hero() {
 
   return (
     <section ref={ref} id="top" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      <InteractiveGrid />
-
       {/* Dynamic Parallax Background Gradients */}
       <motion.div style={{ y: isMobile ? 0 : yBg, scale: isMobile ? 1 : scaleImage }} className="absolute inset-0 z-0 pointer-events-none">
         {/* Floating Glassmorphism Orbs for Hero Background */}
@@ -77,7 +73,7 @@ export default function Hero() {
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-6 leading-tight md:leading-[1.1] pb-2 cursor-default"
         >
-          I'm <PhysicsText text="Sautrik Roy" className="inline-block text-cyan-300 font-display drop-shadow-[0_0_15px_rgba(34,211,238,0.5)] pb-2" />.
+          I'm <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 font-display text-glow pb-2">Sautrik Roy</span>.
         </motion.h1>
 
         <motion.div

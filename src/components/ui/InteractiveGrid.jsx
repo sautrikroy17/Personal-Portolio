@@ -22,7 +22,7 @@ export default function InteractiveGrid() {
   return (
     <div 
       ref={containerRef}
-      className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+      className="fixed inset-0 z-0 pointer-events-none overflow-hidden"
     >
       <div 
         className="absolute inset-0"

@@ -11,6 +11,8 @@ import Preloader from "./components/ui/Preloader";
 import CustomCursor from "./components/ui/CustomCursor";
 import CommandPalette from "./components/ui/CommandPalette";
 import LiquidRipple from "./components/ui/LiquidRipple";
+import InteractiveGrid from "./components/ui/InteractiveGrid";
+import ScrollProgressRing from "./components/ui/ScrollProgressRing";
 
 function App() {
   const { scrollYProgress } = useScroll();
@@ -22,6 +24,8 @@ function App() {
       <CustomCursor />
       <LiquidRipple />
       <CommandPalette />
+      <InteractiveGrid />
+      <ScrollProgressRing />
       
       <AnimatePresence mode="wait">
         {loading && <Preloader key="preloader" onComplete={() => setLoading(false)} />}
