@@ -4,7 +4,7 @@ import { Send } from "lucide-react";
 export default function Contact() {
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/10 blur-[130px] rounded-t-full pointer-events-none" />
+      <div className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/10 blur-[130px] rounded-t-full pointer-events-none" />
       
       <div className="max-w-3xl px-6 mx-auto text-center relative z-10">
         <motion.div

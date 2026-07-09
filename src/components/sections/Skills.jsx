@@ -9,7 +9,7 @@ const skills = {
 export default function Skills() {
   return (
     <section id="skills" className="py-24 relative overflow-hidden">
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-cyan-600/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="hidden md:block absolute top-1/2 right-0 w-[500px] h-[500px] bg-cyan-600/10 blur-[120px] rounded-full pointer-events-none" />
       
       <div className="max-w-5xl px-6 mx-auto">
         <div className="mb-20 md:text-center">

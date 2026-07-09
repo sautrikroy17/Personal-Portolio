@@ -110,7 +110,7 @@ function FeaturedProjectCard({ project }) {
       whileInView={isMobile ? { opacity: 1, y: 0 } : false}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative col-span-1 md:col-span-2 overflow-hidden rounded-3xl md:rounded-[2.5rem] glass-card border border-white/5 transition-all duration-700"
+      className="group relative col-span-1 md:col-span-2 overflow-hidden rounded-3xl md:rounded-[2.5rem] glass-card border border-white/5 transition-colors duration-700"
       whileHover={!isMobile ? { boxShadow: `0 0 80px ${project.glowColor}` } : {}}
     >
       {/* Background image with strong gradient overlay */}
@@ -199,7 +199,7 @@ function ProjectCard({ project }) {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       whileHover={!isMobile ? { y: -10, boxShadow: `0 0 50px ${project.glowColor}` } : {}}
-      className={`group relative overflow-hidden rounded-3xl md:rounded-[2.5rem] glass-card flex flex-col transition-all duration-500 border border-white/5 hover:border-${project.glowBorder} h-auto md:h-[500px]`}
+      className={`group relative overflow-hidden rounded-3xl md:rounded-[2.5rem] glass-card flex flex-col transition-colors duration-500 border border-white/5 hover:border-${project.glowBorder} h-auto md:h-[500px]`}
     >
       {/* Image */}
       <div className="relative overflow-hidden h-48 md:h-60 shrink-0">
