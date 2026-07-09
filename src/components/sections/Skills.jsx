@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import SpotlightCard from "../ui/SpotlightCard";
+import RevealText from "../ui/RevealText";
+import Marquee from "../ui/Marquee";
 
 const skills = {
   Frontend: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Vue", "TypeScript"],
@@ -12,11 +14,22 @@ export default function Skills() {
     <section id="skills" className="py-24 relative overflow-hidden">
       <div className="hidden md:block absolute top-1/2 right-0 w-[500px] h-[500px] bg-cyan-600/10 blur-[120px] rounded-full pointer-events-none" />
       
+      {/* Interactive Infinite Marquee */}
+      <div className="mb-24 -rotate-2 relative z-10">
+        <Marquee baseVelocity={2} className="text-6xl md:text-[8rem] font-black text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.1)] opacity-50 hover:opacity-100 hover:[-webkit-text-stroke:2px_rgba(34,211,238,0.5)] transition-all duration-500">
+          SAUTRIK ROY — FULL STACK DEVELOPER — 
+        </Marquee>
+        <Marquee baseVelocity={-2} className="text-6xl md:text-[8rem] font-black text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.1)] opacity-50 hover:opacity-100 hover:[-webkit-text-stroke:2px_rgba(34,211,238,0.5)] transition-all duration-500 mt-2">
+          INNOVATE — DESIGN — BUILD — SCALABLE — 
+        </Marquee>
+      </div>
+
       <div className="max-w-5xl px-6 mx-auto">
         <div className="mb-20 md:text-center">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
-            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Tech Stack.</span>
-          </h2>
+          <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight flex justify-center flex-wrap gap-x-2">
+            <RevealText text="My" className="inline-block" />
+            <RevealText text="Tech Stack." className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400" />
+          </div>
           <p className="text-zinc-400 text-lg md:text-xl max-w-2xl md:mx-auto">
             Technologies I use to bring ideas to life, from pixel-perfect interfaces to robust, scalable backends.
           </p>

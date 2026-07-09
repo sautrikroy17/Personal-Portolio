@@ -1,9 +1,14 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import SRLogo from "./SRLogo";
 
 export default function Preloader({ onComplete }) {
   const [progress, setProgress] = useState(0);
+  const onCompleteRef = useRef(onComplete);
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
     // Lock scroll globally
@@ -11,6 +16,8 @@ export default function Preloader({ onComplete }) {
 
     const startTime = Date.now();
     const duration = 2000; // 2 seconds total loading
+    let animationFrameId;
+    let timeoutId;
 
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
@@ -19,21 +26,25 @@ export default function Preloader({ onComplete }) {
       setProgress(nextProgress);
 
       if (nextProgress < 100) {
-        requestAnimationFrame(updateProgress);
+        animationFrameId = requestAnimationFrame(updateProgress);
       } else {
-        setTimeout(() => {
+        timeoutId = setTimeout(() => {
           document.body.style.overflow = "unset";
-          onComplete();
-        }, 1000); // Wait for logo to finish drawing
+          if (onCompleteRef.current) {
+            onCompleteRef.current();
+          }
+        }, 800); // Wait for logo to finish drawing
       }
     };
 
-    requestAnimationFrame(updateProgress);
+    animationFrameId = requestAnimationFrame(updateProgress);
 
     return () => {
+      cancelAnimationFrame(animationFrameId);
+      clearTimeout(timeoutId);
       document.body.style.overflow = "unset";
     };
-  }, [onComplete]);
+  }, []);
 
   return (
     <motion.div

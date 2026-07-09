@@ -36,6 +36,26 @@ function App() {
       {/* Global Animated Premium Gradient Background */}
       <div className="fixed inset-0 z-0 pointer-events-none w-full h-full overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_#0f172a_0%,_#020617_40%,_#000000_100%)]"></div>
+        
+        {/* Animated Orbs */}
+        <motion.div
+          animate={{
+            x: [0, 150, 0],
+            y: [0, -150, 0],
+            scale: [1, 1.3, 1],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[10%] left-[10%] w-[30rem] h-[30rem] bg-blue-600/10 rounded-full mix-blend-screen filter blur-[120px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -150, 0],
+            y: [0, 150, 0],
+            scale: [1, 1.4, 1],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[10%] right-[10%] w-[35rem] h-[35rem] bg-cyan-500/10 rounded-full mix-blend-screen filter blur-[140px]"
+        />
       </div>
 
       {/* Scroll Progress Bar */}

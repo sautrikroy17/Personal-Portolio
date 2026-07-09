@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import RevealText from "../ui/RevealText";
 
 export default function About() {
   const ref = useRef(null);
@@ -41,9 +42,10 @@ export default function About() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="w-full md:w-[55%] space-y-8"
           >
-            <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight">
-              Driven by <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 text-glow">Curiosity</span>.
-            </h2>
+            <div className="text-4xl md:text-6xl font-extrabold text-white tracking-tight">
+              <RevealText text="Driven by" className="inline-block" /> <br/>
+              <RevealText text="Curiosity." className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 text-glow" />
+            </div>
             <div className="space-y-5 text-zinc-300 text-lg md:text-xl font-medium leading-relaxed">
               <p>
                 I am a first-year B.Tech CSE Core student at SRMIST with a relentless drive for building systems that solve real-world problems.

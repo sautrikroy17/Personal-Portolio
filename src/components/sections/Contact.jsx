@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Send } from "lucide-react";
+import RevealText from "../ui/RevealText";
 
 export default function Contact() {
   return (
@@ -14,9 +15,11 @@ export default function Contact() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="glass-card rounded-3xl p-8 md:p-16 border border-white/5"
         >
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6">
-            Let's build something <span className="text-cyan-400 text-glow">cool</span> together.
-          </h2>
+          <div className="text-3xl md:text-5xl font-extrabold text-white mb-6 flex justify-center flex-wrap gap-x-2">
+            <RevealText text="Let's build something" className="inline-block" />
+            <RevealText text="cool" className="inline-block text-cyan-400 text-glow" />
+            <RevealText text="together." className="inline-block" />
+          </div>
           <p className="text-zinc-400 text-lg mb-10 max-w-xl mx-auto">
             Whether you have an idea for a project or just want to chat, feel free to shoot me an email!
           </p>

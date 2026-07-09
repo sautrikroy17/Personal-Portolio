@@ -4,6 +4,7 @@ import { cn } from "../../lib/utils";
 import { Menu, X } from "lucide-react";
 
 import SRLogo from "../ui/SRLogo";
+import MagneticButton from "../ui/MagneticButton";
 
 const navLinks = [
   { name: "About", href: "#about" },
@@ -67,32 +68,37 @@ export default function Navbar() {
               : "bg-transparent border-transparent"
           )}
         >
-          <a
-            href="#top"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center space-x-2 z-[70] outline-none"
-          >
-            <SRLogo className="w-12 h-12" />
-          </a>
+          <MagneticButton>
+            <a
+              href="#top"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center space-x-2 z-[70] outline-none"
+            >
+              <SRLogo className="w-12 h-12" />
+            </a>
+          </MagneticButton>
 
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-zinc-300 hover:text-white transition-colors"
-              >
-                {link.name}
-              </a>
+              <MagneticButton key={link.name}>
+                <a
+                  href={link.href}
+                  className="text-sm font-medium text-zinc-300 hover:text-white transition-colors px-2 py-1"
+                >
+                  {link.name}
+                </a>
+              </MagneticButton>
             ))}
           </div>
 
-          <a
-            href="#contact"
-            className="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-white transition-all bg-zinc-900 border border-zinc-800 rounded-full hover:bg-blue-950/40 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)]"
-          >
-            Contact Me
-          </a>
+          <MagneticButton>
+            <a
+              href="#contact"
+              className="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-white transition-all bg-zinc-900 border border-zinc-800 rounded-full hover:bg-blue-950/40 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)]"
+            >
+              Contact Me
+            </a>
+          </MagneticButton>
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

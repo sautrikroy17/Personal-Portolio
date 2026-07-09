@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { ExternalLink, Music2 } from "lucide-react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import SpotlightCard from "../ui/SpotlightCard";
+import RevealText from "../ui/RevealText";
 
 function GithubIcon(props) {
   return (
@@ -270,9 +271,10 @@ export default function Projects() {
     <section id="projects" className="py-24 md:py-32 relative">
       <div className="max-w-6xl px-4 md:px-6 mx-auto">
         <div className="mb-12 md:mb-20">
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-4 md:mb-6 tracking-tight">
-            Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Work.</span>
-          </h2>
+          <div className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-4 md:mb-6 tracking-tight">
+            <RevealText text="Selected" className="inline-block" />{" "}
+            <RevealText text="Work." className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400" />
+          </div>
           <p className="text-zinc-400 text-lg md:text-xl max-w-2xl font-medium leading-relaxed">
             A curated collection of scalable systems and fluid interfaces showcasing my expertise.
           </p>

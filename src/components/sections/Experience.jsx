@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import RevealText from "../ui/RevealText";
 
 const timeline = [
   {
@@ -28,9 +29,10 @@ export default function Experience() {
     <section id="experience" className="py-24 relative">
       <div className="max-w-4xl px-6 mx-auto">
         <div className="mb-16 md:text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            The <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Journey.</span>
-          </h2>
+          <div className="text-4xl md:text-5xl font-bold text-white mb-4 flex md:justify-center flex-wrap gap-x-2">
+            <RevealText text="The" className="inline-block" />
+            <RevealText text="Journey." className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400" />
+          </div>
           <p className="text-zinc-400 text-lg">
             How I got here and what I've learned along the way.
           </p>
