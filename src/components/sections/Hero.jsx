@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { ArrowRight, Mail } from "lucide-react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import MagneticButton from "../ui/MagneticButton";
+import ScrambleText from "../ui/ScrambleText";
 
 function GithubIcon(props) {
   return (
@@ -63,7 +64,7 @@ export default function Hero() {
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-6 leading-tight md:leading-[1.1] pb-2"
         >
-          I'm <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-100 via-blue-400 to-indigo-600 font-display text-glow pb-2">Sautrik Roy</span>.
+          I'm <ScrambleText text="Sautrik Roy" className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-100 via-blue-400 to-indigo-600 font-display text-glow pb-2" />.
         </motion.h1>
 
         <motion.div

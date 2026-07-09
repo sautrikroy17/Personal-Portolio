@@ -3,6 +3,8 @@ import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-
 import { cn } from "../../lib/utils";
 import { Menu, X } from "lucide-react";
 
+import SRLogo from "../ui/SRLogo";
+
 const navLinks = [
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
@@ -68,10 +70,9 @@ export default function Navbar() {
           <a
             href="#top"
             onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center space-x-2 text-lg font-bold tracking-tight text-white hover:text-blue-400 transition-colors z-[70]"
+            className="flex items-center space-x-2 z-[70] outline-none"
           >
-            <img src="/logo.png" alt="Sautrik Logo" className="w-8 h-8 rounded-lg" />
-            <span>Sautrik<span className="text-blue-500">.</span></span>
+            <SRLogo className="w-12 h-12" />
           </a>
 
           <div className="hidden md:flex items-center space-x-8">

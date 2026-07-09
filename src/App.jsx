@@ -1,4 +1,5 @@
-import { motion, useScroll } from "framer-motion";
+import { motion, useScroll, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import Navbar from "./components/layout/Navbar";
 import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
@@ -6,13 +7,22 @@ import Projects from "./components/sections/Projects";
 import Skills from "./components/sections/Skills";
 import Experience from "./components/sections/Experience";
 import Contact from "./components/sections/Contact";
+import Preloader from "./components/ui/Preloader";
+import CustomCursor from "./components/ui/CustomCursor";
 
 function App() {
   const { scrollYProgress } = useScroll();
+  const [loading, setLoading] = useState(true);
 
   return (
     <div className="relative min-h-screen font-sans text-slate-100 selection:bg-cyan-500/30 bg-slate-950 flex flex-col overflow-x-hidden">
       
+      <CustomCursor />
+      
+      <AnimatePresence mode="wait">
+        {loading && <Preloader key="preloader" onComplete={() => setLoading(false)} />}
+      </AnimatePresence>
+
       {/* Cinematic Noise Overlay */}
       <div className="fixed inset-0 z-50 pointer-events-none opacity-[0.03] mix-blend-overlay pointer-events-none w-full h-full">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
