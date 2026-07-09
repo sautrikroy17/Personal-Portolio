@@ -33,7 +33,7 @@ export default function Experience() {
             <RevealText text="The" className="inline-block" />
             <RevealText text="Journey." className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400" />
           </div>
-          <p className="text-zinc-400 text-lg">
+          <p className="text-zinc-200 text-lg">
             How I got here and what I've learned along the way.
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function Experience() {
                     <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <span className="text-cyan-400 font-bold mb-2 block">{item.year}</span>
                     <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-zinc-400 text-sm leading-relaxed">
+                    <p className="text-zinc-200 text-sm leading-relaxed">
                       {item.description}
                     </p>
                   </div>

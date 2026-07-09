@@ -137,7 +137,7 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         custom={0.8}
-        className="absolute bottom-10 sm:bottom-16 w-full flex justify-center items-center space-x-10 text-zinc-600 z-20"
+        className="absolute bottom-10 sm:bottom-16 w-full flex justify-center items-center space-x-10 text-zinc-400 z-20"
       >
         <a
           href="https://github.com/sautrikroy17"

@@ -173,7 +173,7 @@ function FeaturedProjectCard({ project }) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-full sm:w-auto gap-2 text-sm font-bold text-zinc-400 hover:text-white transition-colors py-3 sm:py-0 relative z-30"
+              className="flex items-center justify-center w-full sm:w-auto gap-2 text-sm font-bold text-zinc-200 hover:text-white transition-colors py-3 sm:py-0 relative z-30"
             >
               <GithubIcon className="w-5 h-5" />
               Source Code
@@ -223,7 +223,7 @@ function ProjectCard({ project }) {
             <h3 className={`text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${project.accent} mb-3 transition-colors duration-300`}>
               {project.title}
             </h3>
-            <p className="text-zinc-400 text-sm leading-relaxed mb-5 font-medium line-clamp-4 md:line-clamp-none">
+            <p className="text-zinc-200 text-sm leading-relaxed mb-5 font-medium line-clamp-4 md:line-clamp-none">
               {project.description}
             </p>
             <div className="flex flex-wrap gap-2 mb-6">
@@ -252,7 +252,7 @@ function ProjectCard({ project }) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center text-xs md:text-sm font-bold text-zinc-400 hover:text-white transition-colors relative z-30"
+              className="flex items-center text-xs md:text-sm font-bold text-zinc-200 hover:text-white transition-colors relative z-30"
             >
               <GithubIcon className="w-4 h-4 md:w-5 md:h-5 mr-1.5 md:mr-2" />
               Source
@@ -275,7 +275,7 @@ export default function Projects() {
             <RevealText text="Selected" className="inline-block" />{" "}
             <RevealText text="Work." className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400" />
           </div>
-          <p className="text-zinc-400 text-lg md:text-xl max-w-2xl font-medium leading-relaxed">
+          <p className="text-zinc-200 text-lg md:text-xl max-w-2xl font-medium leading-relaxed">
             A curated collection of scalable systems and fluid interfaces showcasing my expertise.
           </p>
         </div>

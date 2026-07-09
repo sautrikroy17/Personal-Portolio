@@ -20,7 +20,7 @@ export default function Contact() {
             <RevealText text="cool" className="inline-block text-cyan-400 text-glow" />
             <RevealText text="together." className="inline-block" />
           </div>
-          <p className="text-zinc-400 text-lg mb-10 max-w-xl mx-auto">
+          <p className="text-zinc-200 text-lg mb-10 max-w-xl mx-auto">
             Whether you have an idea for a project or just want to chat, feel free to shoot me an email!
           </p>
           
@@ -55,7 +55,7 @@ export default function Contact() {
             <PaperAirplaneButton />
           </form>
 
-          <p className="text-zinc-500 text-sm">
+          <p className="text-zinc-300 text-sm">
             © {new Date().getFullYear()} Sautrik. Crafted with React & Tailwind.
           </p>
         </motion.div>

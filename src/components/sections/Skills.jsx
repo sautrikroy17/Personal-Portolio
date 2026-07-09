@@ -30,7 +30,7 @@ export default function Skills() {
             <RevealText text="My" className="inline-block" />
             <RevealText text="Tech Stack." className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400" />
           </div>
-          <p className="text-zinc-400 text-lg md:text-xl max-w-2xl md:mx-auto">
+          <p className="text-zinc-200 text-lg md:text-xl max-w-2xl md:mx-auto">
             Technologies I use to bring ideas to life, from pixel-perfect interfaces to robust, scalable backends.
           </p>
         </div>
