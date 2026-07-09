@@ -24,7 +24,7 @@ export default function Preloader({ onComplete }) {
     setPhase("speaking");
 
     // Initialize speech
-    const utterance = new SpeechSynthesisUtterance("Hi, I'm Sautrik. Welcome to my world.");
+    const utterance = new SpeechSynthesisUtterance("Hey, I'm Sautrik Roy. I am a C S E undergrad, and a full stack developer. Welcome to my world.");
     utterance.rate = 0.95;
     utterance.pitch = 1.0;
     
@@ -60,7 +60,7 @@ export default function Preloader({ onComplete }) {
       if (!speechSynthesis.speaking && !isDone) {
         finishIntro();
       }
-    }, 4000);
+    }, 9000);
   };
 
   // Ensure voices are loaded (Chrome sometimes needs this)
