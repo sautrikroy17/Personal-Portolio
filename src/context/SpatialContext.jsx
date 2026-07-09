@@ -1,21 +1,10 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext } from "react";
 
 const SpatialContext = createContext();
 
 export function SpatialProvider({ children }) {
   const [isSpatialMode, setIsSpatialMode] = useState(false);
-
-  const toggleSpatialMode = () => {
-    setIsSpatialMode((prev) => !prev);
-  };
-
-  useEffect(() => {
-    if (isSpatialMode) {
-      document.body.classList.add("spatial-mode-active");
-    } else {
-      document.body.classList.remove("spatial-mode-active");
-    }
-  }, [isSpatialMode]);
+  const toggleSpatialMode = () => setIsSpatialMode((prev) => !prev);
 
   return (
     <SpatialContext.Provider value={{ isSpatialMode, toggleSpatialMode }}>
