@@ -13,11 +13,13 @@ import CommandPalette from "./components/ui/CommandPalette";
 import LiquidRipple from "./components/ui/LiquidRipple";
 import InteractiveGrid from "./components/ui/InteractiveGrid";
 import ScrollProgressRing from "./components/ui/ScrollProgressRing";
-import BlueprintScanner from "./components/ui/BlueprintScanner";
+import SpatialWrapper from "./components/ui/SpatialWrapper";
+import useSoundEffects from "./hooks/useSoundEffects";
 
 function App() {
   const { scrollYProgress } = useScroll();
   const [loading, setLoading] = useState(true);
+  useSoundEffects(); // Initialize scroll sounds
 
   return (
     <div className="relative min-h-screen font-sans text-slate-100 selection:bg-cyan-500/30 bg-slate-950 flex flex-col overflow-x-hidden">
@@ -26,7 +28,6 @@ function App() {
       <LiquidRipple />
       <CommandPalette />
       <ScrollProgressRing />
-      <BlueprintScanner />
       
       <AnimatePresence mode="wait">
         {loading && <Preloader key="preloader" onComplete={() => setLoading(false)} />}
@@ -73,22 +74,24 @@ function App() {
 
       <div className="relative z-10 w-full flex-1">
         <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Projects />
-          <Skills />
-          <Experience />
-          <Contact />
-        </main>
-      </div>
+        <SpatialWrapper>
+          <main>
+            <Hero />
+            <About />
+            <Projects />
+            <Skills />
+            <Experience />
+            <Contact />
+          </main>
 
-      {/* MIT Copyright Footer */}
-      <footer className="relative z-10 border-t border-white/5 py-6 text-center">
-        <p className="text-zinc-600 text-sm font-medium tracking-wide">
-          © {new Date().getFullYear()} Sautrik Roy &mdash; Licensed under the MIT License
-        </p>
-      </footer>
+          {/* MIT Copyright Footer */}
+          <footer className="relative z-10 border-t border-white/5 py-6 text-center">
+            <p className="text-zinc-600 text-sm font-medium tracking-wide">
+              © {new Date().getFullYear()} Sautrik Roy &mdash; Licensed under the MIT License
+            </p>
+          </footer>
+        </SpatialWrapper>
+      </div>
     </div>
   );
 }
