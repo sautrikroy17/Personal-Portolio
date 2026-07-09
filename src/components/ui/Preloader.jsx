@@ -1,15 +1,15 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
-// The intro text shown word-by-word under the genmoji
 const INTRO_WORDS = ["Hey,", "I'm", "Sautrik", "Roy.", "CSE", "undergrad", "&", "Full", "Stack", "Dev."];
 
 export default function Preloader({ onComplete }) {
-  const [phase, setPhase] = useState("enter"); // enter -> speaking -> exit
-  const [wordIndex, setWordIndex] = useState(0);
-  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [phase, setPhase] = useState("tap"); // tap -> speaking -> exit
+  const [wordIndex, setWordIndex] = useState(-1);
+  const [mouthOpen, setMouthOpen] = useState(false);
   const onCompleteRef = useRef(onComplete);
-  const wordTimerRef = useRef(null);
+  const wordIntervalRef = useRef(null);
+  const mouthIntervalRef = useRef(null);
 
   useEffect(() => {
     onCompleteRef.current = onComplete;
@@ -17,219 +17,241 @@ export default function Preloader({ onComplete }) {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-
-    // Short delay then transition to speaking phase
-    const enterDelay = setTimeout(() => {
-      setPhase("speaking");
-      setIsSpeaking(true);
-      startWordReveal();
-      attemptSpeech();
-    }, 600);
-
     return () => {
-      clearTimeout(enterDelay);
-      clearInterval(wordTimerRef.current);
       document.body.style.overflow = "unset";
+      clearInterval(wordIntervalRef.current);
+      clearInterval(mouthIntervalRef.current);
       try { speechSynthesis.cancel(); } catch (e) {}
     };
   }, []);
 
-  const startWordReveal = () => {
-    let idx = 0;
-    setWordIndex(0);
-    wordTimerRef.current = setInterval(() => {
-      idx += 1;
-      setWordIndex(idx);
-      if (idx >= INTRO_WORDS.length) {
-        clearInterval(wordTimerRef.current);
-      }
-    }, 280); // one word every 280ms — reads naturally with speech
-  };
-
-  const finishIntro = () => {
-    setIsSpeaking(false);
+  const finishIntro = useCallback(() => {
+    clearInterval(wordIntervalRef.current);
+    clearInterval(mouthIntervalRef.current);
+    setMouthOpen(false);
     setPhase("exit");
     setTimeout(() => {
       document.body.style.overflow = "unset";
-      if (onCompleteRef.current) onCompleteRef.current();
+      onCompleteRef.current?.();
     }, 900);
-  };
+  }, []);
 
-  const attemptSpeech = () => {
-    if (!window.speechSynthesis) {
-      // Fallback: just wait for words to finish + buffer
-      setTimeout(finishIntro, INTRO_WORDS.length * 280 + 800);
-      return;
-    }
+  const startSpeaking = useCallback(() => {
+    if (phase !== "tap") return;
+    setPhase("speaking");
 
+    // Start mouth animation
+    mouthIntervalRef.current = setInterval(() => {
+      setMouthOpen((v) => !v);
+    }, 180);
+
+    // Reveal words progressively
+    let idx = 0;
+    setWordIndex(0);
+    wordIntervalRef.current = setInterval(() => {
+      idx += 1;
+      setWordIndex(idx);
+      if (idx >= INTRO_WORDS.length) clearInterval(wordIntervalRef.current);
+    }, 290);
+
+    // Speech synthesis — Chrome requires this to be called inside a user gesture handler
     const speak = () => {
       speechSynthesis.cancel();
       const utter = new SpeechSynthesisUtterance(
-        "Hey, I'm Sautrik Roy. CSE undergrad and Full Stack Developer. Welcome."
+        "Hey, I'm Sautrik Roy. CSE undergrad and Full Stack Developer. Here's my world."
       );
-      utter.rate = 1.0;
-      utter.pitch = 1.05;
+      // Target: young male voice, natural pace
+      utter.rate = 1.05;
+      utter.pitch = 1.1;  // slightly higher = younger sound
       utter.volume = 1;
 
-      // Pick best available voice
       const voices = speechSynthesis.getVoices();
-      const preferred = voices.find(v =>
-        v.name.includes("Daniel") ||
-        v.name.includes("Aaron") ||
-        v.name.includes("Google UK English Male") ||
-        v.name.includes("Alex") ||
-        v.lang?.startsWith("en")
-      );
-      if (preferred) utter.voice = preferred;
+      const pick =
+        voices.find((v) => v.name === "Aaron") ||
+        voices.find((v) => v.name === "Daniel") ||
+        voices.find((v) => v.name === "Google UK English Male") ||
+        voices.find((v) => v.name.toLowerCase().includes("male") && v.lang.startsWith("en")) ||
+        voices.find((v) => v.lang.startsWith("en"));
+      if (pick) utter.voice = pick;
 
       utter.onend = finishIntro;
-      utter.onerror = () => {
-        // On error, wait for words + buffer then finish
-        setTimeout(finishIntro, INTRO_WORDS.length * 280 + 600);
-      };
-
+      utter.onerror = () => setTimeout(finishIntro, 800);
       speechSynthesis.speak(utter);
-
-      // Hard fallback: if speech takes too long
-      setTimeout(() => {
-        if (speechSynthesis.speaking) return;
-        finishIntro();
-      }, INTRO_WORDS.length * 280 + 1200);
     };
 
-    // Chrome needs voices loaded first
     if (speechSynthesis.getVoices().length > 0) {
       speak();
     } else {
-      speechSynthesis.onvoiceschanged = speak;
-      // Extra fallback if onvoiceschanged never fires (Safari)
-      setTimeout(speak, 400);
+      speechSynthesis.onvoiceschanged = () => {
+        speak();
+        speechSynthesis.onvoiceschanged = null;
+      };
+      // Fallback if onvoiceschanged never fires (some browsers)
+      setTimeout(() => {
+        if (phase === "speaking" && !speechSynthesis.speaking) speak();
+      }, 500);
     }
-  };
+
+    // Hard timeout — always exits even if speech fails
+    setTimeout(finishIntro, INTRO_WORDS.length * 290 + 2500);
+  }, [phase, finishIntro]);
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] bg-zinc-950 flex flex-col items-center justify-center"
+      className="fixed inset-0 z-[9999] bg-zinc-950 flex flex-col items-center justify-center cursor-pointer select-none"
       animate={{
-        clipPath: phase === "exit"
-          ? "circle(0% at 50% 50%)"
-          : "circle(150% at 50% 50%)"
+        clipPath:
+          phase === "exit"
+            ? "circle(0% at 50% 50%)"
+            : "circle(150% at 50% 50%)",
       }}
       transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
       style={{ clipPath: "circle(150% at 50% 50%)" }}
+      onClick={phase === "tap" ? startSpeaking : undefined}
     >
-      {/* Radial glow behind genmoji */}
+      {/* Ambient glow */}
       <div
-        className="absolute rounded-full pointer-events-none"
+        className="absolute pointer-events-none"
         style={{
-          width: 360,
-          height: 360,
-          background: "radial-gradient(circle, rgba(34,211,238,0.18) 0%, transparent 70%)",
-          filter: "blur(30px)",
+          width: 500,
+          height: 500,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(34,211,238,0.15) 0%, transparent 65%)",
+          filter: "blur(40px)",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -58%)",
         }}
       />
 
-      {/* Genmoji Avatar */}
-      <AnimatePresence>
-        {(phase === "speaking" || phase === "exit") && (
-          <motion.div
-            key="genmoji"
-            initial={{ opacity: 0, scale: 0.75, y: 30, filter: "blur(12px)" }}
-            animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-10 flex flex-col items-center"
-          >
-            {/* Avatar container with floating animation */}
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative"
-              style={{ width: 200, height: 200 }}
-            >
-              {/* The image */}
-              <img
-                src="/memoji.png"
-                alt="Sautrik"
-                className="w-full h-full object-contain object-center select-none"
-                draggable={false}
-                style={{ filter: "drop-shadow(0 20px 40px rgba(34,211,238,0.25))" }}
-              />
+      {/* Genmoji + content */}
+      <div className="relative z-10 flex flex-col items-center">
 
-              {/* Mouth overlay — white ellipse that animates to simulate talking */}
-              {isSpeaking && (
-                <div
-                  className="mouth-talking absolute"
+        {/* Avatar */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.7, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <motion.div
+            animate={{ y: phase === "speaking" ? [0, -8, 0] : 0 }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="relative"
+            style={{ width: 220, height: 220 }}
+          >
+            {/* Image — mix-blend-mode:multiply removes white background */}
+            <img
+              src="/memoji-v2.png"
+              alt="Sautrik"
+              draggable={false}
+              className="w-full h-full object-contain select-none"
+              style={{
+                mixBlendMode: "multiply",
+                filter:
+                  "drop-shadow(0 16px 40px rgba(34,211,238,0.3)) invert(0)",
+              }}
+            />
+
+            {/* Animated mouth overlay — positioned over mouth area */}
+            <AnimatePresence>
+              {phase === "speaking" && (
+                <motion.div
+                  className="absolute"
                   style={{
-                    // Positioned over the mouth area of the talking genmoji
-                    bottom: "28%",
+                    // These %s target the mouth on the face-forward genmoji
+                    bottom: "32%",
                     left: "50%",
                     transform: "translateX(-50%)",
-                    width: 24,
-                    height: 12,
-                    background: "#1a0a00",
-                    borderRadius: "0 0 50% 50%",
-                    opacity: 0.85,
+                    width: 26,
+                    borderRadius: mouthOpen ? "0 0 50% 50%" : "50%",
+                    height: mouthOpen ? 14 : 5,
+                    background: "rgba(15, 5, 0, 0.9)",
+                    transition: "height 0.15s ease, border-radius 0.15s ease",
                   }}
                 />
               )}
-            </motion.div>
+            </AnimatePresence>
+          </motion.div>
+        </motion.div>
 
-            {/* Audio visualizer bars */}
-            {isSpeaking && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="mt-5 flex gap-[5px] items-end justify-center"
-                style={{ height: 28 }}
-              >
-                {[0.6, 1, 0.7, 1.3, 0.5, 1.1, 0.8, 1.4, 0.6, 1].map((factor, i) => (
+        {/* Audio visualizer — only while speaking */}
+        <AnimatePresence>
+          {phase === "speaking" && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mt-4 flex gap-[4px] items-end justify-center"
+              style={{ height: 28 }}
+            >
+              {[0.5, 0.9, 0.6, 1.2, 0.4, 1.0, 0.7, 1.3, 0.5, 0.8].map(
+                (factor, i) => (
                   <motion.div
                     key={i}
-                    animate={{ height: [6, 24 * factor, 6] }}
+                    animate={{ height: [5, 22 * factor, 5] }}
                     transition={{
-                      duration: 0.3 + i * 0.04,
+                      duration: 0.28 + i * 0.035,
                       repeat: Infinity,
-                      delay: i * 0.07,
+                      delay: i * 0.06,
                       repeatType: "reverse",
                       ease: "easeInOut",
                     }}
-                    className="rounded-full"
                     style={{
                       width: 3,
                       minHeight: 4,
-                      background: `hsl(${190 + i * 5}, 80%, ${55 + i * 2}%)`,
+                      borderRadius: 99,
+                      background: `hsl(${188 + i * 4}, 80%, ${55 + i * 2}%)`,
                     }}
                   />
-                ))}
-              </motion.div>
-            )}
+                )
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-            {/* Intro words — word-by-word reveal */}
-            <div
-              className="mt-8 flex flex-wrap justify-center gap-x-[0.4em] gap-y-1 max-w-xs text-center"
-              style={{ minHeight: 36 }}
+        {/* Word-by-word intro text */}
+        <div
+          className="mt-7 flex flex-wrap justify-center gap-x-[0.3em] gap-y-1 max-w-[280px] text-center"
+          style={{ minHeight: 32 }}
+        >
+          {INTRO_WORDS.map((word, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+              animate={
+                wordIndex > i
+                  ? { opacity: 1, y: 0, filter: "blur(0px)" }
+                  : { opacity: 0, y: 10, filter: "blur(4px)" }
+              }
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="text-white font-medium text-lg"
             >
-              {INTRO_WORDS.map((word, i) => (
-                <span
-                  key={i}
-                  className="word-reveal text-white font-medium text-lg"
-                  style={{
-                    animationDelay: `${i * 0.28}s`,
-                    animationPlayState: wordIndex > i ? "running" : "paused",
-                    opacity: wordIndex > i ? undefined : 0,
-                  }}
-                >
-                  {word}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {word}
+            </motion.span>
+          ))}
+        </div>
+
+        {/* Tap hint — only on initial state */}
+        <AnimatePresence>
+          {phase === "tap" && (
+            <motion.p
+              key="tap-hint"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: [0.4, 0.9, 0.4], y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{
+                opacity: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                y: { duration: 0.4 },
+              }}
+              className="mt-10 text-zinc-500 text-sm tracking-widest uppercase"
+            >
+              Tap anywhere to enter
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
     </motion.div>
   );
 }

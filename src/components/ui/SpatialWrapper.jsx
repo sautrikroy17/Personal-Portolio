@@ -1,23 +1,23 @@
 import { motion, useSpring, useTransform, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useSpatial } from "../../context/SpatialContext";
-import { cn } from "../../lib/utils";
 
 export default function SpatialWrapper({ children }) {
   const { isSpatialMode } = useSpatial();
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
-  
-  // Detect touch devices / mobile
-  const [isMobile, setIsMobile] = useState(false);
 
+  // Detect touch / mobile — 3D is desktop-only
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.matchMedia("(hover: none) and (pointer: coarse)").matches || window.innerWidth <= 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const check = () =>
+      setIsMobile(
+        window.matchMedia("(hover: none) and (pointer: coarse)").matches ||
+          window.innerWidth <= 900
+      );
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
 
   useEffect(() => {
@@ -26,55 +26,56 @@ export default function SpatialWrapper({ children }) {
       mouseY.set(0.5);
       return;
     }
-
-    const handleMouseMove = (e) => {
-      mouseX.set(e.clientX / window.innerWidth);
-      mouseY.set(e.clientY / window.innerHeight);
+    let rafId = null;
+    const onMove = (e) => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        mouseX.set(e.clientX / window.innerWidth);
+        mouseY.set(e.clientY / window.innerHeight);
+        rafId = null;
+      });
     };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [isSpatialMode, isMobile, mouseX, mouseY]);
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [isSpatialMode, mouseX, mouseY]);
+  // Gentle tilt — reduced from ±10 to ±6 to avoid content clipping navbar
+  const spring = { damping: 50, stiffness: 180, mass: 0.8 };
+  const rotateX = useSpring(useTransform(mouseY, [0, 1], [6, -6]), spring);
+  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-6, 6]), spring);
+  const scale = useSpring(!isMobile && isSpatialMode ? 0.97 : 1, spring);
 
-  // Spring animations for smooth tilt
-  const springConfig = { damping: 40, stiffness: 150, mass: 1 };
-  
-  const rotateX = useSpring(
-    useTransform(mouseY, [0, 1], [10, -10]),
-    springConfig
-  );
-  const rotateY = useSpring(
-    useTransform(mouseX, [0, 1], [-10, 10]),
-    springConfig
-  );
-  const scale = useSpring(!isMobile && isSpatialMode ? 0.95 : 1, springConfig);
-
-  // When not in spatial mode or on mobile, force 0 rotation
-  const smoothRotateX = useTransform(() => (!isMobile && isSpatialMode) ? rotateX.get() : 0);
-  const smoothRotateY = useTransform(() => (!isMobile && isSpatialMode) ? rotateY.get() : 0);
+  const active = !isMobile && isSpatialMode;
 
   return (
-    <motion.div
-      style={{
-        perspective: (!isMobile && isSpatialMode) ? "2000px" : "none",
-        transformStyle: (!isMobile && isSpatialMode) ? "preserve-3d" : "flat",
-      }}
+    /*
+     * KEY FIX: perspective lives on THIS div (the outer container),
+     * NOT on the animated child. The animated child uses plain 2D rotateX/Y
+     * with NO preserve-3d. This prevents z-fighting with the fixed navbar
+     * while still giving the full holographic tilt effect.
+     */
+    <div
+      style={{ perspective: active ? "1800px" : "none" }}
       className="w-full flex-1"
     >
       <motion.div
         style={{
-          rotateX: smoothRotateX,
-          rotateY: smoothRotateY,
+          rotateX: active ? rotateX : 0,
+          rotateY: active ? rotateY : 0,
           scale,
-          transformStyle: (!isMobile && isSpatialMode) ? "preserve-3d" : "flat",
+          // NO preserve-3d — this stops z-fighting with the fixed navbar
         }}
-        className={cn(
-          "w-full h-full origin-center transition-all duration-700",
-          (!isMobile && isSpatialMode) ? "shadow-[0_0_150px_rgba(34,211,238,0.15)] ring-1 ring-white/10 rounded-[40px] overflow-hidden" : ""
-        )}
+        className={
+          active
+            ? "w-full h-full origin-center will-change-transform ring-1 ring-white/[0.06] rounded-[32px] overflow-hidden shadow-[0_32px_80px_-20px_rgba(34,211,238,0.12)]"
+            : "w-full h-full origin-center"
+        }
       >
         {children}
       </motion.div>
-    </motion.div>
+    </div>
   );
 }

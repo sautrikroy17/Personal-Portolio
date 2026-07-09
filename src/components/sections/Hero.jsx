@@ -60,7 +60,7 @@ export default function Hero() {
 
       <motion.div
         style={{ y: isMobile ? 0 : yText, opacity: isMobile ? 1 : opacityText }}
-        className="relative z-10 w-full max-w-5xl px-6 mx-auto flex flex-col items-center text-center mt-[-8vh]"
+        className="relative z-10 w-full max-w-5xl px-6 mx-auto flex flex-col items-center text-center mt-[-4vh]"
       >
         {/* Badge */}
         <motion.div
@@ -75,7 +75,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Main Headline — simple block-level animation, NO char-split */}
-        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-6 leading-[1.05] pb-2 cursor-default">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-white mb-6 leading-[1.05] pb-2 cursor-default">
           <motion.span
             variants={fadeUp}
             initial="hidden"
