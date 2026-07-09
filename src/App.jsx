@@ -24,7 +24,6 @@ function App() {
       <CustomCursor />
       <LiquidRipple />
       <CommandPalette />
-      <InteractiveGrid />
       <ScrollProgressRing />
       
       <AnimatePresence mode="wait">
@@ -65,6 +64,8 @@ function App() {
           className="absolute bottom-[10%] right-[10%] w-[35rem] h-[35rem] bg-cyan-500/10 rounded-full mix-blend-screen filter blur-[140px]"
         />
       </div>
+
+      <InteractiveGrid />
 
       {/* Scroll Progress Bar */}
       <motion.div
