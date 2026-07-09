@@ -70,3 +70,57 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-zinc-700;
 }
+
+/* =========================================
+   X-RAY BLUEPRINT MODE
+   ========================================= */
+body.blueprint-mode {
+  background: #000b1a !important;
+  background-image: 
+    linear-gradient(rgba(34, 211, 238, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.2) 1px, transparent 1px) !important;
+  background-size: 40px 40px !important;
+  color: #22d3ee !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+/* Strip backgrounds and add wireframe boxes to elements */
+.blueprint-mode * {
+  background-color: transparent !important;
+  border-color: rgba(34, 211, 238, 0.3) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.blueprint-mode img,
+.blueprint-mode video,
+.blueprint-mode .rounded-full {
+  outline: 1px dashed #22d3ee !important;
+  filter: grayscale(100%) sepia(100%) hue-rotate(150deg) contrast(150%) !important;
+  background-color: rgba(34, 211, 238, 0.05) !important;
+}
+
+.blueprint-mode h1,
+.blueprint-mode h2,
+.blueprint-mode h3,
+.blueprint-mode p,
+.blueprint-mode span,
+.blueprint-mode a,
+.blueprint-mode button {
+  font-family: 'Courier New', Courier, monospace !important;
+  color: #22d3ee !important;
+  letter-spacing: 0 !important;
+  -webkit-text-fill-color: #22d3ee !important;
+}
+
+/* Hide decorative background elements */
+.blueprint-mode [class*="blur-["],
+.blueprint-mode [class*="bg-[radial-gradient"] {
+  display: none !important;
+}
+
+.blueprint-mode ::selection {
+  background: rgba(34, 211, 238, 0.3) !important;
+  color: #fff !important;
+}

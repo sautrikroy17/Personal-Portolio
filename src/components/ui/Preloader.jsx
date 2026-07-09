@@ -7,8 +7,8 @@ export default function Preloader({ onComplete }) {
   const [textIndex, setTextIndex] = useState(0);
   const onCompleteRef = useRef(onComplete);
 
-  const quoteText = "Any sufficiently advanced technology is indistinguishable from magic.";
-  const authorText = "— Arthur C. Clarke";
+  const quoteText = "First, solve the problem. Then, write the code.";
+  const authorText = "— John Johnson";
 
   useEffect(() => {
     onCompleteRef.current = onComplete;

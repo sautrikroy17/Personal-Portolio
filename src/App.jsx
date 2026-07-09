@@ -13,6 +13,7 @@ import CommandPalette from "./components/ui/CommandPalette";
 import LiquidRipple from "./components/ui/LiquidRipple";
 import InteractiveGrid from "./components/ui/InteractiveGrid";
 import ScrollProgressRing from "./components/ui/ScrollProgressRing";
+import BlueprintScanner from "./components/ui/BlueprintScanner";
 
 function App() {
   const { scrollYProgress } = useScroll();
@@ -25,6 +26,7 @@ function App() {
       <LiquidRipple />
       <CommandPalette />
       <ScrollProgressRing />
+      <BlueprintScanner />
       
       <AnimatePresence mode="wait">
         {loading && <Preloader key="preloader" onComplete={() => setLoading(false)} />}
@@ -67,11 +69,7 @@ function App() {
 
       <InteractiveGrid />
 
-      {/* Scroll Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 origin-left z-[100]"
-        style={{ scaleX: scrollYProgress }}
-      />
+
 
       <div className="relative z-10 w-full flex-1">
         <Navbar />
