@@ -36,6 +36,7 @@ export default function PhysicsText({ text, className = "" }) {
             key={index}
             className="inline-block cursor-default"
             whileHover={!isMobile ? rubberBand() : {}}
+            style={{ willChange: "transform" }}
           >
             {letter}
           </motion.span>

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Send } from "lucide-react";
 import RevealText from "../ui/RevealText";
+import PaperAirplaneButton from "../ui/PaperAirplaneButton";
 
 export default function Contact() {
   return (
@@ -52,13 +52,7 @@ export default function Contact() {
                 className="w-full px-5 py-4 bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all resize-none"
               ></textarea>
             </div>
-            <button
-              type="submit"
-              className="group flex items-center justify-center w-full px-8 py-4 text-lg font-bold text-white transition-all bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] hover:scale-[1.02] active:scale-95"
-            >
-              Send Message
-              <Send className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </button>
+            <PaperAirplaneButton />
           </form>
 
           <p className="text-zinc-500 text-sm">

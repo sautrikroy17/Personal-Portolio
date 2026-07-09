@@ -9,6 +9,8 @@ import Experience from "./components/sections/Experience";
 import Contact from "./components/sections/Contact";
 import Preloader from "./components/ui/Preloader";
 import CustomCursor from "./components/ui/CustomCursor";
+import CommandPalette from "./components/ui/CommandPalette";
+import LiquidRipple from "./components/ui/LiquidRipple";
 
 function App() {
   const { scrollYProgress } = useScroll();
@@ -18,6 +20,8 @@ function App() {
     <div className="relative min-h-screen font-sans text-slate-100 selection:bg-cyan-500/30 bg-slate-950 flex flex-col overflow-x-hidden">
       
       <CustomCursor />
+      <LiquidRipple />
+      <CommandPalette />
       
       <AnimatePresence mode="wait">
         {loading && <Preloader key="preloader" onComplete={() => setLoading(false)} />}
