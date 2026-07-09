@@ -102,7 +102,7 @@ export default function Navbar() {
                   "flex items-center justify-center w-10 h-10 rounded-full border transition-all",
                   isSpatialMode 
                     ? "bg-cyan-900/40 border-cyan-500/50 text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.3)]" 
-                    : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-800"
+                    : "bg-zinc-900 border-cyan-500/50 text-cyan-400 hover:text-white hover:bg-zinc-800 relative ring-2 ring-cyan-500/30 animate-pulse shadow-[0_0_15px_rgba(34,211,238,0.4)]"
                 )}
               >
                 <Box className="w-4 h-4" />

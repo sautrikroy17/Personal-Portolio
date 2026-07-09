@@ -3,7 +3,7 @@ import { createContext, useState, useContext } from "react";
 const SpatialContext = createContext();
 
 export function SpatialProvider({ children }) {
-  const [isSpatialMode, setIsSpatialMode] = useState(true); // ON by default — it's the signature experience
+  const [isSpatialMode, setIsSpatialMode] = useState(false); // OFF by default
   const toggleSpatialMode = () => setIsSpatialMode((prev) => !prev);
 
   return (
