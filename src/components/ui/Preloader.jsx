@@ -23,6 +23,29 @@ export default function Preloader({ onComplete }) {
     if (phase !== "init") return;
     setPhase("speaking");
 
+    // Play synthetic boot sound
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.5);
+      
+      gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.1);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+      
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + 0.8);
+    } catch(e) {
+      // Audio fallback silent
+    }
+
     // Initialize speech
     const utterance = new SpeechSynthesisUtterance("Hey, I'm Sautrik Roy. I am a C S E undergrad, and a full stack developer. Welcome to my world.");
     utterance.rate = 0.95;

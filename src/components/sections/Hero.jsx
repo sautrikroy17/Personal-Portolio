@@ -21,6 +21,8 @@ function LinkedinIcon(props) {
   );
 }
 
+import SplitTextReveal from "../ui/SplitTextReveal";
+
 export default function Hero() {
   const ref = useRef(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -67,14 +69,12 @@ export default function Hero() {
           Full Stack Developer • Where Code Meets Creativity
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, scale: 1.1, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-6 leading-tight md:leading-[1.1] pb-2 cursor-default"
-        >
-          I'm <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 font-display text-glow pb-2">Sautrik Roy</span>.
-        </motion.h1>
+        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-6 leading-tight md:leading-[1.1] pb-2 cursor-default flex flex-col sm:flex-row justify-center items-center gap-4">
+          <SplitTextReveal text="I'm" delay={0.2} /> 
+          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 font-display text-glow pb-2">
+            <SplitTextReveal text="Sautrik Roy." delay={0.4} />
+          </span>
+        </h1>
 
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 1.05 }}
