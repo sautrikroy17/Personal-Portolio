@@ -11,11 +11,10 @@ export default function Preloader({ onComplete }) {
   }, [onComplete]);
 
   useEffect(() => {
-    // Lock scroll globally
     document.body.style.overflow = "hidden";
 
     const startTime = Date.now();
-    const duration = 2000; // 2 seconds total loading
+    const duration = 2000;
     let animationFrameId;
     let timeoutId;
 
@@ -33,7 +32,7 @@ export default function Preloader({ onComplete }) {
           if (onCompleteRef.current) {
             onCompleteRef.current();
           }
-        }, 800); // Wait for logo to finish drawing
+        }, 800);
       }
     };
 
@@ -47,32 +46,48 @@ export default function Preloader({ onComplete }) {
   }, []);
 
   return (
-    <motion.div
-      className="fixed inset-0 z-[9999] bg-zinc-950 flex flex-col items-center justify-center overflow-hidden"
-      initial={{ y: 0 }}
-      exit={{ 
-        y: "-100%", 
-        transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] } 
-      }}
-    >
-      <div className="flex flex-col items-center gap-10">
-        <SRLogo className="w-24 h-24 sm:w-32 sm:h-32" />
-        
-        <div className="flex flex-col items-center gap-4">
-          <div className="text-3xl sm:text-5xl font-extrabold font-display text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-            {progress}%
-          </div>
-          
-          <div className="w-48 sm:w-64 h-[2px] bg-white/10 rounded-full overflow-hidden">
-            <motion.div 
-              className="h-full bg-gradient-to-r from-blue-500 to-cyan-400"
-              initial={{ width: "0%" }}
-              animate={{ width: `${progress}%` }}
-              transition={{ ease: "linear", duration: 0.1 }}
-            />
-          </div>
+    <motion.div className="fixed inset-0 z-[9999] flex flex-col pointer-events-none">
+      {/* Shatter Panels */}
+      <motion.div 
+        className="absolute inset-0 bg-zinc-950 origin-top"
+        exit={{ scaleY: 0, transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.2 } }}
+      />
+      <motion.div 
+        className="absolute inset-0 bg-zinc-900 origin-bottom"
+        exit={{ scaleY: 0, transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 } }}
+      />
+      <motion.div 
+        className="absolute inset-0 bg-zinc-950 origin-top"
+        exit={{ scaleY: 0, transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
+      />
+
+      <motion.div 
+        className="absolute inset-0 flex flex-col items-center justify-center gap-8 md:gap-16"
+        exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)", transition: { duration: 0.4, ease: "easeOut" } }}
+      >
+        <div className="relative">
+          <SRLogo className="w-24 h-24 md:w-32 md:h-32 relative z-10" />
+          <motion.div 
+            className="absolute inset-0 bg-cyan-400 blur-[50px] mix-blend-screen opacity-50 rounded-full"
+            animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0.5, 0.2] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
         </div>
-      </div>
+        
+        <div className="flex flex-col items-center">
+          <div className="text-[6rem] md:text-[15rem] leading-none font-black text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.1)] md:[-webkit-text-stroke:2px_rgba(255,255,255,0.1)] relative">
+            <span className="opacity-0">{progress}%</span>
+            <motion.span 
+              className="absolute inset-0 text-white [-webkit-text-stroke:0px] overflow-hidden whitespace-nowrap"
+              style={{ width: `${progress}%` }}
+            >
+              {progress}%
+            </motion.span>
+            <span className="absolute inset-0 pointer-events-none">{progress}%</span>
+          </div>
+          <p className="text-cyan-400 uppercase tracking-[0.5em] md:tracking-[1em] font-bold text-xs md:text-sm mt-4 md:mt-0 text-glow">System Initializing</p>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }

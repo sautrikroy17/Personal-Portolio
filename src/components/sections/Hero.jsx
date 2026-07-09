@@ -3,7 +3,8 @@ import { useRef } from "react";
 import { ArrowRight, Mail } from "lucide-react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import MagneticButton from "../ui/MagneticButton";
-import ScrambleText from "../ui/ScrambleText";
+import PhysicsText from "../ui/PhysicsText";
+import InteractiveGrid from "../ui/InteractiveGrid";
 
 function GithubIcon(props) {
   return (
@@ -39,9 +40,21 @@ export default function Hero() {
 
   return (
     <section ref={ref} id="top" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <InteractiveGrid />
+
       {/* Dynamic Parallax Background Gradients */}
       <motion.div style={{ y: isMobile ? 0 : yBg, scale: isMobile ? 1 : scaleImage }} className="absolute inset-0 z-0 pointer-events-none">
-        {/* Intentionally left blank to allow global App.jsx animated gradient mesh to shine through */}
+        {/* Floating Glassmorphism Orbs for Hero Background */}
+        <motion.div 
+          className="absolute top-[20%] left-[15%] w-64 h-64 bg-cyan-500/20 rounded-full blur-[80px]"
+          animate={{ y: [-20, 20, -20], x: [-20, 20, -20] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-[20%] right-[15%] w-80 h-80 bg-blue-600/20 rounded-full blur-[100px]"
+          animate={{ y: [20, -20, 20], x: [20, -20, 20] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
       </motion.div>
       
       <motion.div 
@@ -49,8 +62,8 @@ export default function Hero() {
         className="relative z-10 w-full max-w-5xl px-6 mx-auto flex flex-col items-center text-center mt-[-8vh]"
       >
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -20, scale: 1.1 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="inline-flex items-center px-4 py-2 mb-8 text-xs sm:text-sm font-bold rounded-full bg-blue-950/30 border border-blue-900/50 text-blue-300 backdrop-blur-md tracking-widest uppercase shadow-[0_0_15px_rgba(30,58,138,0.3)]"
         >
@@ -59,17 +72,17 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, scale: 0.95, y: 30 }}
+          initial={{ opacity: 0, scale: 1.1, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-6 leading-tight md:leading-[1.1] pb-2"
+          className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-6 leading-tight md:leading-[1.1] pb-2 cursor-default"
         >
-          I'm <ScrambleText text="Sautrik Roy" className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-100 via-blue-400 to-indigo-600 font-display text-glow pb-2" />.
+          I'm <PhysicsText text="Sautrik Roy" className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-100 via-blue-400 to-indigo-600 font-display text-glow pb-2" />.
         </motion.h1>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20, scale: 1.05 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl mb-12 flex flex-col items-center space-y-3"
         >
