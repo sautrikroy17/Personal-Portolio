@@ -21,7 +21,7 @@ const projects = [
       "A next-generation, hyper-personalized music streaming ecosystem powered by an adaptive AI intelligence engine. It dynamically analyzes listening patterns to predict and curate your exact mood in real-time. Features an insane 60FPS fluid UI, ultra-low latency playback, instantaneous cross-device cloud sync, and 5 breathtaking visual themes. Built completely from the ground up for the ultimate auditory experience.",
     tags: ["React 19", "TanStack Start", "Supabase", "TypeScript", "Vercel", "Framer Motion"],
     image:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop",
+      "/loop.png",
     featured: true,
     liveUrl: "https://loop-feel.vercel.app",
     githubUrl: "https://github.com/sautrikroy17/Loop-Feel-the-waves",
@@ -37,7 +37,7 @@ const projects = [
       "Built for a competitive hackathon, an AI-powered tool that converts natural language into complex database queries, bridging the gap between non-technical users and databases.",
     tags: ["React", "Node.js", "Gemini AI", "MongoDB", "MySQL"],
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+      "/legacy-lens.png",
     featured: false,
     liveUrl: "https://legacy-lens-beta.vercel.app",
     githubUrl: "https://github.com/sautrikroy17/LegacyLens-2.O",
@@ -52,7 +52,7 @@ const projects = [
       "An AI-driven quiz generator built with a resilient C++ backend for complex scheduling and dynamic scaling. Full stack implementation with Next.js frontend.",
     tags: ["Next.js", "C++", "Tailwind", "Gemini API"],
     image:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop",
+      "/quizzify.png",
     featured: false,
     liveUrl: "https://quizzify-ai.vercel.app",
     githubUrl: "https://github.com/sautrikroy17/Quizzify",
