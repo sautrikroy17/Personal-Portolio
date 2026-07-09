@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ExternalLink, Music2 } from "lucide-react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import SpotlightCard from "../ui/SpotlightCard";
 
 function GithubIcon(props) {
   return (
@@ -110,73 +111,75 @@ function FeaturedProjectCard({ project }) {
       whileInView={isMobile ? { opacity: 1, y: 0 } : false}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative col-span-1 md:col-span-2 overflow-hidden rounded-3xl md:rounded-[2.5rem] glass-card border border-white/5 transition-colors duration-700"
+      className="group relative col-span-1 md:col-span-2 overflow-hidden rounded-3xl md:rounded-[2.5rem] transition-colors duration-700"
       whileHover={!isMobile ? { boxShadow: `0 0 80px ${project.glowColor}` } : {}}
     >
-      {/* Background image with strong gradient overlay */}
-      <div className="absolute inset-0">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover scale-105 transition-transform duration-1000 group-hover:scale-110 opacity-30"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-zinc-950/30" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 p-6 sm:p-10 md:p-14 flex flex-col justify-end min-h-[420px] md:min-h-[480px]">
-        {/* Badge */}
-        {project.badge && (
-          <span className={`inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-1.5 mb-4 md:mb-6 w-fit text-[10px] md:text-xs font-bold rounded-full bg-gradient-to-r ${project.accent} text-black tracking-widest uppercase shadow-lg`}>
-            {project.badge}
-          </span>
-        )}
-
-        <div className="flex items-center gap-3 mb-4">
-          <div className={`hidden sm:flex w-10 h-10 rounded-xl bg-gradient-to-br ${project.accent} items-center justify-center shadow-lg`}>
-            <Music2 className="w-5 h-5 text-black" />
-          </div>
-          <h3 className={`text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${project.accent} tracking-tight`}>
-            {project.title}
-          </h3>
+      <SpotlightCard spotLightColor={project.glowColor} className="h-full glass-card border border-white/5">
+        {/* Background image with strong gradient overlay */}
+        <div className="absolute inset-0">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover scale-105 transition-transform duration-1000 group-hover:scale-110 opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-zinc-950/30" />
         </div>
 
-        <p className="text-zinc-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 md:mb-8 max-w-3xl font-medium">
-          {project.description}
-        </p>
-
-        <div className="flex flex-wrap gap-2 mb-8">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className={`px-3 py-1 text-xs font-bold rounded-full border backdrop-blur-md bg-white/5 text-white border-white/10`}
-            >
-              {tag}
+        {/* Content */}
+        <div className="relative z-20 p-6 sm:p-10 md:p-14 flex flex-col justify-end min-h-[420px] md:min-h-[480px]">
+          {/* Badge */}
+          {project.badge && (
+            <span className={`inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-1.5 mb-4 md:mb-6 w-fit text-[10px] md:text-xs font-bold rounded-full bg-gradient-to-r ${project.accent} text-black tracking-widest uppercase shadow-lg`}>
+              {project.badge}
             </span>
-          ))}
-        </div>
+          )}
 
-        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 w-full sm:w-auto">
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`flex items-center justify-center w-full sm:w-auto gap-2 px-6 py-3 rounded-2xl text-sm font-bold text-black bg-gradient-to-r ${project.accent} hover:opacity-90 transition-all shadow-lg hover:scale-105 active:scale-95`}
-          >
-            <ExternalLink className="w-4 h-4" />
-            Live App
-          </a>
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-full sm:w-auto gap-2 text-sm font-bold text-zinc-400 hover:text-white transition-colors py-3 sm:py-0"
-          >
-            <GithubIcon className="w-5 h-5" />
-            Source Code
-          </a>
+          <div className="flex items-center gap-3 mb-4">
+            <div className={`hidden sm:flex w-10 h-10 rounded-xl bg-gradient-to-br ${project.accent} items-center justify-center shadow-lg`}>
+              <Music2 className="w-5 h-5 text-black" />
+            </div>
+            <h3 className={`text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${project.accent} tracking-tight`}>
+              {project.title}
+            </h3>
+          </div>
+
+          <p className="text-zinc-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 md:mb-8 max-w-3xl font-medium">
+            {project.description}
+          </p>
+
+          <div className="flex flex-wrap gap-2 mb-8">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className={`px-3 py-1 text-xs font-bold rounded-full border backdrop-blur-md bg-white/5 text-white border-white/10`}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 w-full sm:w-auto">
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center justify-center w-full sm:w-auto gap-2 px-6 py-3 rounded-2xl text-sm font-bold text-black bg-gradient-to-r ${project.accent} hover:opacity-90 transition-all shadow-lg hover:scale-105 active:scale-95 relative z-30`}
+            >
+              <ExternalLink className="w-4 h-4" />
+              Live App
+            </a>
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-full sm:w-auto gap-2 text-sm font-bold text-zinc-400 hover:text-white transition-colors py-3 sm:py-0 relative z-30"
+            >
+              <GithubIcon className="w-5 h-5" />
+              Source Code
+            </a>
+          </div>
         </div>
-      </div>
+      </SpotlightCard>
     </motion.div>
   );
 }
@@ -199,61 +202,63 @@ function ProjectCard({ project }) {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       whileHover={!isMobile ? { y: -10, boxShadow: `0 0 50px ${project.glowColor}` } : {}}
-      className={`group relative overflow-hidden rounded-3xl md:rounded-[2.5rem] glass-card flex flex-col transition-colors duration-500 border border-white/5 hover:border-${project.glowBorder} h-auto md:h-[500px]`}
+      className={`group relative overflow-hidden rounded-3xl md:rounded-[2.5rem] flex flex-col transition-colors duration-500 h-auto md:h-[500px]`}
     >
-      {/* Image */}
-      <div className="relative overflow-hidden h-48 md:h-60 shrink-0">
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/40 to-transparent z-10" />
-        <motion.img
-          style={{ y: isMobile ? 0 : yImage }}
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full md:h-[120%] object-cover transition-transform duration-1000 group-hover:scale-110"
-        />
-      </div>
+      <SpotlightCard spotLightColor={project.glowColor} className={`h-full flex flex-col glass-card border border-white/5 hover:border-${project.glowBorder}`}>
+        {/* Image */}
+        <div className="relative overflow-hidden h-48 md:h-60 shrink-0">
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/40 to-transparent z-10" />
+          <motion.img
+            style={{ y: isMobile ? 0 : yImage }}
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full md:h-[120%] object-cover transition-transform duration-1000 group-hover:scale-110"
+          />
+        </div>
 
-      {/* Content */}
-      <div className="p-6 md:p-8 flex flex-col flex-1 justify-between z-20 relative">
-        <div>
-          <h3 className={`text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${project.accent} mb-3 transition-colors duration-300`}>
-            {project.title}
-          </h3>
-          <p className="text-zinc-400 text-sm leading-relaxed mb-5 font-medium line-clamp-4 md:line-clamp-none">
-            {project.description}
-          </p>
-          <div className="flex flex-wrap gap-2 mb-6">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-2.5 py-1 text-[10px] md:text-xs font-semibold text-zinc-300 bg-white/5 rounded-full border border-white/10 backdrop-blur-md"
-              >
-                {tag}
-              </span>
-            ))}
+        {/* Content */}
+        <div className="p-6 md:p-8 flex flex-col flex-1 justify-between z-20 relative">
+          <div>
+            <h3 className={`text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${project.accent} mb-3 transition-colors duration-300`}>
+              {project.title}
+            </h3>
+            <p className="text-zinc-400 text-sm leading-relaxed mb-5 font-medium line-clamp-4 md:line-clamp-none">
+              {project.description}
+            </p>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-2.5 py-1 text-[10px] md:text-xs font-semibold text-zinc-300 bg-white/5 rounded-full border border-white/10 backdrop-blur-md"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 md:gap-6 mt-auto">
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-xs md:text-sm font-bold text-white hover:text-cyan-400 transition-colors relative z-30"
+            >
+              <ExternalLink className="w-4 h-4 mr-1.5 md:mr-2" />
+              {project.liveUrl === "#" ? "Coming Soon" : "Live Demo"}
+            </a>
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-xs md:text-sm font-bold text-zinc-400 hover:text-white transition-colors relative z-30"
+            >
+              <GithubIcon className="w-4 h-4 md:w-5 md:h-5 mr-1.5 md:mr-2" />
+              Source
+            </a>
           </div>
         </div>
-
-        <div className="flex items-center gap-4 md:gap-6 mt-auto">
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-xs md:text-sm font-bold text-white hover:text-cyan-400 transition-colors"
-          >
-            <ExternalLink className="w-4 h-4 mr-1.5 md:mr-2" />
-            {project.liveUrl === "#" ? "Coming Soon" : "Live Demo"}
-          </a>
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-xs md:text-sm font-bold text-zinc-400 hover:text-white transition-colors"
-          >
-            <GithubIcon className="w-4 h-4 md:w-5 md:h-5 mr-1.5 md:mr-2" />
-            Source
-          </a>
-        </div>
-      </div>
+      </SpotlightCard>
     </motion.div>
   );
 }

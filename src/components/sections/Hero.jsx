@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, Mail } from "lucide-react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import MagneticButton from "../ui/MagneticButton";
 
 function GithubIcon(props) {
   return (
@@ -85,23 +86,23 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full sm:w-auto"
         >
-          <a
+          <MagneticButton
             href="#projects"
             className="group flex items-center justify-center w-full sm:w-auto px-8 py-4 text-sm sm:text-base md:text-lg font-bold text-white transition-all bg-white/5 rounded-2xl hover:bg-white/10 backdrop-blur-xl border border-white/5 hover:border-blue-500/30"
           >
             Explore Work
             <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2" />
-          </a>
-          <a
+          </MagneticButton>
+          <MagneticButton
             href="#contact"
             className="flex items-center justify-center w-full sm:w-auto px-8 py-4 text-sm sm:text-base md:text-lg font-bold text-white transition-all bg-zinc-900 border border-zinc-800 rounded-2xl hover:bg-blue-950/40 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(37,99,235,0.15)] active:scale-95"
           >
             Get in Touch
-          </a>
+          </MagneticButton>
         </motion.div>
       </motion.div>
 
-      {/* Social Icons mapped to absolute bottom with absolute spacing */}
+      {/* Social Icons */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}

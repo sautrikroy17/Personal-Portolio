@@ -1,3 +1,4 @@
+import { motion, useScroll } from "framer-motion";
 import Navbar from "./components/layout/Navbar";
 import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
@@ -7,13 +8,31 @@ import Experience from "./components/sections/Experience";
 import Contact from "./components/sections/Contact";
 
 function App() {
+  const { scrollYProgress } = useScroll();
+
   return (
     <div className="relative min-h-screen font-sans text-slate-100 selection:bg-cyan-500/30 bg-slate-950 flex flex-col overflow-x-hidden">
+      
+      {/* Cinematic Noise Overlay */}
+      <div className="fixed inset-0 z-50 pointer-events-none opacity-[0.03] mix-blend-overlay pointer-events-none w-full h-full">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <filter id="noiseFilter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+        </svg>
+      </div>
+
       {/* Global Animated Premium Gradient Background */}
       <div className="fixed inset-0 z-0 pointer-events-none w-full h-full overflow-hidden">
-        {/* Minimalist Black and Deep Navy Blue Gradient */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_#0f172a_0%,_#020617_40%,_#000000_100%)]"></div>
       </div>
+
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 origin-left z-[100]"
+        style={{ scaleX: scrollYProgress }}
+      />
 
       <div className="relative z-10 w-full flex-1">
         <Navbar />
