@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
+@import "tailwindcss";
 
 @theme {
   --color-zinc-900: #121212;
@@ -26,12 +26,18 @@
     color-scheme: dark;
   }
   
-  body {
-    @apply text-zinc-100 font-sans antialiased overflow-x-hidden selection:bg-cyan-900 selection:text-white bg-transparent;
-  }
-  
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    touch-action: pan-y;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @apply text-zinc-100 font-sans antialiased selection:bg-cyan-900 selection:text-white bg-transparent;
   }
 }
 

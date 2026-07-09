@@ -1,8 +1,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 export default function About() {
   const ref = useRef(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["0 1", "1 0"],
@@ -16,7 +19,7 @@ export default function About() {
       <div className="max-w-5xl px-6 mx-auto">
         <div className="flex flex-col md:flex-row items-center gap-16">
           <motion.div 
-            style={{ y: yImage }}
+            style={{ y: isMobile ? 0 : yImage }}
             className="w-full md:w-[45%] justify-center hidden md:flex"
           >
             <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-3xl overflow-hidden glass-card p-2 group hover:shadow-[0_0_40px_rgba(34,211,238,0.2)] transition-shadow duration-700">
@@ -31,7 +34,11 @@ export default function About() {
 
           {/* Text Content */}
           <motion.div 
-            style={{ y: yText }}
+            style={{ y: isMobile ? 0 : yText }}
+            initial={isMobile ? { opacity: 0, y: 30 } : false}
+            whileInView={isMobile ? { opacity: 1, y: 0 } : false}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="w-full md:w-[55%] space-y-8"
           >
             <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight">

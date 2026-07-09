@@ -8,7 +8,7 @@ import Contact from "./components/sections/Contact";
 
 function App() {
   return (
-    <div className="relative min-h-screen font-sans text-slate-100 selection:bg-cyan-500/30 bg-slate-950 flex flex-col">
+    <div className="relative min-h-screen font-sans text-slate-100 selection:bg-cyan-500/30 bg-slate-950 flex flex-col overflow-x-hidden">
       {/* Global Animated Premium Gradient Background */}
       <div className="fixed inset-0 z-0 pointer-events-none w-full h-full overflow-hidden">
         {/* Minimalist Black and Deep Navy Blue Gradient */}

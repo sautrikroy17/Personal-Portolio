@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, Mail } from "lucide-react";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 function GithubIcon(props) {
   return (
@@ -21,6 +22,8 @@ function LinkedinIcon(props) {
 
 export default function Hero() {
   const ref = useRef(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -35,12 +38,12 @@ export default function Hero() {
   return (
     <section ref={ref} id="top" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Dynamic Parallax Background Gradients */}
-      <motion.div style={{ y: yBg, scale: scaleImage }} className="absolute inset-0 z-0 pointer-events-none">
+      <motion.div style={{ y: isMobile ? 0 : yBg, scale: isMobile ? 1 : scaleImage }} className="absolute inset-0 z-0 pointer-events-none">
         {/* Intentionally left blank to allow global App.jsx animated gradient mesh to shine through */}
       </motion.div>
       
       <motion.div 
-        style={{ y: yText, opacity: opacityText }}
+        style={{ y: isMobile ? 0 : yText, opacity: isMobile ? 1 : opacityText }}
         className="relative z-10 w-full max-w-5xl px-6 mx-auto flex flex-col items-center text-center mt-[-8vh]"
       >
         <motion.div
