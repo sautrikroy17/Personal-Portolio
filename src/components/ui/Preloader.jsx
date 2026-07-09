@@ -1,59 +1,43 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef, useCallback } from "react";
-import SRLogo from "./SRLogo";
 
-const SPEECH_TEXT =
-  "Hey, I'm Sautrik Roy. CSE undergrad and Full Stack Developer. Here's my world.";
+// Short, punchy speech — less text = less chance of cutoff
+const SPEECH = "Hey. I'm Sautrik Roy. Full Stack Developer. Welcome to my world.";
 
 export default function Preloader({ onComplete }) {
-  const [count, setCount] = useState(0);         // 0 → 100 counter
-  const [phase, setPhase] = useState("count");   // count → reveal → speaking → exit
+  // Phases: line → name → tagline → button → speaking → exit
+  const [phase, setPhase] = useState("line");
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [lineWidth, setLineWidth] = useState(0);
+  const [colorFlood, setColorFlood] = useState(false);
   const onCompleteRef = useRef(onComplete);
-  const mouthRef = useRef(null);
+  const keepAliveRef = useRef(null);
 
   useEffect(() => {
     onCompleteRef.current = onComplete;
   }, [onComplete]);
 
-  // ── COUNTING PHASE ──────────────────────────────────────────────────────────
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
-    let start = null;
-    const duration = 2200; // ms to reach 100
+    // Staggered reveal sequence
+    const t1 = setTimeout(() => setPhase("name"),    500);
+    const t2 = setTimeout(() => setPhase("tagline"), 1300);
+    const t3 = setTimeout(() => setPhase("button"),  2000);
 
-    const tick = (timestamp) => {
-      if (!start) start = timestamp;
-      const elapsed = timestamp - start;
-      const progress = Math.min(elapsed / duration, 1);
-      // Ease out: fast then slow
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const currentCount = Math.round(eased * 100);
-      setCount(currentCount);
-      setLineWidth(eased * 100);
-
-      if (progress < 1) {
-        requestAnimationFrame(tick);
-      } else {
-        // Counter done → brief pause → reveal phase
-        setTimeout(() => setPhase("reveal"), 400);
-      }
-    };
-
-    const raf = requestAnimationFrame(tick);
     return () => {
-      cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearInterval(keepAliveRef.current);
       document.body.style.overflow = "unset";
       try { speechSynthesis.cancel(); } catch (e) {}
     };
   }, []);
 
-  // ── FINISH ──────────────────────────────────────────────────────────────────
   const finishIntro = useCallback(() => {
-    clearInterval(mouthRef.current);
+    clearInterval(keepAliveRef.current);
     setIsSpeaking(false);
+    setColorFlood(false);
     setPhase("exit");
     setTimeout(() => {
       document.body.style.overflow = "unset";
@@ -61,261 +45,300 @@ export default function Preloader({ onComplete }) {
     }, 950);
   }, []);
 
-  // ── ENTER BUTTON CLICK ──────────────────────────────────────────────────────
   const handleEnter = useCallback(() => {
-    if (phase !== "reveal") return;
+    if (phase !== "button") return;
     setPhase("speaking");
     setIsSpeaking(true);
+    setColorFlood(true);
 
+    // ---------- ROBUST SPEECH SYNTHESIS ----------
     const doSpeak = () => {
       try { speechSynthesis.cancel(); } catch (e) {}
-      const utter = new SpeechSynthesisUtterance(SPEECH_TEXT);
-      utter.rate = 1.05;
-      utter.pitch = 1.1;
-      utter.volume = 1;
 
-      const voices = speechSynthesis.getVoices();
-      const pick =
-        voices.find(v => v.name === "Aaron") ||
-        voices.find(v => v.name === "Daniel") ||
-        voices.find(v => v.name.includes("Google UK English Male")) ||
-        voices.find(v => v.lang.startsWith("en-") && !v.name.toLowerCase().includes("female")) ||
-        voices.find(v => v.lang.startsWith("en"));
-      if (pick) utter.voice = pick;
+      setTimeout(() => {
+        const utter = new SpeechSynthesisUtterance(SPEECH);
+        utter.rate  = 0.92;   // slightly slow = clearer, less cutoff risk
+        utter.pitch = 1.08;
+        utter.volume = 1;
 
-      utter.onend = finishIntro;
-      utter.onerror = () => setTimeout(finishIntro, 300);
-      speechSynthesis.speak(utter);
+        // Voice selection: prefer young male English voices
+        const voices = speechSynthesis.getVoices();
+        const pick =
+          voices.find(v => v.name === "Aaron") ||
+          voices.find(v => v.name === "Daniel") ||
+          voices.find(v => v.name === "Google UK English Male") ||
+          voices.find(v => v.name === "Google US English") ||
+          voices.find(v => v.lang.startsWith("en") && !v.name.toLowerCase().includes("female") && !v.name.toLowerCase().includes("zira") && !v.name.toLowerCase().includes("victoria")) ||
+          voices.find(v => v.lang.startsWith("en"));
+        if (pick) utter.voice = pick;
+
+        // Chrome bug fix: speech cuts out after ~15s if page is idle.
+        // Pause + resume every 8s keeps it alive. Our text is ~4s but this is a safety net.
+        utter.onstart = () => {
+          keepAliveRef.current = setInterval(() => {
+            if (speechSynthesis.speaking) {
+              speechSynthesis.pause();
+              speechSynthesis.resume();
+            } else {
+              clearInterval(keepAliveRef.current);
+            }
+          }, 8000);
+        };
+
+        utter.onend   = finishIntro;
+        utter.onerror = () => setTimeout(finishIntro, 400);
+
+        speechSynthesis.speak(utter);
+
+        // Safety exit — fires if onend never triggers (some browsers don't fire it)
+        setTimeout(finishIntro, 10000);
+      }, 120); // tiny delay after cancel to avoid race condition
     };
 
-    if (speechSynthesis.getVoices().length) {
+    // Chrome: voices load asynchronously on first call
+    const voices = speechSynthesis.getVoices();
+    if (voices.length > 0) {
       doSpeak();
     } else {
       speechSynthesis.onvoiceschanged = () => {
-        doSpeak();
         speechSynthesis.onvoiceschanged = null;
+        doSpeak();
       };
-      setTimeout(doSpeak, 400);
+      // Fallback if onvoiceschanged never fires (Safari / Firefox)
+      setTimeout(doSpeak, 600);
     }
-
-    // Safety exit in case speech never fires
-    setTimeout(finishIntro, 9000);
   }, [phase, finishIntro]);
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] bg-zinc-950 flex flex-col items-center justify-center overflow-hidden select-none"
+      className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center overflow-hidden select-none"
       animate={{
         clipPath: phase === "exit"
           ? "circle(0% at 50% 50%)"
           : "circle(150% at 50% 50%)",
       }}
-      transition={{ duration: 0.95, ease: [0.76, 0, 0.24, 1] }}
+      transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
       style={{ clipPath: "circle(150% at 50% 50%)" }}
     >
-      {/* Subtle vignette */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 40%, rgba(0,0,0,0.6) 100%)",
-        }}
-      />
+      {/* ── AURORA BACKGROUND BLOBS (CSS only, always present) ── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div
+          className="orb"
+          style={{
+            position: "absolute",
+            width: 700, height: 700,
+            top: "50%", left: "50%",
+            transform: "translate(-50%, -50%)",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(6,182,212,0.12) 0%, rgba(37,99,235,0.08) 50%, transparent 70%)",
+            filter: "blur(60px)",
+            animation: "orbFloat1 18s ease-in-out infinite",
+          }}
+        />
+      </div>
 
-      {/* ── COUNTING PHASE ── */}
+      {/* ── COLOR FLOOD on Enter ── */}
       <AnimatePresence>
-        {phase === "count" && (
+        {colorFlood && (
           <motion.div
-            key="count-phase"
+            key="flood"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, y: -30, filter: "blur(8px)" }}
-            transition={{ duration: 0.5 }}
-            className="absolute inset-0 flex flex-col items-center justify-center"
-          >
-            {/* Big counter */}
-            <div
-              className="font-display font-black text-white"
-              style={{
-                fontSize: "clamp(5rem, 20vw, 14rem)",
-                lineHeight: 1,
-                letterSpacing: "-0.05em",
-                fontVariantNumeric: "tabular-nums",
-              }}
-            >
-              <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-zinc-300 to-zinc-600">
-                {String(count).padStart(2, "0")}
-              </span>
-            </div>
-
-            {/* Progress line */}
-            <div className="mt-8 w-[200px] h-px bg-zinc-800 relative overflow-hidden">
-              <motion.div
-                className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500 to-blue-500"
-                style={{ width: `${lineWidth}%` }}
-              />
-            </div>
-
-            <p className="mt-4 text-zinc-600 text-xs tracking-[0.3em] uppercase font-medium">
-              Initializing
-            </p>
-          </motion.div>
+            animate={{ opacity: [0, 0.35, 0] }}
+            transition={{ duration: 2.5, times: [0, 0.15, 1], ease: "easeInOut" }}
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: "radial-gradient(ellipse at center, rgba(6,182,212,0.5) 0%, rgba(37,99,235,0.3) 40%, transparent 70%)",
+            }}
+          />
         )}
       </AnimatePresence>
 
-      {/* ── REVEAL PHASE — SR Logo + name + enter button ── */}
-      <AnimatePresence>
-        {(phase === "reveal" || phase === "speaking") && (
-          <motion.div
-            key="reveal-phase"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col items-center text-center px-8"
-          >
-            {/* SR Logo draws in */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.7 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <SRLogo className="w-20 h-20" />
-            </motion.div>
+      {/* ── MAIN CONTENT ── */}
+      <div className="relative z-10 flex flex-col items-center w-full px-8">
 
-            {/* Name */}
-            <motion.h1
+        {/* The horizontal line — animates in first */}
+        <AnimatePresence>
+          {phase !== "line" && (
+            <motion.div
+              key="line"
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+              className="origin-center"
+              style={{
+                width: "min(500px, 80vw)",
+                height: 1,
+                background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2) 30%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.2) 70%, transparent)",
+                marginBottom: 0,
+              }}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* The name — slides UP from behind the line */}
+        <div
+          style={{
+            overflow: "hidden",
+            paddingTop: 6,
+            paddingBottom: 4,
+          }}
+        >
+          <AnimatePresence>
+            {(phase === "name" || phase === "tagline" || phase === "button" || phase === "speaking") && (
+              <motion.h1
+                key="name"
+                initial={{ y: "110%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
+                className="text-white font-black text-center"
+                style={{
+                  fontSize: "clamp(3.5rem, 10vw, 8rem)",
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1,
+                  // Subtle gradient shimmer on the name
+                  background: "linear-gradient(135deg, #ffffff 0%, #d4d4d8 60%, #ffffff 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                SAUTRIK ROY
+              </motion.h1>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Bottom line */}
+        <AnimatePresence>
+          {phase !== "line" && (
+            <motion.div
+              key="line-bottom"
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
+              className="origin-center"
+              style={{
+                width: "min(500px, 80vw)",
+                height: 1,
+                background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2) 30%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.2) 70%, transparent)",
+              }}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Tagline — letter-spacing expands in */}
+        <AnimatePresence>
+          {(phase === "tagline" || phase === "button" || phase === "speaking") && (
+            <motion.p
+              key="tagline"
+              initial={{ opacity: 0, letterSpacing: "0em" }}
+              animate={{ opacity: 1, letterSpacing: "0.3em" }}
+              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-6 text-xs font-medium uppercase text-cyan-400/70"
+            >
+              Full Stack Developer &nbsp;·&nbsp; CSE Undergrad
+            </motion.p>
+          )}
+        </AnimatePresence>
+
+        {/* Audio visualizer — speaking only */}
+        <AnimatePresence>
+          {isSpeaking && (
+            <motion.div
+              key="viz"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.4 }}
+              className="mt-6 flex gap-[4px] items-end justify-center"
+              style={{ height: 32 }}
+            >
+              {[0.4, 0.8, 0.5, 1.1, 0.35, 1.0, 0.65, 1.2, 0.45, 0.75, 0.55, 0.95].map((f, i) => (
+                <motion.div
+                  key={i}
+                  animate={{ height: [4, Math.round(26 * f), 4] }}
+                  transition={{
+                    duration: 0.2 + i * 0.025,
+                    repeat: Infinity,
+                    delay: i * 0.05,
+                    repeatType: "reverse",
+                    ease: "easeInOut",
+                  }}
+                  style={{
+                    width: 3,
+                    minHeight: 4,
+                    borderRadius: 99,
+                    background: `hsl(${188 + i * 4}, 78%, ${52 + i * 2}%)`,
+                  }}
+                />
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Enter button */}
+        <AnimatePresence>
+          {phase === "button" && (
+            <motion.button
+              key="enter"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-6 font-display font-black tracking-tight text-white"
-              style={{ fontSize: "clamp(2.5rem, 8vw, 5rem)", letterSpacing: "-0.03em" }}
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              onClick={handleEnter}
+              className="group mt-10 relative flex items-center gap-3 px-10 py-4 rounded-full text-white text-sm font-semibold tracking-[0.1em] uppercase cursor-pointer overflow-hidden"
+              style={{
+                background: "linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03))",
+                border: "1px solid rgba(255,255,255,0.15)",
+                backdropFilter: "blur(16px)",
+                boxShadow: "0 0 40px rgba(6,182,212,0.08)",
+              }}
+              whileHover={{
+                scale: 1.04,
+                boxShadow: "0 0 60px rgba(6,182,212,0.3)",
+                borderColor: "rgba(6,182,212,0.5)",
+              }}
+              whileTap={{ scale: 0.97 }}
             >
-              Sautrik Roy
-            </motion.h1>
+              {/* Shimmer sweep on hover */}
+              <motion.div
+                className="absolute inset-0 pointer-events-none"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: "100%" }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                style={{
+                  background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent)",
+                }}
+              />
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-60" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
+              </span>
+              <span className="relative">Enter My World</span>
+              <svg className="relative w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </motion.button>
+          )}
+        </AnimatePresence>
 
-            {/* Tagline */}
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-3 text-sm tracking-[0.25em] uppercase text-cyan-400/80 font-medium"
+        {/* Skip while speaking */}
+        <AnimatePresence>
+          {isSpeaking && (
+            <motion.button
+              key="skip"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.35 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 1.5 }}
+              onClick={finishIntro}
+              className="mt-8 text-[10px] text-zinc-600 hover:text-zinc-400 tracking-[0.35em] uppercase transition-colors cursor-pointer"
             >
-              CSE Undergrad &nbsp;·&nbsp; Full Stack Developer
-            </motion.p>
-
-            {/* Divider line */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-6 w-24 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent origin-center"
-            />
-
-            {/* Audio visualizer (speaking only) */}
-            <AnimatePresence>
-              {isSpeaking && (
-                <motion.div
-                  initial={{ opacity: 0, scaleY: 0 }}
-                  animate={{ opacity: 1, scaleY: 1 }}
-                  exit={{ opacity: 0, scaleY: 0 }}
-                  className="mt-6 flex gap-[4px] items-end justify-center"
-                  style={{ height: 32 }}
-                >
-                  {[0.4, 0.8, 0.55, 1.1, 0.35, 0.95, 0.65, 1.25, 0.45, 0.75, 0.5, 1.0].map((f, i) => (
-                    <motion.div
-                      key={i}
-                      animate={{ height: [5, Math.round(26 * f), 5] }}
-                      transition={{
-                        duration: 0.22 + i * 0.025,
-                        repeat: Infinity,
-                        delay: i * 0.05,
-                        repeatType: "reverse",
-                        ease: "easeInOut",
-                      }}
-                      style={{
-                        width: 3,
-                        minHeight: 4,
-                        borderRadius: 99,
-                        background: `hsl(${186 + i * 4}, 75%, ${52 + i * 2}%)`,
-                      }}
-                    />
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Speaking label */}
-            <AnimatePresence>
-              {isSpeaking && (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.5 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="mt-4 text-xs text-zinc-500 tracking-[0.3em] uppercase"
-                >
-                  Introducing...
-                </motion.p>
-              )}
-            </AnimatePresence>
-
-            {/* Enter button */}
-            <AnimatePresence>
-              {phase === "reveal" && (
-                <motion.button
-                  key="enter-btn"
-                  initial={{ opacity: 0, y: 20, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -12, scale: 0.96 }}
-                  transition={{ duration: 0.55, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  onClick={handleEnter}
-                  className="group mt-10 relative flex items-center gap-3 px-9 py-4 rounded-full text-white text-sm font-semibold tracking-wide cursor-pointer"
-                  style={{
-                    background: "linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    backdropFilter: "blur(12px)",
-                    boxShadow: "0 0 40px rgba(34,211,238,0.1), inset 0 1px 0 rgba(255,255,255,0.08)",
-                  }}
-                  whileHover={{
-                    scale: 1.04,
-                    boxShadow: "0 0 60px rgba(34,211,238,0.25), inset 0 1px 0 rgba(255,255,255,0.1)",
-                    borderColor: "rgba(34,211,238,0.4)",
-                  }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  {/* Animated glow dot */}
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
-                  </span>
-                  Enter My World
-                  <svg
-                    className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
-                    fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </motion.button>
-              )}
-
-              {/* Skip while speaking */}
-              {phase === "speaking" && (
-                <motion.button
-                  key="skip-btn"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.45 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ delay: 1.5 }}
-                  onClick={finishIntro}
-                  className="mt-8 text-xs text-zinc-600 hover:text-zinc-400 tracking-[0.25em] uppercase transition-colors cursor-pointer"
-                >
-                  Skip
-                </motion.button>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              Skip
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </div>
     </motion.div>
   );
 }
