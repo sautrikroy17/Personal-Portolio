@@ -10,8 +10,6 @@ import Contact from "./components/sections/Contact";
 import Preloader from "./components/ui/Preloader";
 import CommandPalette from "./components/ui/CommandPalette";
 import InteractiveGrid from "./components/ui/InteractiveGrid";
-import SpatialWrapper from "./components/ui/SpatialWrapper";
-
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -35,7 +33,6 @@ function App() {
 
       <div className="relative z-10 w-full flex-1">
         <Navbar />
-        <SpatialWrapper>
           <main>
             <Hero />
             <About />
@@ -50,7 +47,6 @@ function App() {
               © {new Date().getFullYear()} Sautrik Roy &mdash; Licensed under the MIT License
             </p>
           </footer>
-        </SpatialWrapper>
       </div>
     </div>
   );

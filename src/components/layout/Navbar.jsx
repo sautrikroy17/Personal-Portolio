@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { cn } from "../../lib/utils";
-import { Menu, X, Box } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 import SRLogo from "../ui/SRLogo";
 import MagneticButton from "../ui/MagneticButton";
-import { useSpatial } from "../../context/SpatialContext";
-
 const navLinks = [
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
@@ -19,8 +17,6 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { isSpatialMode, toggleSpatialMode } = useSpatial();
-
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
     if (latest > 50) {
@@ -94,21 +90,6 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <MagneticButton>
-              <button
-                onClick={toggleSpatialMode}
-                title="Toggle Spatial Computing Mode"
-                className={cn(
-                  "flex items-center justify-center w-10 h-10 rounded-full border transition-all",
-                  isSpatialMode 
-                    ? "bg-cyan-900/40 border-cyan-500/50 text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.3)]" 
-                    : "bg-zinc-900 border-cyan-500/50 text-cyan-400 hover:text-white hover:bg-zinc-800 relative ring-2 ring-cyan-500/30 animate-pulse shadow-[0_0_15px_rgba(34,211,238,0.4)]"
-                )}
-              >
-                <Box className="w-4 h-4" />
-              </button>
-            </MagneticButton>
-
             <MagneticButton>
               <a
                 href="#contact"
