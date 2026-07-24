@@ -10,7 +10,6 @@ import Contact from "./components/sections/Contact";
 import Preloader from "./components/ui/Preloader";
 import CommandPalette from "./components/ui/CommandPalette";
 import InteractiveGrid from "./components/ui/InteractiveGrid";
-import ScrollProgressRing from "./components/ui/ScrollProgressRing";
 import SpatialWrapper from "./components/ui/SpatialWrapper";
 
 function App() {
@@ -19,7 +18,6 @@ function App() {
   return (
     <div className="relative min-h-screen font-sans text-slate-100 selection:bg-cyan-500/30 bg-slate-950 flex flex-col overflow-x-hidden">
       <CommandPalette />
-      <ScrollProgressRing />
       
       <AnimatePresence mode="wait">
         {loading && <Preloader key="preloader" onComplete={() => setLoading(false)} />}
