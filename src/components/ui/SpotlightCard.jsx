@@ -63,9 +63,7 @@ export default function SpotlightCard({ children, className = "", spotLightColor
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
-        rotateX: isMobile ? 0 : rotateX,
-        rotateY: isMobile ? 0 : rotateY,
-        transformStyle: "preserve-3d",
+        // Removed rotateX, rotateY, and preserve-3d for performance
       }}
       className={`relative overflow-hidden ${className} perspective-1000`}
     >
@@ -76,7 +74,7 @@ export default function SpotlightCard({ children, className = "", spotLightColor
           background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotLightColor}, transparent 40%)`,
         }}
       />
-      <div style={{ transform: isMobile ? "none" : "translateZ(20px)" }} className="h-full">
+      <div style={{ transform: "none" }} className="h-full">
         {children}
       </div>
     </motion.div>

@@ -8,7 +8,6 @@ import Skills from "./components/sections/Skills";
 import Experience from "./components/sections/Experience";
 import Contact from "./components/sections/Contact";
 import Preloader from "./components/ui/Preloader";
-import CustomCursor from "./components/ui/CustomCursor";
 import CommandPalette from "./components/ui/CommandPalette";
 import LiquidRipple from "./components/ui/LiquidRipple";
 import InteractiveGrid from "./components/ui/InteractiveGrid";
@@ -21,7 +20,6 @@ function App() {
   return (
     <div className="relative min-h-screen font-sans text-slate-100 selection:bg-cyan-500/30 bg-slate-950 flex flex-col overflow-x-hidden">
       
-      <CustomCursor />
       <LiquidRipple />
       <CommandPalette />
       <ScrollProgressRing />
