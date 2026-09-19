@@ -71,7 +71,8 @@ export default function About() {
           className="w-full h-full object-cover object-center opacity-100"
         />
 
-        {/* Soft bottom edge blend into the next section */}
+        {/* Soft top and bottom edge blends for seamless transition between sections */}
+        <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none" />
         <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none" />
       </div>
 
