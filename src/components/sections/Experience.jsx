@@ -129,13 +129,13 @@ export default function Experience() {
         </picture>
 
         {/* Seamless top blend with Skills section */}
-        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-zinc-950 via-zinc-950/85 to-transparent z-10" />
+        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-black via-black/85 to-transparent z-10 pointer-events-none" />
 
         {/* Velvety left and center dark overlay for razor-sharp typography contrast */}
-        <div className="absolute inset-y-0 left-0 w-full lg:w-[68%] bg-gradient-to-r from-black via-black/92 to-transparent z-10" />
+        <div className="absolute inset-y-0 left-0 w-full lg:w-[68%] bg-gradient-to-r from-black via-black/92 to-transparent z-10 pointer-events-none" />
 
         {/* Seamless bottom blend into Contact section */}
-        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-zinc-950 via-zinc-950/85 to-transparent z-10" />
+        <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-black via-black/85 to-transparent z-10 pointer-events-none" />
 
         {/* Subtle cyan ambient glow */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-600/10 blur-[160px] rounded-full" />
@@ -192,26 +192,6 @@ export default function Experience() {
           <p className="mt-2.5 text-base sm:text-lg text-zinc-300 max-w-2xl">
             A journey from learning the fundamentals to building real products.
           </p>
-
-          {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3.5 mt-6">
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] transition-all duration-300 hover:scale-[1.02] active:scale-95"
-            >
-              <span>View Resume</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-            </a>
-
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium text-zinc-300 hover:text-white bg-zinc-900/80 hover:bg-zinc-800/80 border border-white/10 hover:border-white/20 backdrop-blur-xl transition-all duration-200 active:scale-95"
-            >
-              <span>Get in Touch</span>
-            </a>
-          </div>
         </div>
 
         {/* =========================================================================
@@ -485,56 +465,6 @@ export default function Experience() {
             </motion.div>
           </div>
         </div>
-
-        {/* =========================================================================
-            BOTTOM BANNER: WHAT'S NEXT?
-            Wide horizontal glass card leading directly into Contact
-            ========================================================================= */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-16 md:mt-20 rounded-2xl bg-zinc-950/85 backdrop-blur-xl border border-white/10 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
-
-          {/* Left Title */}
-          <div>
-            <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-500 block mb-1">
-              WHAT'S NEXT?
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Let’s build something{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-sky-300 text-glow-blue">
-                worth shipping.
-              </span>
-            </h3>
-          </div>
-
-          {/* Middle Subtitle */}
-          <p className="text-xs sm:text-sm text-zinc-400 max-w-sm text-center md:text-left leading-relaxed">
-            New opportunities, collaborations or just a good conversation — I’d love to connect.
-          </p>
-
-          {/* Right Action Button */}
-          <a
-            href="#contact"
-            className="group shrink-0 inline-flex items-center gap-3.5 px-6 py-3 rounded-full bg-zinc-900/90 hover:bg-zinc-800 border border-white/10 hover:border-cyan-500/40 shadow-lg hover:shadow-[0_0_25px_rgba(34,211,238,0.2)] transition-all duration-300 active:scale-95"
-          >
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-[0_0_15px_rgba(34,211,238,0.4)] group-hover:scale-105 transition-transform">
-              <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-0.5" />
-            </div>
-            <div className="text-left">
-              <div className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
-                Get in touch
-              </div>
-              <div className="text-[11px] font-mono text-zinc-500">
-                Let's create, together.
-              </div>
-            </div>
-          </a>
-        </motion.div>
       </div>
     </section>
   );

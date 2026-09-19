@@ -41,8 +41,10 @@ export default function InteractiveGrid() {
       style={{ "--mx": "-1000px", "--my": "-1000px" }}
     >
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 transform-gpu"
         style={{
+          transform: "translateZ(0)",
+          willChange: "mask-image, -webkit-mask-image",
           backgroundSize: "32px 32px",
           backgroundImage: "radial-gradient(circle at 2px 2px, rgba(34, 211, 238, 0.35) 1px, transparent 0)",
           WebkitMaskImage:

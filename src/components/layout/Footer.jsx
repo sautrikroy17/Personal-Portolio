@@ -42,14 +42,6 @@ export default function Footer() {
             <a href="#contact" className="hover:text-white transition-colors">
               Contact
             </a>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors"
-            >
-              Resume ↗
-            </a>
           </div>
 
           {/* Right: Socials & Back-To-Top Button */}

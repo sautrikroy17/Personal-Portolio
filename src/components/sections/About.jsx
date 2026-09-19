@@ -75,8 +75,8 @@ export default function About() {
         <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[54%] bg-gradient-to-r from-zinc-950/90 via-zinc-950/50 to-transparent pointer-events-none" />
 
         {/* Seamless top and bottom edge blends for unified developer studio transition */}
-        <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-zinc-950 via-zinc-950/85 to-transparent pointer-events-none z-10" />
-        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-zinc-950 via-zinc-950/85 to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-black via-black/85 to-transparent pointer-events-none z-10" />
+        <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-black via-black/85 to-transparent pointer-events-none z-10" />
       </div>
 
       {/* =========================================================================

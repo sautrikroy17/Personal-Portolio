@@ -141,13 +141,13 @@ export default function Skills() {
         </picture>
 
         {/* Seamless top blend with Projects section - perfectly connects the developer studio journey */}
-        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-zinc-950 via-zinc-950/85 to-transparent z-10" />
+        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-black via-black/85 to-transparent z-10 pointer-events-none" />
 
         {/* Left vignette for maximum typography readability */}
-        <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[48%] bg-gradient-to-r from-black via-black/85 to-transparent z-10" />
+        <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[48%] bg-gradient-to-r from-black via-black/85 to-transparent z-10 pointer-events-none" />
 
         {/* Bottom fade into Experience section */}
-        <div className="absolute bottom-0 inset-x-0 h-36 bg-gradient-to-t from-zinc-950 via-zinc-950/75 to-transparent z-10" />
+        <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-black via-black/85 to-transparent z-10 pointer-events-none" />
 
         {/* Subtle atmospheric ambient glow */}
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-cyan-600/10 blur-[140px] rounded-full" />
@@ -423,7 +423,7 @@ export default function Skills() {
         {/* =========================================================================
             BOTTOM METADATA BAR (Timeline Journey & 04 / EXPERIENCE ->)
             ========================================================================= */}
-        <div className="mt-14 md:mt-18 pt-7 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-14 md:mt-18 pt-7 flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Scroll to explore indicator */}
           <a
             href="#experience"

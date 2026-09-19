@@ -77,13 +77,13 @@ export default function Projects() {
         </picture>
 
         {/* Seamless top blend with About section to eliminate harsh boundaries */}
-        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-zinc-950 via-zinc-950/85 to-transparent z-10" />
+        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-black via-black/85 to-transparent z-10 pointer-events-none" />
 
         {/* Left vignette for maximum typography readability */}
-        <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[52%] bg-gradient-to-r from-black via-black/85 to-transparent z-10" />
+        <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[52%] bg-gradient-to-r from-black via-black/85 to-transparent z-10 pointer-events-none" />
 
         {/* Bottom fade into Skills section - seamless dark studio transition */}
-        <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-zinc-950 via-zinc-950/90 to-transparent z-10" />
+        <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-black via-black/90 to-transparent z-10 pointer-events-none" />
 
         {/* Subtle atmospheric ambient glow */}
         <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-blue-600/10 blur-[130px] rounded-full" />
@@ -306,7 +306,7 @@ export default function Projects() {
         {/* =========================================================================
             BOTTOM METADATA BAR (Scroll to Explore, Ideas Compound & Section 03 / 06)
             ========================================================================= */}
-        <div className="mt-14 md:mt-18 pt-7 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-14 md:mt-18 pt-7 flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Scroll to explore indicator */}
           <a
             href="#skills"

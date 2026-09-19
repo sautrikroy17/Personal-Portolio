@@ -83,7 +83,7 @@ export default function Hero() {
         />
 
         {/* Seamless bottom edge blend into About section */}
-        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-zinc-950 via-zinc-950/85 to-transparent pointer-events-none z-10" />
+        <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-black via-black/85 to-transparent pointer-events-none z-10" />
       </div>
 
       {/* =========================================================================
@@ -156,22 +156,16 @@ export default function Hero() {
             variants={itemVariants}
             className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-3.5 max-w-xl lg:max-w-2xl pt-2"
           >
-            {bentoCards.map((card, idx) => {
+            {bentoCards.map((card) => {
               const Icon = card.icon;
-              const isActive = idx === 0;
               return (
                 <motion.a
                   key={card.number}
                   href={card.href}
-                  whileHover={{ y: -5, scale: 1.02 }}
+                  whileHover={{ y: -4, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className={cn(
-                    "group relative flex flex-col justify-between p-4 rounded-2xl transition-all duration-300 cursor-pointer overflow-hidden backdrop-blur-2xl border",
-                    isActive
-                      ? "bg-slate-950/80 border-blue-500/60 shadow-[0_0_25px_rgba(59,130,246,0.3)]"
-                      : "bg-slate-950/65 border-white/10 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.25)]"
-                  )}
+                  className="group relative flex flex-col justify-between p-4 rounded-2xl transition-all duration-300 cursor-pointer overflow-hidden backdrop-blur-md border bg-slate-950/70 border-white/10 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.25)] transform-gpu"
                 >
                   {/* Top Row: Icon + Number */}
                   <div className="relative z-10 flex items-center justify-between mb-3">
@@ -193,15 +187,8 @@ export default function Hero() {
                     </p>
                   </div>
 
-                  {/* Bottom accent line */}
-                  <div
-                    className={cn(
-                      "absolute bottom-0 inset-x-4 h-[2px] transition-all duration-300 rounded-full",
-                      isActive
-                        ? "bg-blue-500 shadow-[0_0_10px_#3b82f6]"
-                        : "bg-transparent group-hover:bg-blue-400 group-hover:shadow-[0_0_10px_#60a5fa]"
-                    )}
-                  />
+                  {/* Bottom accent line - only glows on hover */}
+                  <div className="absolute bottom-0 inset-x-4 h-[2px] transition-all duration-300 rounded-full bg-transparent group-hover:bg-blue-400 group-hover:shadow-[0_0_10px_#60a5fa]" />
                 </motion.a>
               );
             })}

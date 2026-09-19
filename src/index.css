@@ -72,14 +72,20 @@
     background: radial-gradient(circle at 50% -20%, theme('colors.blue.900/40'), transparent 65%);
   }
   .glass-card {
-    @apply bg-zinc-950/80 backdrop-blur-md md:bg-zinc-950/40 md:backdrop-blur-3xl border border-white/5;
+    @apply bg-zinc-950/85 backdrop-blur-md border border-white/10;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
   .glass-tile {
-    background: rgba(10, 16, 30, 0.5);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 16, 30, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 }
 

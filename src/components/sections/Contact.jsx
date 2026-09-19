@@ -109,13 +109,13 @@ export default function Contact() {
         </picture>
 
         {/* Seamless top blend with Experience section */}
-        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-zinc-950 via-zinc-950/85 to-transparent z-10" />
+        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-black via-black/85 to-transparent z-10 pointer-events-none" />
 
         {/* Left vignette for maximum typography readability */}
-        <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[50%] bg-gradient-to-r from-black via-black/90 to-transparent z-10" />
+        <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[50%] bg-gradient-to-r from-black via-black/90 to-transparent z-10 pointer-events-none" />
 
         {/* Bottom fade into Footer */}
-        <div className="absolute bottom-0 inset-x-0 h-36 bg-gradient-to-t from-zinc-950 via-zinc-950/90 to-transparent z-10" />
+        <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-black via-black/90 to-transparent z-10 pointer-events-none" />
 
         {/* Subtle ambient cyan glow */}
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-600/10 blur-[150px] rounded-full" />
@@ -381,36 +381,6 @@ export default function Contact() {
                 </div>
               </a>
             </motion.div>
-
-            {/* DOWNLOAD RESUME QUICK CARD */}
-            <motion.a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="group p-4 rounded-xl bg-gradient-to-r from-blue-950/40 via-indigo-950/30 to-zinc-900/50 backdrop-blur-xl border border-indigo-500/30 hover:border-indigo-400/60 transition-all duration-300 flex items-center justify-between shadow-lg"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-300 group-hover:scale-105 transition-transform">
-                  <FileText className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-white group-hover:text-indigo-300 transition-colors">
-                    Official Resume (PDF)
-                  </div>
-                  <div className="text-[10px] font-mono text-zinc-400">
-                    Sautrik_Roy_Resume.pdf • 308 KB
-                  </div>
-                </div>
-              </div>
-              <div className="inline-flex items-center gap-1 text-[11px] font-mono text-indigo-300 group-hover:translate-x-0.5 transition-transform font-semibold">
-                <span>Open</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </div>
-            </motion.a>
           </div>
 
           {/* =======================================================================
