@@ -1,9 +1,5 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { ExternalLink, Music2 } from "lucide-react";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import SpotlightCard from "../ui/SpotlightCard";
-import RevealText from "../ui/RevealText";
+import { motion } from "framer-motion";
+import { ExternalLink, ArrowRight } from "lucide-react";
 
 function GithubIcon(props) {
   return (
@@ -13,281 +9,305 @@ function GithubIcon(props) {
   );
 }
 
-const projects = [
+const featuredProject = {
+  number: "01",
+  tag: "FEATURED PROJECT",
+  title: "Loop — Beyond Limits",
+  subtitle: "A next-generation music experience, built for a more personal you.",
+  description:
+    "A modern, AI-powered music platform with personalized recommendations, live lyrics, immersive player experience and more.",
+  tags: ["React", "TypeScript", "Supabase", "Framer Motion"],
+  liveUrl: "https://loop-feel.vercel.app",
+  githubUrl: "https://github.com/sautrikroy17/Loop-Beyond-Limits",
+  image: "/loop.png",
+};
+
+const secondaryProjects = [
   {
-    id: 0,
-    title: "Loop — Beyond Limits",
-    description:
-      "A next-generation, hyper-personalized music streaming ecosystem powered by an adaptive AI intelligence engine. It dynamically analyzes listening patterns to predict and curate your exact mood in real-time. Features an insane 60FPS fluid UI, ultra-low latency playback, instantaneous cross-device cloud sync, and 5 breathtaking visual themes. Built completely from the ground up for the ultimate auditory experience.",
-    tags: ["React 19", "TanStack Start", "Supabase", "TypeScript", "Vercel", "Framer Motion"],
-    image:
-      "/loop.png",
-    featured: true,
-    liveUrl: "https://loop-feel.vercel.app",
-    githubUrl: "https://github.com/sautrikroy17/Loop-Feel-the-waves",
-    accent: "from-purple-500 to-pink-500",
-    glowColor: "rgba(168,85,247,0.15)",
-    glowBorder: "purple-500/40",
-    badge: "🎵 Masterpiece",
-  },
-  {
-    id: 1,
-    title: "Legacy Lens",
-    description:
-      "Built for a competitive hackathon, an AI-powered tool that converts natural language into complex database queries, bridging the gap between non-technical users and databases.",
-    tags: ["React", "Node.js", "Gemini AI", "MongoDB", "MySQL"],
-    image:
-      "/legacy-lens.png",
-    featured: false,
-    liveUrl: "https://legacy-lens-beta.vercel.app",
-    githubUrl: "https://github.com/sautrikroy17/LegacyLens-2.O",
-    accent: "from-blue-400 to-cyan-400",
-    glowColor: "rgba(34,211,238,0.15)",
-    glowBorder: "cyan-400/40",
-  },
-  {
-    id: 2,
-    title: "Quizzify AI",
-    description:
-      "An AI-driven quiz generator built with a resilient C++ backend for complex scheduling and dynamic scaling. Full stack implementation with Next.js frontend.",
-    tags: ["Next.js", "C++", "Tailwind", "Gemini API"],
-    image:
-      "/quizzify.png",
-    featured: false,
+    number: "02",
+    title: "Quizify",
+    subtitle: "AI-powered quiz generation from your documents.",
+    image: "/quizzify.png",
     liveUrl: "https://quizzify-ai.vercel.app",
     githubUrl: "https://github.com/sautrikroy17/Quizzify",
-    accent: "from-emerald-400 to-teal-400",
-    glowColor: "rgba(52,211,153,0.15)",
-    glowBorder: "emerald-400/40",
+    glowColor: "rgba(56, 189, 248, 0.2)",
+    accentColor: "from-cyan-500 to-blue-600",
   },
   {
-    id: 3,
-    title: "Credit Card Validator",
-    description:
-      "A robust credit card validation engine utilizing the Luhn algorithm for fast, secure, and offline checking. Highly optimized C++ logic.",
-    tags: ["C++", "Algorithms", "Terminal"],
-    image:
-      "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop",
-    featured: false,
-    liveUrl: "https://github.com/sautrikroy17",
-    githubUrl: "https://github.com/sautrikroy17",
-    accent: "from-orange-400 to-amber-400",
-    glowColor: "rgba(251,146,60,0.15)",
-    glowBorder: "orange-400/40",
+    number: "03",
+    title: "Sentinel",
+    subtitle: "Mental wellness platform for uniformed forces.",
+    image: "/sentinel.png",
+    liveUrl: "https://sentinelsfrontend.onrender.com/",
+    githubUrl: "https://github.com/sautrikroy17/Sentinel_SIH",
+    glowColor: "rgba(16, 185, 129, 0.2)",
+    accentColor: "from-emerald-500 to-teal-600",
   },
   {
-    id: 4,
-    title: "Future Venture: Fintech Engine",
-    description:
-      "An upcoming project researching quantitative development, algorithmic logic, and high-frequency data structures for DeFi and banking tech.",
-    tags: ["Fintech", "Go / Rust", "Analytics"],
-    image:
-      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&auto=format&fit=crop",
-    featured: false,
-    liveUrl: "#",
-    githubUrl: "#",
-    accent: "from-blue-400 to-cyan-400",
-    glowColor: "rgba(34,211,238,0.15)",
-    glowBorder: "cyan-400/40",
+    number: "04",
+    title: "Legacy Lens 2.0",
+    subtitle: "A lightweight, high-performance database system.",
+    image: "/legacy-lens.png",
+    liveUrl: "https://legacy-lens-beta.vercel.app/",
+    githubUrl: "https://github.com/sautrikroy17/LegacyLens-2.O",
+    glowColor: "rgba(99, 102, 241, 0.2)",
+    accentColor: "from-blue-500 to-indigo-600",
   },
 ];
 
-function FeaturedProjectCard({ project }) {
-  const ref = useRef(null);
-  const isMobile = useMediaQuery("(max-width: 768px)");
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["0 1", "1.2 1"] });
-  
-  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
-  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.2, 1]);
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ 
-        scale: isMobile ? 1 : scaleProgress, 
-        opacity: isMobile ? 1 : opacityProgress, 
-        boxShadow: `0 0 0 0 ${project.glowColor}` 
-      }}
-      initial={isMobile ? { opacity: 0, y: 30 } : false}
-      whileInView={isMobile ? { opacity: 1, y: 0 } : false}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative col-span-1 md:col-span-2 overflow-hidden rounded-3xl md:rounded-[2.5rem] transition-colors duration-700"
-      whileHover={!isMobile ? { boxShadow: `0 0 80px ${project.glowColor}` } : {}}
-    >
-      <SpotlightCard spotLightColor={project.glowColor} className="h-full glass-card border border-white/5">
-        {/* Background image with strong gradient overlay */}
-        <div className="absolute inset-0">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover scale-105 transition-transform duration-1000 group-hover:scale-110 opacity-30"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-zinc-950/30" />
-        </div>
-
-        {/* Content */}
-        <div className="relative z-20 p-6 sm:p-10 md:p-14 flex flex-col justify-end min-h-[420px] md:min-h-[480px]">
-          {/* Badge */}
-          {project.badge && (
-            <span className={`inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-1.5 mb-4 md:mb-6 w-fit text-[10px] md:text-xs font-bold rounded-full bg-gradient-to-r ${project.accent} text-black tracking-widest uppercase shadow-lg`}>
-              {project.badge}
-            </span>
-          )}
-
-          <div className="flex items-center gap-3 mb-4">
-            <div className={`hidden sm:flex w-10 h-10 rounded-xl bg-gradient-to-br ${project.accent} items-center justify-center shadow-lg`}>
-              <Music2 className="w-5 h-5 text-black" />
-            </div>
-            <h3 className={`text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${project.accent} tracking-tight`}>
-              {project.title}
-            </h3>
-          </div>
-
-          <p className="text-zinc-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 md:mb-8 max-w-3xl font-medium">
-            {project.description}
-          </p>
-
-          <div className="flex flex-wrap gap-2 mb-8">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className={`px-3 py-1 text-xs font-bold rounded-full border backdrop-blur-md bg-white/5 text-white border-white/10`}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 w-full sm:w-auto">
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex items-center justify-center w-full sm:w-auto gap-2 px-6 py-3 rounded-2xl text-sm font-bold text-black bg-gradient-to-r ${project.accent} hover:opacity-90 transition-all shadow-lg hover:scale-105 active:scale-95 relative z-30`}
-            >
-              <ExternalLink className="w-4 h-4" />
-              Live App
-            </a>
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-full sm:w-auto gap-2 text-sm font-bold text-zinc-200 hover:text-white transition-colors py-3 sm:py-0 relative z-30"
-            >
-              <GithubIcon className="w-5 h-5" />
-              Source Code
-            </a>
-          </div>
-        </div>
-      </SpotlightCard>
-    </motion.div>
-  );
-}
-
-function ProjectCard({ project }) {
-  const ref = useRef(null);
-  const isMobile = useMediaQuery("(max-width: 768px)");
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["0 1", "1.3 1"] });
-  
-  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
-  const yImage = useTransform(scrollYProgress, [0, 1], ["20%", "0%"]);
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ scale: isMobile ? 1 : scaleProgress, opacity: isMobile ? 1 : opacityProgress }}
-      initial={isMobile ? { opacity: 0, y: 30 } : false}
-      whileInView={isMobile ? { opacity: 1, y: 0 } : false}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={!isMobile ? { y: -10, boxShadow: `0 0 50px ${project.glowColor}` } : {}}
-      className={`group relative overflow-hidden rounded-3xl md:rounded-[2.5rem] flex flex-col transition-colors duration-500 h-auto md:h-[500px]`}
-    >
-      <SpotlightCard spotLightColor={project.glowColor} className={`h-full flex flex-col glass-card border border-white/5 hover:border-${project.glowBorder}`}>
-        {/* Image */}
-        <div className="relative overflow-hidden h-48 md:h-60 shrink-0">
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/40 to-transparent z-10" />
-          <motion.img
-            style={{ y: isMobile ? 0 : yImage }}
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full md:h-[120%] object-cover transition-transform duration-1000 group-hover:scale-110"
-          />
-        </div>
-
-        {/* Content */}
-        <div className="p-6 md:p-8 flex flex-col flex-1 justify-between z-20 relative">
-          <div>
-            <h3 className={`text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${project.accent} mb-3 transition-colors duration-300`}>
-              {project.title}
-            </h3>
-            <p className="text-zinc-200 text-sm leading-relaxed mb-5 font-medium line-clamp-4 md:line-clamp-none">
-              {project.description}
-            </p>
-            <div className="flex flex-wrap gap-2 mb-6">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2.5 py-1 text-[10px] md:text-xs font-semibold text-zinc-300 bg-white/5 rounded-full border border-white/10 backdrop-blur-md"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 md:gap-6 mt-auto">
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-xs md:text-sm font-bold text-white hover:text-cyan-400 transition-colors relative z-30"
-            >
-              <ExternalLink className="w-4 h-4 mr-1.5 md:mr-2" />
-              {project.liveUrl === "#" ? "Coming Soon" : "Live Demo"}
-            </a>
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-xs md:text-sm font-bold text-zinc-200 hover:text-white transition-colors relative z-30"
-            >
-              <GithubIcon className="w-4 h-4 md:w-5 md:h-5 mr-1.5 md:mr-2" />
-              Source
-            </a>
-          </div>
-        </div>
-      </SpotlightCard>
-    </motion.div>
-  );
-}
-
 export default function Projects() {
-  const [featured, ...rest] = projects;
-
   return (
-    <section id="projects" className="py-24 md:py-32 relative">
-      <div className="max-w-6xl px-4 md:px-6 mx-auto">
-        <div className="mb-12 md:mb-20">
-          <div className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-4 md:mb-6 tracking-tight">
-            <RevealText text="Selected" className="inline-block" />{" "}
-            <RevealText text="Work." className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400" />
+    <section id="projects" className="relative min-h-screen py-20 md:py-28 overflow-hidden bg-black text-white">
+      {/* Dynamic Background matching 10/10 mockup */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <picture>
+          <source srcSet="/projects-workspace.webp" type="image/webp" />
+          <img
+            src="/projects-workspace.jpg"
+            alt="Workspace Studio"
+            className="w-full h-full object-cover object-center opacity-85"
+            loading="lazy"
+          />
+        </picture>
+        {/* Shading gradients to blend left side deep dark for legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 lg:via-black/55 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black/95 z-10" />
+        {/* Subtle atmospheric ambient glow */}
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-blue-600/10 blur-[130px] rounded-full" />
+      </div>
+
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* TOP ROW: Selected Work Headline + Featured Project */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          {/* Left Column: Heading & Quotes */}
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            {/* Section Tag */}
+            <div className="flex items-center gap-3 mb-6">
+              <span className="font-mono text-xs md:text-sm tracking-widest text-zinc-400 font-semibold uppercase">
+                02 / WORK
+              </span>
+              <div className="w-12 h-[1px] bg-zinc-700/60" />
+            </div>
+
+            {/* Main Headline */}
+            <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.05]">
+              Selected
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-400 drop-shadow-[0_0_35px_rgba(56,189,248,0.4)]">
+                Work.
+              </span>
+            </h2>
+
+            {/* Subtitle */}
+            <p className="text-zinc-300 text-base md:text-lg max-w-md leading-relaxed mb-8 font-normal">
+              A few things I've built, broken, learned from, and shipped.
+            </p>
+
+            {/* Handwritten Quote */}
+            <div className="relative pt-2">
+              <p className="font-['Caveat',cursive] text-2xl md:text-3xl text-zinc-400 leading-snug">
+                Better Products.
+                <br />
+                A Brighter Tomorrow.
+              </p>
+              <div className="w-20 h-[2px] bg-gradient-to-r from-cyan-400 to-transparent mt-2 rounded-full shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
+            </div>
           </div>
-          <p className="text-zinc-200 text-lg md:text-xl max-w-2xl font-medium leading-relaxed">
-            A curated collection of scalable systems and fluid interfaces showcasing my expertise.
-          </p>
+
+          {/* Right Column: Featured Project Glass Card */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="relative rounded-3xl p-6 sm:p-8 md:p-10 border border-white/10 bg-zinc-950/60 backdrop-blur-xl shadow-2xl hover:border-blue-500/30 transition-all duration-500 group overflow-hidden"
+            >
+              {/* Subtle card glow */}
+              <div className="absolute -top-24 -right-24 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+
+              {/* Tag / Header */}
+              <div className="flex items-center gap-3 mb-5">
+                <span className="text-xs font-mono font-bold text-zinc-400 tracking-wider">
+                  {featuredProject.number}
+                </span>
+                <span className="w-4 h-[1px] bg-zinc-600" />
+                <span className="text-[11px] font-bold text-zinc-300 tracking-widest uppercase">
+                  {featuredProject.tag}
+                </span>
+              </div>
+
+              {/* Title */}
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3">
+                {featuredProject.title}
+              </h3>
+
+              {/* Subheading */}
+              <p className="text-sm sm:text-base text-zinc-300 font-medium mb-3">
+                {featuredProject.subtitle}
+              </p>
+
+              {/* Description */}
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6 max-w-xl">
+                {featuredProject.description}
+              </p>
+
+              {/* Tech Stack Pills */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {featuredProject.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 text-xs font-medium text-zinc-300 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* Actions */}
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href={featuredProject.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-sky-400/40 bg-sky-500/10 hover:bg-sky-500/20 text-white font-semibold text-sm transition-all shadow-lg hover:scale-105 active:scale-95 group/btn"
+                >
+                  <span>View Project</span>
+                  <ArrowRight className="w-4 h-4 text-sky-400 group-hover/btn:translate-x-0.5 transition-transform" />
+                </a>
+
+                <a
+                  href={featuredProject.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white text-sm font-medium transition-all"
+                  title="View Source on GitHub"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                  <span className="text-xs">GitHub</span>
+                </a>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {/* Loop as featured hero card spanning full width */}
-          <FeaturedProjectCard project={featured} />
+        {/* BOTTOM ROW: 3 Secondary Project Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 md:mt-16">
+          {secondaryProjects.map((project, idx) => (
+            <motion.div
+              key={project.number}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="relative rounded-2xl md:rounded-3xl border border-white/10 bg-zinc-950/70 backdrop-blur-xl p-5 sm:p-6 flex flex-col justify-between hover:border-white/20 transition-all duration-300 hover:-translate-y-1.5 shadow-xl group overflow-hidden"
+            >
+              {/* Card top bar */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs font-bold text-zinc-400">
+                      {project.number}
+                    </span>
+                    <span className="w-5 h-[1px] bg-zinc-700" />
+                  </div>
 
-          {/* Rest of projects as regular cards */}
-          {rest.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+                  <div className="flex items-center gap-2">
+                    {/* GitHub Link Icon */}
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-all"
+                      title="GitHub Repository"
+                    >
+                      <GithubIcon className="w-3.5 h-3.5" />
+                    </a>
+
+                    {/* Live Demo Arrow Button */}
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-full border border-sky-500/30 bg-sky-500/10 hover:bg-sky-500 hover:text-black flex items-center justify-center text-sky-400 transition-all shadow-sm"
+                      title="Live Demo"
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight mb-2 group-hover:text-sky-300 transition-colors">
+                  {project.title}
+                </h3>
+
+                {/* Subtitle */}
+                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-5 font-normal">
+                  {project.subtitle}
+                </p>
+              </div>
+
+              {/* Real Project Image Preview Container */}
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative rounded-xl md:rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 shadow-inner group/img aspect-video mt-auto"
+              >
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/img:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                  <span className="text-[11px] font-semibold text-white inline-flex items-center gap-1.5 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+                    <ExternalLink className="w-3 h-3 text-sky-400" />
+                    Open Live
+                  </span>
+                </div>
+              </a>
+            </motion.div>
           ))}
+        </div>
+
+        {/* BOTTOM METADATA BAR */}
+        <div className="mt-16 md:mt-20 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Scroll to explore indicator */}
+          <div className="flex items-center gap-3">
+            <div className="w-4 h-6 rounded-full border border-white/20 flex items-start justify-center p-1">
+              <motion.div
+                animate={{ y: [0, 6, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                className="w-1 h-1.5 rounded-full bg-cyan-400"
+              />
+            </div>
+            <span className="font-mono tracking-widest uppercase text-[10px] text-zinc-400 font-medium">
+              SCROLL TO EXPLORE
+            </span>
+            <div className="hidden sm:block w-12 h-[1px] bg-zinc-800" />
+          </div>
+
+          {/* Script Quote */}
+          <div className="text-center">
+            <span className="font-['Caveat',cursive] text-xl text-zinc-400 tracking-wide">
+              Ideas compound.
+            </span>
+          </div>
+
+          {/* View All Projects Button */}
+          <div>
+            <a
+              href="https://github.com/sautrikroy17?tab=repositories"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/25 text-white font-medium text-xs transition-all duration-300 group"
+            >
+              <span>View All Projects</span>
+              <ArrowRight className="w-3.5 h-3.5 text-zinc-300 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
         </div>
       </div>
     </section>
