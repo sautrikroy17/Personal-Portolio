@@ -1,169 +1,273 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { ArrowRight, Mail } from "lucide-react";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import MagneticButton from "../ui/MagneticButton";
+import { motion } from "framer-motion";
+import { ArrowRight, Mail, Lightbulb, Code2, Box, BarChart3, MapPin } from "lucide-react";
 
-function GithubIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.24c3-.34 6-1.53 6-6.6a5.44 5.44 0 0 0-1.54-3.9 5.4 5.4 0 0 0-.15-3.8s-1.25-.4-4 1.4a13.3 13.3 0 0 0-7 0C4.3 1.9 3 2.3 3 2.3a5.4 5.4 0 0 0-.15 3.8A5.44 5.44 0 0 0 1.3 10.3c0 5 3 6.2 6 6.5A5.8 5.8 0 0 0 6 20v2M9 20c-5 1.5-5-2.5-7-3" />
-    </svg>
-  );
-}
+// The 4 interactive bento tiles from the reference mockup
+const bentoCards = [
+  {
+    number: "01",
+    title: "Ideas",
+    description: "Turning ideas into real solutions.",
+    icon: Lightbulb,
+    href: "#about",
+    glowColor: "from-blue-500/20 to-cyan-500/10",
+  },
+  {
+    number: "02",
+    title: "Code",
+    description: "Writing clean, scalable code.",
+    icon: Code2,
+    href: "#skills",
+    glowColor: "from-indigo-500/20 to-blue-500/10",
+  },
+  {
+    number: "03",
+    title: "Products",
+    description: "Building products that create value.",
+    icon: Box,
+    href: "#projects",
+    glowColor: "from-cyan-500/20 to-indigo-500/10",
+  },
+  {
+    number: "04",
+    title: "Impact",
+    description: "Solving real problems, for real people.",
+    icon: BarChart3,
+    href: "#experience",
+    glowColor: "from-blue-500/20 to-purple-500/10",
+  },
+];
 
-function LinkedinIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  );
-}
+// Motion animation variants for smooth sequential reveal
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.15,
+    },
+  },
+};
 
-// Simple, GPU-friendly word-level fade-up — NO per-char blur loops
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (delay = 0) => ({
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] },
-  }),
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
 };
 
 export default function Hero() {
-  const ref = useRef(null);
-  const isMobile = useMediaQuery("(max-width: 768px)");
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacityText = useTransform(scrollYProgress, [0, 1], [1, 0]);
-
   return (
     <section
-      ref={ref}
       id="top"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden pt-28 pb-10 select-none"
     >
-      {/* Hero-local background orb (CSS, no JS) */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 10%, rgba(37,99,235,0.12) 0%, transparent 70%)",
-        }}
-      />
+      {/* =========================================================================
+          ATMOSPHERIC WORKSPACE BACKGROUND
+          High-performance LCP image with fetchpriority="high" and dark gradient masks
+          ========================================================================= */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Crisp WebP Background Photograph */}
+        <img
+          src="/hero-workspace.webp"
+          alt="Atmospheric Developer Workspace"
+          fetchPriority="high"
+          decoding="async"
+          className="w-full h-full object-cover object-right lg:object-center opacity-85 transition-opacity duration-1000"
+        />
 
+        {/* Cinematic gradient overlays for contrast and smooth blending */}
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-transparent sm:via-zinc-950/60 sm:to-zinc-950/20 lg:from-zinc-950/95 lg:via-zinc-950/50 lg:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+        <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-zinc-950/80 to-transparent" />
+
+        {/* Ambient subtle blue backlight glow */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none mix-blend-screen" />
+      </div>
+
+      {/* =========================================================================
+          BACKGROUND ATMOSPHERIC QUOTES (From Reference Mockup)
+          ========================================================================= */}
+      {/* Top-Right Window Handwritten Quote */}
       <motion.div
-        style={{ y: isMobile ? 0 : yText, opacity: isMobile ? 1 : opacityText }}
-        className="relative z-10 w-full max-w-5xl px-6 mx-auto flex flex-col items-center text-center mt-[-4vh]"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, delay: 0.6 }}
+        className="hidden lg:block absolute top-28 right-16 z-10 text-right pointer-events-none select-none"
       >
-        {/* Badge */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.1}
-          className="inline-flex items-center px-4 py-2 mb-8 text-xs sm:text-sm font-bold rounded-full bg-blue-950/30 border border-blue-900/50 text-blue-300 backdrop-blur-md tracking-widest uppercase shadow-[0_0_15px_rgba(30,58,138,0.3)]"
-        >
-          <span className="w-2 h-2 mr-3 rounded-full bg-blue-500 animate-pulse" />
-          Full Stack Developer • Where Code Meets Creativity
-        </motion.div>
-
-        {/* Main Headline — simple block-level animation, NO char-split */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-white mb-6 leading-[1.05] pb-2 cursor-default">
-          <motion.span
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0.2}
-            className="block"
-          >
-            I&apos;m{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 font-display text-glow">
-              Sautrik Roy
-            </span>
-            .
-          </motion.span>
-        </h1>
-
-        {/* Sub-tagline */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.4}
-          className="max-w-2xl mb-12 flex flex-col items-center space-y-3"
-        >
-          <p className="text-xl sm:text-2xl text-zinc-300 font-medium tracking-tight">
-            I turn ideas into experiences you can feel.
-          </p>
-          <p className="text-lg sm:text-xl font-display font-medium tracking-[0.2em] text-blue-400/80 uppercase">
-            Simple. Fast. Intentional.
-          </p>
-        </motion.div>
-
-        {/* CTAs */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.55}
-          className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full sm:w-auto"
-        >
-          <MagneticButton
-            href="#projects"
-            className="group flex items-center justify-center w-full sm:w-auto px-8 py-4 text-sm sm:text-base font-bold text-white transition-all bg-white/5 rounded-2xl hover:bg-white/10 backdrop-blur-xl border border-white/5 hover:border-blue-500/30"
-          >
-            Explore Work
-            <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2" />
-          </MagneticButton>
-          <MagneticButton
-            href="#contact"
-            className="flex items-center justify-center w-full sm:w-auto px-8 py-4 text-sm sm:text-base font-bold text-white transition-all bg-zinc-900 border border-zinc-800 rounded-2xl hover:bg-blue-950/40 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(37,99,235,0.15)] active:scale-95"
-          >
-            Get in Touch
-          </MagneticButton>
-        </motion.div>
+        <p className="font-handwriting text-zinc-300/85 text-2xl font-bold leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] -rotate-3">
+          Same<br />
+          Student<br />
+          Bigger<br />
+          Vision.
+        </p>
       </motion.div>
 
-      {/* Social Icons */}
+      {/* Center/Right Ambient Framed Wall Quote */}
       <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        animate="visible"
-        custom={0.8}
-        className="absolute bottom-10 sm:bottom-16 w-full flex justify-center items-center space-x-10 text-zinc-400 z-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.8 }}
+        className="hidden xl:block absolute top-24 left-[58%] z-10 pointer-events-none select-none"
       >
-        <a
-          href="https://github.com/sautrikroy17"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-blue-400 hover:scale-110 transition-all duration-300 cursor-pointer p-2"
+        <div className="border border-white/5 bg-black/40 backdrop-blur-sm px-4 py-3 rounded-lg shadow-xl">
+          <p className="text-zinc-300 font-bold text-sm tracking-tight leading-snug">
+            Discipline<br />
+            Builds<br />
+            Freedom.
+          </p>
+          <div className="w-6 h-[2px] bg-blue-500/80 mt-1.5 rounded-full" />
+        </div>
+      </motion.div>
+
+      {/* =========================================================================
+          MAIN HERO CONTENT (Left Column)
+          ========================================================================= */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 flex-1 flex flex-col justify-center">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-2xl flex flex-col items-start text-left"
         >
-          <GithubIcon className="w-6 h-6 sm:w-7 sm:h-7" />
-          <span className="sr-only">GitHub</span>
-        </a>
+          {/* Tag Badge */}
+          <motion.div variants={itemVariants} className="mb-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/60 border border-white/10 backdrop-blur-md shadow-lg shadow-black/40">
+              <span className="w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_8px_#38bdf8] animate-pulse" />
+              <span className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] text-zinc-300 uppercase">
+                BUILD &bull; LEARN &bull; SOLVE &bull; REPEAT
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Main Headline */}
+          <motion.div variants={itemVariants} className="mb-6">
+            <h1 className="text-5xl sm:text-7xl lg:text-[82px] font-black tracking-[-0.035em] text-white leading-[1.02]">
+              Hi, I’m<br />
+              Sautrik{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 drop-shadow-[0_0_35px_rgba(59,130,246,0.65)] font-display">
+                Roy.
+              </span>
+            </h1>
+          </motion.div>
+
+          {/* Sub-headline description */}
+          <motion.div variants={itemVariants} className="mb-8">
+            <p className="text-base sm:text-lg text-zinc-300/90 leading-relaxed max-w-xl font-normal">
+              I build full-stack and AI-powered products that turn complex problems into elegant,
+              impactful experiences.
+            </p>
+          </motion.div>
+
+          {/* Call-to-Action Buttons */}
+          <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 mb-12 sm:mb-14">
+            <motion.a
+              href="#projects"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl font-semibold text-white bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 shadow-[0_0_25px_rgba(37,99,235,0.55)] hover:shadow-[0_0_35px_rgba(37,99,235,0.85)] transition-shadow duration-300"
+            >
+              <span className="text-sm sm:text-base font-semibold">View My Work</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </motion.a>
+
+            <motion.a
+              href="#contact"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="group inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl font-semibold text-zinc-200 bg-slate-950/60 hover:bg-slate-900/80 border border-white/10 hover:border-white/25 backdrop-blur-xl shadow-lg transition-all duration-300"
+            >
+              <span className="text-sm sm:text-base font-semibold">Get in Touch</span>
+              <Mail className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
+            </motion.a>
+          </motion.div>
+
+          {/* =========================================================================
+              THE 4 BENTO GLASS TILES (Ideas, Code, Products, Impact)
+              ========================================================================= */}
+          <motion.div
+            variants={itemVariants}
+            className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-3.5 max-w-xl lg:max-w-2xl"
+          >
+            {bentoCards.map((card) => {
+              const Icon = card.icon;
+              return (
+                <motion.a
+                  key={card.number}
+                  href={card.href}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="group relative flex flex-col justify-between p-4 rounded-2xl glass-tile hover:border-blue-500/50 hover:shadow-[0_0_25px_rgba(59,130,246,0.25)] transition-all duration-300 cursor-pointer overflow-hidden"
+                >
+                  {/* Subtle hover gradient illumination */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-blue-500/0 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                  {/* Top Row: Icon + Number */}
+                  <div className="relative z-10 flex items-center justify-between mb-3">
+                    <div className="w-8 h-8 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:text-blue-300 group-hover:border-blue-400/40 group-hover:shadow-[0_0_12px_rgba(59,130,246,0.4)] transition-all duration-200">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <span className="text-[11px] font-mono font-medium text-zinc-300 tracking-wider">
+                      {card.number}
+                    </span>
+                  </div>
+
+                  {/* Title & Description */}
+                  <div className="relative z-10 text-left">
+                    <h2 className="text-sm sm:text-base font-bold text-white mb-1 tracking-tight group-hover:text-blue-200 transition-colors">
+                      {card.title}
+                    </h2>
+                    <p className="text-[11px] sm:text-xs text-zinc-300/80 leading-snug line-clamp-2">
+                      {card.description}
+                    </p>
+                  </div>
+
+                  {/* Bottom neon accent line on hover */}
+                  <div className="absolute bottom-0 inset-x-3 h-[2px] bg-gradient-to-r from-transparent via-blue-400/0 to-transparent group-hover:via-blue-400 group-hover:shadow-[0_0_8px_#60a5fa] transition-all duration-300" />
+                </motion.a>
+              );
+            })}
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* =========================================================================
+          BOTTOM META BAR (Scroll to Explore & Location)
+          ========================================================================= */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.9 }}
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pt-10 sm:pt-14 flex items-center justify-between text-zinc-300"
+      >
+        {/* Scroll Indicator (Left) */}
         <a
-          href="https://www.linkedin.com/in/sautrik-roy-1779r"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-blue-400 hover:scale-110 transition-all duration-300 cursor-pointer p-2"
+          href="#about"
+          className="group flex items-center gap-3 text-[11px] sm:text-xs font-semibold tracking-widest uppercase hover:text-white transition-colors cursor-pointer"
         >
-          <LinkedinIcon className="w-6 h-6 sm:w-7 sm:h-7" />
-          <span className="sr-only">LinkedIn</span>
+          {/* Animated Mouse Icon */}
+          <div className="w-4 h-7 rounded-full border border-zinc-300/60 group-hover:border-blue-400 flex items-start justify-center p-1 transition-colors">
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+              className="w-1 h-1.5 rounded-full bg-zinc-400 group-hover:bg-blue-400"
+            />
+          </div>
+          <span>SCROLL TO EXPLORE</span>
+          <div className="w-10 h-[1px] bg-zinc-300/40 group-hover:w-14 group-hover:bg-blue-400 transition-all duration-300" />
         </a>
-        <a
-          href="mailto:sautrikroy2006@gmail.com"
-          className="hover:text-blue-400 hover:scale-110 transition-all duration-300 cursor-pointer p-2"
-        >
-          <Mail className="w-6 h-6 sm:w-7 sm:h-7" />
-          <span className="sr-only">Email</span>
-        </a>
+
+        {/* Location Indicator (Right) */}
+        <div className="flex items-center gap-2 text-[12px] sm:text-xs font-medium text-zinc-300/90">
+          <MapPin className="w-3.5 h-3.5 text-blue-400" />
+          <span>Chennai, India</span>
+        </div>
       </motion.div>
     </section>
   );

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { cn } from "../../lib/utils";
-import { Menu, X } from "lucide-react";
-
+import { Menu, X, Mail, ArrowRight } from "lucide-react";
 import SRLogo from "../ui/SRLogo";
-import MagneticButton from "../ui/MagneticButton";
+import { GithubIcon, LinkedinIcon } from "../ui/SocialIcons";
+
 const navLinks = [
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
@@ -17,15 +17,16 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious();
-    if (latest > 50) {
+    const previous = scrollY.getPrevious() || 0;
+    if (latest > 40) {
       setIsScrolled(true);
     } else {
       setIsScrolled(false);
     }
 
-    if (latest > 100 && latest > previous && !mobileMenuOpen) {
+    if (latest > 120 && latest > previous && !mobileMenuOpen) {
       setHidden(true);
     } else {
       setHidden(false);
@@ -48,58 +49,85 @@ export default function Navbar() {
     <>
       <motion.nav
         variants={{
-          visible: { y: 0 },
-          hidden: { y: "-100%" },
+          visible: { y: 0, opacity: 1 },
+          hidden: { y: "-100%", opacity: 0 },
         }}
         animate={hidden ? "hidden" : "visible"}
-        transition={{ duration: 0.35, ease: "easeInOut" }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
-          "fixed top-0 inset-x-0 z-[60] flex items-center justify-center p-4 transition-all duration-300",
-          isScrolled ? "pt-4" : "pt-8"
+          "fixed top-0 inset-x-0 z-[60] transition-all duration-300",
+          isScrolled
+            ? "py-3 bg-zinc-950/75 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-black/50"
+            : "py-6 bg-transparent"
         )}
       >
-        <div
-          className={cn(
-            "flex items-center justify-between w-full max-w-5xl px-6 py-3 mx-auto transition-all duration-300",
-            isScrolled
-              ? "bg-zinc-900/60 backdrop-blur-xl border border-white/10 rounded-full shadow-lg"
-              : "bg-transparent border-transparent"
-          )}
-        >
-          <MagneticButton>
-            <a
-              href="#top"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center space-x-2 z-[70] outline-none"
-            >
-              <SRLogo className="w-12 h-12" />
-            </a>
-          </MagneticButton>
+        <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 flex items-center justify-between">
+          {/* Logo on Left */}
+          <a
+            href="#top"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center space-x-2 z-[70] outline-none"
+            aria-label="Sautrik Roy Homepage"
+          >
+            <SRLogo />
+          </a>
 
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Navigation Links in Center */}
+          <div className="hidden md:flex items-center space-x-9">
             {navLinks.map((link) => (
-              <MagneticButton key={link.name}>
-                <a
-                  href={link.href}
-                  className="text-sm font-medium text-zinc-300 hover:text-white transition-colors px-2 py-1"
-                >
-                  {link.name}
-                </a>
-              </MagneticButton>
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-[14px] font-medium text-zinc-300 hover:text-white transition-colors duration-200 tracking-normal hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+              >
+                {link.name}
+              </a>
             ))}
           </div>
 
-          <div className="hidden md:flex items-center space-x-4">
-            <MagneticButton>
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-white transition-all bg-zinc-900 border border-zinc-800 rounded-full hover:bg-blue-950/40 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)]"
-              >
-                Contact Me
-              </a>
-            </MagneticButton>
+          {/* Right Group: Social Icons + Resume CTA */}
+          <div className="hidden md:flex items-center space-x-5">
+            <a
+              href="https://github.com/sautrikroy17"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile"
+              className="text-zinc-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.6)] transition-all duration-200 p-1.5"
+            >
+              <GithubIcon className="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/sautrik-roy-1779r"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+              className="text-zinc-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.6)] transition-all duration-200 p-1.5"
+            >
+              <LinkedinIcon className="w-5 h-5" />
+            </a>
+            <a
+              href="mailto:sautrikroy2006@gmail.com"
+              aria-label="Email Sautrik Roy"
+              className="text-zinc-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.6)] transition-all duration-200 p-1.5"
+            >
+              <Mail className="w-5 h-5" />
+            </a>
+
+            {/* Resume Button */}
+            <a
+              href="#contact"
+              onClick={(e) => {
+                // If user clicks resume, either smooth scroll or open resume
+                // Can open prompt or scroll
+              }}
+              className="group relative inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium text-white/95 transition-all duration-300 bg-slate-900/60 hover:bg-blue-950/40 border border-indigo-400/30 hover:border-blue-400 shadow-[0_0_15px_rgba(99,102,241,0.15)] hover:shadow-[0_0_20px_rgba(59,130,246,0.35)]"
+            >
+              <span>Resume</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </a>
           </div>
 
+          {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 text-zinc-300 hover:text-white z-[70] transition-transform active:scale-95"
@@ -115,34 +143,61 @@ export default function Navbar() {
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(16px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[50] bg-zinc-950/80 flex flex-col items-center justify-center"
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[55] bg-zinc-950/90 flex flex-col items-center justify-center"
           >
-            <div className="flex flex-col items-center space-y-8 p-6 w-full max-w-sm">
+            <div className="flex flex-col items-center space-y-6 p-6 w-full max-w-sm">
               {navLinks.map((link, idx) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + idx * 0.1 }}
-                  className="text-2xl font-bold text-white hover:text-cyan-400 transition-colors"
+                  transition={{ delay: 0.05 + idx * 0.05 }}
+                  className="text-2xl font-bold text-white hover:text-blue-400 transition-colors"
                 >
                   {link.name}
                 </motion.a>
               ))}
+
+              <div className="flex items-center space-x-6 pt-4 text-zinc-400">
+                <a
+                  href="https://github.com/sautrikroy17"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white p-2"
+                >
+                  <GithubIcon className="w-6 h-6" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/sautrik-roy-1779r"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white p-2"
+                >
+                  <LinkedinIcon className="w-6 h-6" />
+                </a>
+                <a
+                  href="mailto:sautrikroy2006@gmail.com"
+                  className="hover:text-white p-2"
+                >
+                  <Mail className="w-6 h-6" />
+                </a>
+              </div>
+
               <motion.a
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="mt-8 px-8 py-3 text-lg font-bold text-white transition-all bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] active:scale-95"
+                transition={{ delay: 0.3 }}
+                className="mt-4 px-8 py-2.5 text-base font-semibold text-white transition-all bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full shadow-[0_0_20px_rgba(59,130,246,0.4)] active:scale-95 flex items-center gap-2"
               >
-                Contact Me
+                <span>Resume</span>
+                <ArrowRight className="w-4 h-4" />
               </motion.a>
             </div>
           </motion.div>
