@@ -41,7 +41,7 @@ const secondaryProjects = [
     tags: ["React 18", "Node.js", "Supabase", "WebRTC", "Capacitor"],
     image: "/sentinel.png",
     liveUrl: "https://sentinelsfrontend.onrender.com/",
-    githubUrl: "https://github.com/sautrikroy17/Sentinel",
+    githubUrl: null,
     glowColor: "rgba(16, 185, 129, 0.2)",
     accentColor: "from-emerald-500 to-teal-600",
   },
@@ -230,16 +230,18 @@ export default function Projects() {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    {/* GitHub Link Icon */}
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-full border border-white/10 bg-white/5 hover:bg-white/15 flex items-center justify-center text-zinc-300 hover:text-white transition-all shadow-sm"
-                      title="GitHub Repository"
-                    >
-                      <GithubIcon className="w-3.5 h-3.5" />
-                    </a>
+                    {/* GitHub Link Icon (Only if repo is public) */}
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 rounded-full border border-white/10 bg-white/5 hover:bg-white/15 flex items-center justify-center text-zinc-300 hover:text-white transition-all shadow-sm"
+                        title="GitHub Repository"
+                      >
+                        <GithubIcon className="w-3.5 h-3.5" />
+                      </a>
+                    )}
 
                     {/* Live Demo Arrow Button */}
                     <a
