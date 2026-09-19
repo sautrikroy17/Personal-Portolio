@@ -99,8 +99,8 @@ export default function Hero() {
         >
           {/* Tag Badge */}
           <motion.div variants={itemVariants}>
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-slate-900/70 border border-white/10 backdrop-blur-md shadow-lg shadow-black/40">
-              <span className="text-[11px] sm:text-xs font-mono font-medium tracking-[0.22em] text-zinc-300 uppercase">
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-slate-900/85 border border-blue-500/30 backdrop-blur-xl shadow-[0_0_16px_rgba(59,130,246,0.18)]">
+              <span className="text-xs sm:text-[13px] font-display font-bold tracking-[0.14em] text-white uppercase drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
                 FULL STACK DEVELOPER
               </span>
             </div>

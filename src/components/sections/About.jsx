@@ -71,6 +71,9 @@ export default function About() {
           className="w-full h-full object-cover object-center opacity-100"
         />
 
+        {/* Darker blurred overlay on the left side so text and cards are crystal-clear, matching hero */}
+        <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[54%] bg-gradient-to-r from-zinc-950/90 via-zinc-950/50 to-transparent pointer-events-none" />
+
         {/* Soft top and bottom edge blends for seamless transition between sections */}
         <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none" />
         <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none" />
