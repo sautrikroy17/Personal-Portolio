@@ -82,8 +82,8 @@ export default function Projects() {
         {/* Left vignette for maximum typography readability */}
         <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[52%] bg-gradient-to-r from-black via-black/85 to-transparent z-10" />
 
-        {/* Bottom fade into Skills section */}
-        <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent z-10" />
+        {/* Bottom fade into Skills section - seamless dark studio transition */}
+        <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-zinc-950 via-zinc-950/90 to-transparent z-10" />
 
         {/* Subtle atmospheric ambient glow */}
         <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-blue-600/10 blur-[130px] rounded-full" />

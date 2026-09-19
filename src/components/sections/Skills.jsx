@@ -127,27 +127,27 @@ export default function Skills() {
     <section id="skills" className="relative min-h-screen pt-10 md:pt-14 pb-16 md:pb-24 overflow-hidden bg-black text-white">
       {/* =========================================================================
           ATMOSPHERIC WORKSPACE BACKGROUND
-          Mountain summit overlooking glowing curved planet Earth with sunrise flare
+          Developer tech workstation with dual code monitors, terminal, keyboard & cyan ambient glow
           ========================================================================= */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <picture>
           <source srcSet="/skills-workspace.webp" type="image/webp" />
           <img
             src="/skills-workspace.jpg"
-            alt="Skills Cosmic Workspace"
+            alt="Skills Tech Workspace Studio"
             className="w-full h-full object-cover object-[center_top] opacity-80"
             loading="lazy"
           />
         </picture>
 
-        {/* Seamless top blend with Projects section to eliminate harsh boundaries */}
-        <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-zinc-950 via-zinc-950/70 to-transparent z-10" />
+        {/* Seamless top blend with Projects section - perfectly connects the developer studio journey */}
+        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-zinc-950 via-zinc-950/85 to-transparent z-10" />
 
         {/* Left vignette for maximum typography readability */}
-        <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[46%] bg-gradient-to-r from-black via-black/85 to-transparent z-10" />
+        <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[48%] bg-gradient-to-r from-black via-black/85 to-transparent z-10" />
 
         {/* Bottom fade into Experience section */}
-        <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent z-10" />
+        <div className="absolute bottom-0 inset-x-0 h-36 bg-gradient-to-t from-zinc-950 via-zinc-950/75 to-transparent z-10" />
 
         {/* Subtle atmospheric ambient glow */}
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-cyan-600/10 blur-[140px] rounded-full" />
