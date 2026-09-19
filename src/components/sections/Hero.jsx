@@ -66,12 +66,12 @@ export default function Hero() {
     >
       {/* =========================================================================
           ATMOSPHERIC WORKSPACE BACKGROUND
-          Seamlessly blended 16:9 photographic scene across the entire frame.
-          Contains:
+          Smoothly blended dark background on the left for maximum hero card contrast;
+          100% luminous, crystal-clear workspace scene on the right with:
           - Wall poster: 'Talent without working hard is nothing. — Cristiano Ronaldo'
           - Mug: "It's you vs you. no excuses."
           - Laptop: Code + 'Build Solve Improve Repeat.'
-          - Books, glowing astronaut, plant, twilight city skyline, window cursive.
+          - Books, plant, astronaut, AirPods, mouse, twilight city skyline, window cursive.
           ========================================================================= */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <img
@@ -88,6 +88,7 @@ export default function Hero() {
 
       {/* =========================================================================
           MAIN HERO CONTENT (Left Column)
+          Positioned directly over the deep dark velvety left half for 10/10 contrast
           ========================================================================= */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 flex-1 flex flex-col justify-center">
         <motion.div
@@ -98,7 +99,7 @@ export default function Hero() {
         >
           {/* Tag Badge */}
           <motion.div variants={itemVariants}>
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/60 border border-white/10 backdrop-blur-md shadow-lg shadow-black/40">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/80 border border-white/10 backdrop-blur-md shadow-lg shadow-black/50">
               <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6] animate-pulse" />
               <span className="text-[11px] sm:text-xs font-semibold tracking-[0.16em] text-zinc-300 uppercase">
                 FULL-STACK DEVELOPER &bull; AI BUILDER &bull; PROBLEM SOLVER
@@ -111,7 +112,7 @@ export default function Hero() {
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[78px] font-extrabold tracking-[-0.035em] text-white leading-[1.02]">
               Hi, I’m<br />
               Sautrik{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 drop-shadow-[0_0_30px_rgba(59,130,246,0.65)] font-display">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 drop-shadow-[0_0_30px_rgba(59,130,246,0.7)] font-display">
                 Roy.
               </span>
             </h1>
@@ -119,7 +120,7 @@ export default function Hero() {
 
           {/* Sub-headline description */}
           <motion.div variants={itemVariants}>
-            <p className="text-base sm:text-lg text-zinc-300/90 font-normal leading-relaxed max-w-xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+            <p className="text-base sm:text-lg text-zinc-300 font-normal leading-relaxed max-w-xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
               I build full-stack and AI-powered products that turn complex problems into elegant,
               impactful experiences.
             </p>
@@ -131,7 +132,7 @@ export default function Hero() {
               href="#projects"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="group inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-2xl font-semibold text-white bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 shadow-[0_0_25px_rgba(37,99,235,0.55)] hover:shadow-[0_0_35px_rgba(37,99,235,0.85)] transition-all duration-300"
+              className="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl font-semibold text-white bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 shadow-[0_0_25px_rgba(37,99,235,0.6)] hover:shadow-[0_0_35px_rgba(37,99,235,0.9)] transition-all duration-300"
             >
               <span className="text-sm sm:text-base font-semibold">View My Work</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -141,7 +142,7 @@ export default function Hero() {
               href="#contact"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="group inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-2xl font-semibold text-zinc-200 bg-slate-950/60 hover:bg-slate-900/80 border border-white/10 hover:border-white/25 backdrop-blur-xl shadow-lg transition-all duration-300"
+              className="group inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl font-semibold text-zinc-200 bg-slate-950/70 hover:bg-slate-900/90 border border-white/10 hover:border-white/25 backdrop-blur-xl shadow-lg transition-all duration-300"
             >
               <span className="text-sm sm:text-base font-semibold">Get in Touch</span>
               <Mail className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
@@ -150,6 +151,7 @@ export default function Hero() {
 
           {/* =========================================================================
               THE 4 BENTO GLASS TILES (Ideas, Code, Products, Impact)
+              High-contrast, razor-sharp glass cards matching reference image
               ========================================================================= */}
           <motion.div
             variants={itemVariants}
@@ -166,10 +168,10 @@ export default function Hero() {
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   className={cn(
-                    "group relative flex flex-col justify-between p-4 rounded-2xl transition-all duration-300 cursor-pointer overflow-hidden backdrop-blur-xl border",
+                    "group relative flex flex-col justify-between p-4 rounded-2xl transition-all duration-300 cursor-pointer overflow-hidden backdrop-blur-2xl border",
                     isActive
-                      ? "bg-slate-950/60 border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.25)]"
-                      : "bg-slate-950/45 border-white/10 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]"
+                      ? "bg-slate-950/80 border-blue-500/60 shadow-[0_0_25px_rgba(59,130,246,0.3)]"
+                      : "bg-slate-950/65 border-white/10 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.25)]"
                   )}
                 >
                   {/* Top Row: Icon + Number */}
@@ -187,7 +189,7 @@ export default function Hero() {
                     <h2 className="text-sm sm:text-base font-bold text-white mb-1 tracking-tight group-hover:text-blue-200 transition-colors">
                       {card.title}
                     </h2>
-                    <p className="text-[11px] sm:text-xs text-zinc-300/80 leading-snug line-clamp-2">
+                    <p className="text-[11px] sm:text-xs text-zinc-300 leading-snug line-clamp-2">
                       {card.description}
                     </p>
                   </div>
@@ -195,10 +197,10 @@ export default function Hero() {
                   {/* Bottom accent line */}
                   <div
                     className={cn(
-                      "absolute bottom-0 inset-x-3 h-[2px] transition-all duration-300",
+                      "absolute bottom-0 inset-x-4 h-[2px] transition-all duration-300 rounded-full",
                       isActive
-                        ? "bg-blue-500 shadow-[0_0_8px_#3b82f6]"
-                        : "bg-transparent group-hover:bg-blue-400 group-hover:shadow-[0_0_8px_#60a5fa]"
+                        ? "bg-blue-500 shadow-[0_0_10px_#3b82f6]"
+                        : "bg-transparent group-hover:bg-blue-400 group-hover:shadow-[0_0_10px_#60a5fa]"
                     )}
                   />
                 </motion.a>
