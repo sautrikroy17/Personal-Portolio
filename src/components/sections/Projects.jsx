@@ -77,7 +77,7 @@ export default function Projects() {
         </picture>
 
         {/* Seamless top blend with About section to eliminate harsh boundaries */}
-        <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-zinc-950 via-zinc-950/70 to-transparent z-10" />
+        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-zinc-950 via-zinc-950/85 to-transparent z-10" />
 
         {/* Left vignette for maximum typography readability */}
         <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[52%] bg-gradient-to-r from-black via-black/85 to-transparent z-10" />

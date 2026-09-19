@@ -82,8 +82,8 @@ export default function Hero() {
           className="w-full h-full object-cover object-center opacity-100"
         />
 
-        {/* Soft bottom edge blend into the next section */}
-        <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none" />
+        {/* Seamless bottom edge blend into About section */}
+        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-zinc-950 via-zinc-950/85 to-transparent pointer-events-none z-10" />
       </div>
 
       {/* =========================================================================

@@ -27,14 +27,28 @@ export default function CommandPalette() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  const navigateTo = (selector) => {
+    setIsOpen(false);
+    if (selector === "#top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const el = document.querySelector(selector);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const commands = [
-    { id: "home", name: "Go to Home", icon: Home, action: () => { window.location.hash = "#top"; setIsOpen(false); } },
-    { id: "projects", name: "View Projects", icon: Code, action: () => { window.location.hash = "#projects"; setIsOpen(false); } },
-    { id: "skills", name: "View Skills", icon: Zap, action: () => { window.location.hash = "#skills"; setIsOpen(false); } },
-    { id: "experience", name: "View Experience", icon: Briefcase, action: () => { window.location.hash = "#experience"; setIsOpen(false); } },
-    { id: "contact", name: "Contact Me", icon: Mail, action: () => { window.location.hash = "#contact"; setIsOpen(false); } },
-    { id: "github", name: "Open GitHub", icon: GithubIcon, action: () => { window.open("https://github.com/sautrikroy17", "_blank"); setIsOpen(false); } },
-    { id: "resume", name: "Download Resume", icon: Download, action: () => { window.open("/resume.pdf", "_blank"); setIsOpen(false); } },
+    { id: "home", name: "Go to Home", icon: Home, action: () => navigateTo("#top") },
+    { id: "about", name: "About Sautrik", icon: Terminal, action: () => navigateTo("#about") },
+    { id: "projects", name: "View Projects (Loop, Sentinel, Quizzify...)", icon: Code, action: () => navigateTo("#projects") },
+    { id: "skills", name: "View Technical Skills & Stack", icon: Zap, action: () => navigateTo("#skills") },
+    { id: "experience", name: "View Experience (MLSA, GSSoC, SIH)", icon: Briefcase, action: () => navigateTo("#experience") },
+    { id: "contact", name: "Contact & Connect", icon: Mail, action: () => navigateTo("#contact") },
+    { id: "resume", name: "Open Official Resume (PDF)", icon: Download, action: () => { window.open("/resume.pdf", "_blank"); setIsOpen(false); } },
+    { id: "github", name: "Open GitHub Profile", icon: GithubIcon, action: () => { window.open("https://github.com/sautrikroy17", "_blank"); setIsOpen(false); } },
+    { id: "linkedin", name: "Open LinkedIn Profile", icon: Terminal, action: () => { window.open("https://www.linkedin.com/in/sautrik-roy-1779r", "_blank"); setIsOpen(false); } },
   ];
 
   const filteredCommands = commands.filter((command) =>
