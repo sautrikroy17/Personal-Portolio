@@ -27,7 +27,34 @@ export default function LenisProvider({ children }) {
 
     requestAnimationFrame(raf);
 
+    // Smooth anchor navigation with Lenis
+    const handleAnchorClick = (e) => {
+      const anchor = e.target.closest('a[href^="#"]');
+      if (!anchor) return;
+      const href = anchor.getAttribute("href");
+      if (!href || href === "#") return;
+
+      if (href === "#top") {
+        e.preventDefault();
+        lenis.scrollTo(0, { duration: 1.2 });
+        return;
+      }
+
+      try {
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+          e.preventDefault();
+          lenis.scrollTo(targetElement, { offset: 0, duration: 1.2 });
+        }
+      } catch {
+        // Fallback for non-standard selector
+      }
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+
     return () => {
+      document.removeEventListener("click", handleAnchorClick);
       lenis.destroy();
     };
   }, [isMobile]);

@@ -11,6 +11,8 @@ import Preloader from "./components/ui/Preloader";
 import CommandPalette from "./components/ui/CommandPalette";
 import InteractiveGrid from "./components/ui/InteractiveGrid";
 import ScrollProgressRing from "./components/ui/ScrollProgressRing";
+import Footer from "./components/layout/Footer";
+
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -44,11 +46,7 @@ function App() {
             <Contact />
           </main>
 
-          <footer className="relative z-10 border-t border-white/5 py-6 text-center">
-            <p className="text-zinc-600 text-sm font-medium tracking-wide">
-              © {new Date().getFullYear()} Sautrik Roy &mdash; Licensed under the MIT License
-            </p>
-          </footer>
+          <Footer />
       </div>
     </div>
   );

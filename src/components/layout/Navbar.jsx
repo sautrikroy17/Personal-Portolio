@@ -116,11 +116,9 @@ export default function Navbar() {
 
             {/* Resume Button */}
             <a
-              href="#contact"
-              onClick={(e) => {
-                // If user clicks resume, either smooth scroll or open resume
-                // Can open prompt or scroll
-              }}
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium text-white/95 transition-all duration-300 bg-slate-900/60 hover:bg-blue-950/40 border border-indigo-400/30 hover:border-blue-400 shadow-[0_0_15px_rgba(99,102,241,0.15)] hover:shadow-[0_0_20px_rgba(59,130,246,0.35)]"
             >
               <span>Resume</span>
@@ -190,7 +188,9 @@ export default function Navbar() {
               </div>
 
               <motion.a
-                href="#contact"
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}

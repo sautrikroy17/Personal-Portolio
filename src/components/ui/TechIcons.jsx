@@ -261,3 +261,16 @@ export function LinuxIcon({ className = "w-6 h-6" }) {
     </svg>
   );
 }
+
+export function AzureIcon({ className = "w-6 h-6" }) {
+  return (
+    <svg viewBox="0 0 128 128" className={className}>
+      <path fill="#0078D4" d="M72.4 14.5L34.1 82.2l31.2 27.6 42.6-67.6z" opacity="0.8" />
+      <path fill="#50E6FF" d="M19.3 90.7l22.6-39.7 23.3 58.8H25.4c-6.8 0-10.7-7.4-6.1-12.8z" />
+      <path fill="#0078D4" d="M65.2 109.8h43.5c7.3 0 11.4-8.2 6.5-13.8L79.4 53.6l-14.2 56.2z" />
+    </svg>
+  );
+}
+
+export const TypescriptIcon = TSIcon;
+

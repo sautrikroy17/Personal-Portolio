@@ -34,7 +34,7 @@ export default function CommandPalette() {
     { id: "experience", name: "View Experience", icon: Briefcase, action: () => { window.location.hash = "#experience"; setIsOpen(false); } },
     { id: "contact", name: "Contact Me", icon: Mail, action: () => { window.location.hash = "#contact"; setIsOpen(false); } },
     { id: "github", name: "Open GitHub", icon: GithubIcon, action: () => { window.open("https://github.com/sautrikroy17", "_blank"); setIsOpen(false); } },
-    { id: "resume", name: "Download Resume", icon: Download, action: () => { alert("Resume download simulated for demo!"); setIsOpen(false); } },
+    { id: "resume", name: "Download Resume", icon: Download, action: () => { window.open("/resume.pdf", "_blank"); setIsOpen(false); } },
   ];
 
   const filteredCommands = commands.filter((command) =>
