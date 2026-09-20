@@ -185,10 +185,10 @@ export default function Hero() {
 
                   {/* Title & Description */}
                   <div className="relative z-10 text-left">
-                    <h2 className="text-xs sm:text-base font-bold text-white mb-0.5 sm:mb-1 tracking-tight group-hover:text-blue-200 transition-colors">
+                    <h2 className="text-xs sm:text-base font-bold text-white mb-1 tracking-tight group-hover:text-blue-200 transition-colors">
                       {card.title}
                     </h2>
-                    <p className="text-[10px] sm:text-xs text-zinc-300 leading-tight sm:leading-snug line-clamp-2">
+                    <p className="text-[11px] sm:text-xs text-zinc-300/90 leading-snug">
                       {card.description}
                     </p>
                   </div>

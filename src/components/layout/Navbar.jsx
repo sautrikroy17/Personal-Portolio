@@ -193,12 +193,12 @@ export default function Navbar() {
               </a>
             </div>
 
-            {/* Resume Button */}
+            {/* Resume Button (Desktop & Tablet only; mobile has prominent button inside drawer) */}
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-[13px] font-semibold text-white/95 transition-all duration-300 bg-slate-900/90 hover:bg-blue-950/70 border border-indigo-400/30 hover:border-blue-400 shadow-[0_0_12px_rgba(99,102,241,0.18)] hover:shadow-[0_0_18px_rgba(59,130,246,0.4)]"
+              className="group relative hidden sm:inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-[13px] font-semibold text-white/95 transition-all duration-300 bg-slate-900/90 hover:bg-blue-950/70 border border-indigo-400/30 hover:border-blue-400 shadow-[0_0_12px_rgba(99,102,241,0.18)] hover:shadow-[0_0_18px_rgba(59,130,246,0.4)]"
             >
               <span>Resume</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />

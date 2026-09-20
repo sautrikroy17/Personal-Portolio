@@ -28,40 +28,7 @@
     word-break: break-word;
   }
 
-  /* 2. First Landing Page (Hero #top) Mobile Tuning */
-  #top {
-    min-height: 100dvh !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    padding-top: 5.25rem !important; /* 84px - perfect clearance below floating capsule */
-    padding-bottom: 1.25rem !important;
-  }
-
-  /* Hero Headline scale */
-  #top h1 {
-    font-size: clamp(2.1rem, 9vw, 3.25rem) !important;
-    line-height: 1.1 !important;
-    letter-spacing: -0.03em !important;
-  }
-
-  /* Hero Subtitle */
-  #top p {
-    font-size: 0.95rem !important;
-    line-height: 1.5 !important;
-  }
-
-  /* Hero Bento Cards Mobile Grid: compact, high-contrast, zero clipping */
-  #top .grid-cols-2 {
-    gap: 0.625rem !important;
-  }
-
-  #top .grid-cols-2 > * {
-    padding: 0.75rem !important;
-    border-radius: 0.875rem !important;
-  }
-
-  /* 3. Floating Capsule Navbar Mobile Tuning */
+  /* 2. Floating Capsule Navbar Mobile Tuning */
   nav.fixed {
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
@@ -72,7 +39,96 @@
     width: 100% !important;
     max-width: 100% !important;
     padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-right: 0.75rem !important;
+    height: 3.25rem !important;
+  }
+
+  /* 3. First Landing Page (Hero #top) De-congestion & Spatial Rhythm */
+  #top {
+    min-height: 100dvh !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    padding-top: 6.75rem !important; /* ~108px - generous clearance below floating capsule */
+    padding-bottom: 2.5rem !important;
+  }
+
+  /* Hero Content Column */
+  #top .max-w-xl {
+    gap: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Hero Unboxed Status Line */
+  #top .max-w-xl > div:first-child {
+    margin-bottom: 0.25rem !important;
+  }
+
+  /* Hero Headline scale */
+  #top h1 {
+    font-size: clamp(2.2rem, 9.5vw, 3.25rem) !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.03em !important;
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Hero Subtitle */
+  #top p {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    color: rgba(212, 212, 216, 0.9) !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Hero CTA Buttons - Balanced side-by-side */
+  #top a[href="#projects"],
+  #top a[href="#contact"] {
+    flex: 1 1 0% !important;
+    padding: 0.75rem 0.85rem !important;
+    font-size: 0.85rem !important;
+    border-radius: 0.875rem !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  /* Hero Bento Cards Mobile Grid: spacious, comfortable, zero clipping */
+  #top .grid-cols-2 {
+    gap: 0.75rem !important;
+    margin-top: 0.75rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  #top .grid-cols-2 > * {
+    padding: 0.95rem 1rem !important;
+    border-radius: 1rem !important;
+    min-height: 96px !important;
+    background-color: rgba(9, 9, 11, 0.75) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  #top .grid-cols-2 h2 {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  #top .grid-cols-2 p {
+    font-size: 0.75rem !important;
+    line-height: 1.4 !important;
+    color: rgba(212, 212, 216, 0.85) !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  /* Hero Bottom Meta Bar */
+  #top > div:last-child {
+    margin-top: auto !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 0.5rem !important;
   }
 
   /* 4. iOS Safari Form Auto-Zoom Fix (16px base font rule prevents viewport zoom on focus) */
@@ -102,10 +158,14 @@
     padding-right: 1rem !important;
   }
 
+  #top {
+    padding-top: 6.5rem !important;
+  }
+
   /* Hero Buttons side-by-side balanced sizing */
   #top a[href="#projects"],
   #top a[href="#contact"] {
-    padding: 0.65rem 0.85rem !important;
+    padding: 0.7rem 0.75rem !important;
     font-size: 0.8rem !important;
   }
 
