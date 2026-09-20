@@ -108,7 +108,7 @@ export default function Hero() {
 
           {/* Main Headline */}
           <motion.div variants={itemVariants}>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[78px] font-extrabold tracking-[-0.035em] text-white leading-[1.02]">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[78px] font-extrabold tracking-[-0.035em] text-white leading-[1.05]">
               Hi, I’m<br />
               Sautrik{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 drop-shadow-[0_0_30px_rgba(59,130,246,0.7)] font-display">
@@ -119,19 +119,19 @@ export default function Hero() {
 
           {/* Sub-headline description */}
           <motion.div variants={itemVariants}>
-            <p className="text-base sm:text-lg text-zinc-300 font-normal leading-relaxed max-w-xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+            <p className="text-sm sm:text-base md:text-lg text-zinc-300 font-normal leading-relaxed max-w-xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
               I build full-stack and AI-powered products that turn complex problems into elegant,
               impactful experiences.
             </p>
           </motion.div>
 
           {/* Call-to-Action Buttons */}
-          <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3.5 pt-1">
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 w-full sm:w-auto">
             <motion.a
               href="#projects"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl font-semibold text-white bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 shadow-[0_0_25px_rgba(37,99,235,0.6)] hover:shadow-[0_0_35px_rgba(37,99,235,0.9)] transition-all duration-300"
+              className="group inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 rounded-2xl font-semibold text-white bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 shadow-[0_0_25px_rgba(37,99,235,0.6)] hover:shadow-[0_0_35px_rgba(37,99,235,0.9)] transition-all duration-300 text-center"
             >
               <span className="text-sm sm:text-base font-semibold">View My Work</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -141,7 +141,7 @@ export default function Hero() {
               href="#contact"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="group inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl font-semibold text-zinc-200 bg-slate-950/70 hover:bg-slate-900/90 border border-white/10 hover:border-white/25 backdrop-blur-xl shadow-lg transition-all duration-300"
+              className="group inline-flex items-center justify-center gap-2.5 px-5 sm:px-6 py-3 sm:py-3.5 rounded-2xl font-semibold text-zinc-200 bg-slate-950/70 hover:bg-slate-900/90 border border-white/10 hover:border-white/25 backdrop-blur-xl shadow-lg transition-all duration-300 text-center"
             >
               <span className="text-sm sm:text-base font-semibold">Get in Touch</span>
               <Mail className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
@@ -154,7 +154,7 @@ export default function Hero() {
               ========================================================================= */}
           <motion.div
             variants={itemVariants}
-            className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-3.5 max-w-xl lg:max-w-2xl pt-2"
+            className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5 max-w-xl lg:max-w-2xl pt-2"
           >
             {bentoCards.map((card) => {
               const Icon = card.icon;
@@ -165,7 +165,7 @@ export default function Hero() {
                   whileHover={{ y: -4, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="group relative flex flex-col justify-between p-4 rounded-2xl transition-all duration-300 cursor-pointer overflow-hidden backdrop-blur-md border bg-slate-950/70 border-white/10 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.25)] transform-gpu"
+                  className="group relative flex flex-col justify-between p-3 sm:p-4 rounded-2xl transition-all duration-300 cursor-pointer overflow-hidden backdrop-blur-md border bg-slate-950/70 border-white/10 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.25)] transform-gpu"
                 >
                   {/* Top Row: Icon + Number */}
                   <div className="relative z-10 flex items-center justify-between mb-3">

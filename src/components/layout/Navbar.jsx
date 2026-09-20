@@ -56,13 +56,13 @@ export default function Navbar() {
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
-          "fixed top-0 inset-x-0 z-[60] transition-all duration-300",
+          "fixed top-0 inset-x-0 z-[60] transition-all duration-300 border-none outline-none",
           isScrolled
-            ? "py-3 bg-zinc-950/75 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-black/50"
-            : "py-6 bg-transparent"
+            ? "py-2.5 sm:py-3 bg-zinc-950/80 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.85)] border-none outline-none"
+            : "py-4 sm:py-6 bg-transparent border-none outline-none"
         )}
       >
-        <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 flex items-center justify-between">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-10 lg:px-12 flex items-center justify-between">
           {/* Logo on Left */}
           <a
             href="#top"

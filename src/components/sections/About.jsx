@@ -83,25 +83,21 @@ export default function About() {
           MAIN ABOUT CONTENT
           ========================================================================= */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 flex-1 flex flex-col justify-center">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
+        <div
           className="max-w-2xl flex flex-col items-start text-left space-y-5"
         >
           {/* Section Tracker Label: 01 / ABOUT */}
-          <motion.div variants={itemVariants}>
+          <div>
             <div className="flex items-center gap-2.5">
               <span className="text-xs font-mono font-bold tracking-widest text-blue-500">01</span>
               <span className="text-xs font-mono font-medium tracking-widest text-zinc-500">/</span>
               <span className="text-xs font-mono font-bold tracking-widest text-zinc-300 uppercase">ABOUT</span>
               <div className="w-8 h-[1px] bg-zinc-700/80 ml-1" />
             </div>
-          </motion.div>
+          </div>
 
           {/* Main Headline */}
-          <motion.div variants={itemVariants}>
+          <div>
             <h2 className="text-4xl sm:text-5xl lg:text-[62px] font-extrabold tracking-[-0.035em] text-white leading-[1.04]">
               Curious by nature.<br />
               Relentless in the{" "}
@@ -109,34 +105,30 @@ export default function About() {
                 build.
               </span>
             </h2>
-          </motion.div>
+          </div>
 
           {/* Bio Description */}
-          <motion.div variants={itemVariants}>
+          <div>
             <p className="text-sm sm:text-base text-zinc-300/90 font-normal leading-relaxed max-w-xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               I’m Sautrik — a developer who enjoys turning ambitious ideas into products people can actually use.
               I work across full-stack development, AI integration and product engineering, with a focus on
               building experiences that are fast, intuitive and thoughtfully designed.
             </p>
-          </motion.div>
+          </div>
 
           {/* Motto / Tagline Sub-accent */}
-          <motion.div variants={itemVariants} className="flex items-center gap-3 pt-1">
+          <div className="flex items-center gap-3 pt-1">
             <span className="font-handwriting text-zinc-300/80 text-xl font-bold italic tracking-wide">
               Better Products. A Brighter Tomorrow.
             </span>
             <div className="w-12 h-[2px] bg-blue-500 shadow-[0_0_8px_#3b82f6] rounded-full" />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* =========================================================================
             BENTO CARDS ROW (01 BUILD, 02 LEARN, 03 REFINE, CURRENTLY)
             ========================================================================= */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+        <div
           className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3.5 pt-8"
         >
           {/* The 3 Core Principle Bento Cards (Col span 7 total: ~2.3 cols each) */}
@@ -147,7 +139,6 @@ export default function About() {
                 <motion.a
                   key={feat.number}
                   href={feat.href}
-                  variants={itemVariants}
                   whileHover={{ y: -5, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
@@ -189,8 +180,7 @@ export default function About() {
           </div>
 
           {/* The Large Bento Card: CURRENTLY (Col span 5) */}
-          <motion.div
-            variants={itemVariants}
+          <div
             className="lg:col-span-5 relative p-5 rounded-2xl bg-slate-950/75 backdrop-blur-2xl border border-white/10 shadow-xl overflow-hidden flex flex-col justify-between group hover:border-blue-500/40 transition-all duration-300"
           >
             {/* Top Header: CURRENTLY + Location */}
@@ -219,17 +209,17 @@ export default function About() {
 
             {/* Activities List */}
             <div className="relative z-10 space-y-2 text-xs text-zinc-300">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
                 <span className="font-semibold text-zinc-200 min-w-[65px]">Learning</span>
                 <span className="text-blue-400">&rarr;</span>
                 <span className="text-zinc-300">System Design &bull; DSA &bull; AI Engineering</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
                 <span className="font-semibold text-zinc-200 min-w-[65px]">Building</span>
                 <span className="text-blue-400">&rarr;</span>
                 <span className="text-zinc-300">Web Apps &bull; AI Tools &bull; Product Experiences</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
                 <span className="font-semibold text-zinc-200 min-w-[65px]">Exploring</span>
                 <span className="text-blue-400">&rarr;</span>
                 <span className="text-zinc-300">Better systems, better interfaces</span>
@@ -246,8 +236,8 @@ export default function About() {
                 <line x1="100" y1="15" x2="100" y2="185" stroke="currentColor" strokeWidth="1" />
               </svg>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* =========================================================================

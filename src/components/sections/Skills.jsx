@@ -222,13 +222,9 @@ export default function Skills() {
               CENTER COLUMN: 5 Stack Categories in Stacked Glass Cards
               ------------------------------------------------------------- */}
           <div className="lg:col-span-5 space-y-4">
-            {stackCategories.map((cat, idx) => (
-              <motion.div
+            {stackCategories.map((cat) => (
+              <div
                 key={cat.number}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 className="relative rounded-2xl border border-white/10 bg-zinc-950/75 backdrop-blur-xl p-4 sm:p-5 hover:border-cyan-500/35 transition-all duration-300 group shadow-lg"
               >
                 {/* Header row: Number + Name + Description + Arrow Button */}
@@ -258,7 +254,7 @@ export default function Skills() {
                 </div>
 
                 {/* Tech icons row */}
-                <div className="grid grid-cols-5 sm:grid-cols-6 gap-2 sm:gap-2.5 pt-1">
+                <div className="grid grid-cols-4 min-[420px]:grid-cols-5 sm:grid-cols-6 gap-2 sm:gap-2.5 pt-1">
                   {cat.skills.map((skill) => {
                     const IconComponent = skill.icon;
                     return (
@@ -277,7 +273,7 @@ export default function Skills() {
                     );
                   })}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -286,11 +282,7 @@ export default function Skills() {
               ------------------------------------------------------------- */}
           <div className="lg:col-span-4 space-y-5">
             {/* CARD 1: CURRENTLY EXPLORING WITH 3D GLOBE */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            <div
               className="relative rounded-2xl md:rounded-3xl border border-white/10 bg-zinc-950/75 backdrop-blur-xl p-5 sm:p-6 shadow-xl hover:border-sky-500/35 transition-all duration-300 group overflow-hidden"
             >
               {/* Card Label */}
@@ -317,7 +309,7 @@ export default function Skills() {
               {/* Points & Wireframe Globe Area */}
               <div className="relative">
                 {/* 4 Interactive Key Points */}
-                <div className="space-y-3.5 pr-20">
+                <div className="space-y-3.5 pr-0 sm:pr-20">
                   {exploringPoints.map((pt) => {
                     const PtIcon = pt.icon;
                     return (
@@ -339,7 +331,7 @@ export default function Skills() {
                 </div>
 
                 {/* Floating 3D Glowing Wireframe Globe & Script */}
-                <div className="absolute top-0 right-0 w-28 h-36 flex flex-col items-center justify-center pointer-events-none">
+                <div className="hidden sm:flex absolute top-0 right-0 w-28 h-36 flex-col items-center justify-center pointer-events-none">
                   <div className="relative w-24 h-24">
                     <svg viewBox="0 0 100 100" className="w-full h-full animate-[spin_35s_linear_infinite] text-sky-400 drop-shadow-[0_0_12px_rgba(56,189,248,0.5)]">
                       <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 3" opacity="0.5" />
@@ -358,14 +350,10 @@ export default function Skills() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* CARD 2: MY STACK & IMPACT */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            <div
               className="relative rounded-2xl md:rounded-3xl border border-white/10 bg-zinc-950/75 backdrop-blur-xl p-5 sm:p-6 shadow-xl hover:border-sky-500/35 transition-all duration-300 group overflow-hidden"
             >
               {/* Header */}
@@ -394,19 +382,25 @@ export default function Skills() {
                   <div>Build.</div>
                   <div>Learn.</div>
                   <div>Ship.</div>
-                  <div>Repeat.</div>
                 </div>
               </div>
 
               {/* Subtitle */}
               <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6 font-normal">
-                A versatile stack across development, AI and cloud, helping me build scalable products and solve real-world problems.
+                Carefully selected frameworks and platforms for production-ready development.
               </p>
 
-              {/* Stats Row */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-white/10">
-                {stats.map((s) => (
-                  <div key={s.label} className="text-left">
+              {/* 3 Metric Pills / Feature Rows */}
+              <div className="grid grid-cols-3 gap-2.5 pt-1 border-t border-white/5">
+                {[
+                  { value: "Full Stack", label: "End-to-End" },
+                  { value: "AI + LLMs", label: "Smart Systems" },
+                  { value: "Clean UI", label: "Design Systems" },
+                ].map((s) => (
+                  <div
+                    key={s.value}
+                    className="p-3 rounded-xl bg-zinc-900/60 border border-white/5 text-center"
+                  >
                     <div className="text-base sm:text-lg font-extrabold text-white tracking-tight">
                       {s.value}
                     </div>
@@ -416,7 +410,7 @@ export default function Skills() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
 

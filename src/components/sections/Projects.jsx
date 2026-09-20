@@ -131,11 +131,7 @@ export default function Projects() {
 
           {/* Right Column: Featured Project Glass Card */}
           <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            <div
               className="relative rounded-3xl p-6 sm:p-8 md:p-9 border border-white/10 bg-zinc-950/65 backdrop-blur-xl shadow-2xl hover:border-blue-500/40 transition-all duration-500 group overflow-hidden"
             >
               {/* Subtle card glow */}
@@ -202,7 +198,7 @@ export default function Projects() {
                   <span className="text-xs">GitHub</span>
                 </a>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
 
@@ -210,13 +206,9 @@ export default function Projects() {
             BOTTOM ROW: 3 Secondary Project Cards (With Tech Stacks & Working Links)
             ========================================================================= */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 md:mt-14">
-          {secondaryProjects.map((project, idx) => (
-            <motion.div
+          {secondaryProjects.map((project) => (
+            <div
               key={project.number}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="relative rounded-2xl md:rounded-3xl border border-white/10 bg-zinc-950/75 backdrop-blur-xl p-5 sm:p-6 flex flex-col justify-between hover:border-white/25 transition-all duration-300 hover:-translate-y-1.5 shadow-xl group overflow-hidden"
             >
               {/* Card top bar */}
@@ -299,7 +291,7 @@ export default function Projects() {
                   </span>
                 </div>
               </a>
-            </motion.div>
+            </div>
           ))}
         </div>
 

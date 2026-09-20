@@ -203,23 +203,19 @@ export default function Experience() {
               ======================================================================= */}
           <div className="lg:col-span-7 relative">
             {/* Continuous Vertical Timeline Line */}
-            <div className="absolute top-4 bottom-8 left-[68px] sm:left-[80px] w-[2px] bg-gradient-to-b from-blue-500 via-cyan-500/60 to-zinc-800" />
+            <div className="absolute top-4 bottom-8 left-[52px] sm:left-[80px] w-[2px] bg-gradient-to-b from-blue-500 via-cyan-500/60 to-zinc-800" />
 
             <div className="space-y-12">
-              {timelineItems.map((item, idx) => (
-                <motion.div
+              {timelineItems.map((item) => (
+                <div
                   key={item.year}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="relative flex items-start gap-4 sm:gap-6"
+                  className="relative flex items-start gap-3 sm:gap-6"
                 >
                   {/* Year Label */}
-                  <div className="w-14 sm:w-16 text-right shrink-0 pt-0.5">
+                  <div className="w-11 sm:w-16 text-right shrink-0 pt-0.5">
                     <span
                       className={cn(
-                        "text-sm sm:text-base font-mono font-extrabold tracking-wider",
+                        "text-xs sm:text-base font-mono font-extrabold tracking-wider",
                         item.year === "NOW"
                           ? "text-cyan-400 text-glow"
                           : "text-zinc-400"
@@ -358,7 +354,7 @@ export default function Experience() {
                       )}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -368,11 +364,7 @@ export default function Experience() {
               ======================================================================= */}
           <div className="lg:col-span-5 space-y-6">
             {/* BENTO CARD 1: WHAT I'VE LEARNED */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+            <div
               className="rounded-2xl bg-zinc-950/75 backdrop-blur-xl border border-white/10 p-6 shadow-2xl relative overflow-hidden"
             >
               <div className="flex items-center justify-between mb-5 pb-3 border-b border-white/5">
@@ -410,14 +402,10 @@ export default function Experience() {
                   );
                 })}
               </div>
-            </motion.div>
+            </div>
 
             {/* BENTO CARD 2: SELECTED WORK */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, delay: 0.1 }}
-              transition={{ duration: 0.5 }}
+            <div
               className="rounded-2xl bg-zinc-950/75 backdrop-blur-xl border border-white/10 p-6 shadow-2xl relative overflow-hidden"
             >
               <div className="flex items-center justify-between mb-5 pb-3 border-b border-white/5">
@@ -462,7 +450,7 @@ export default function Experience() {
                   );
                 })}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

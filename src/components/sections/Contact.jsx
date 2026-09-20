@@ -9,7 +9,6 @@ import {
   Clock,
   ExternalLink,
   FileText,
-  Phone,
   Sparkles,
   ArrowUpRight,
   ShieldAlert,
@@ -22,7 +21,6 @@ import { GithubIcon, LinkedinIcon } from "../ui/SocialIcons";
 
 export default function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedPhone, setCopiedPhone] = useState(false);
   const [currentTime, setCurrentTime] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -57,13 +55,6 @@ export default function Contact() {
     navigator.clipboard.writeText("sautrikroy2006@gmail.com");
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2500);
-  };
-
-  const handleCopyPhone = (e) => {
-    e.preventDefault();
-    navigator.clipboard.writeText("+919641665853");
-    setCopiedPhone(true);
-    setTimeout(() => setCopiedPhone(false), 2500);
   };
 
   const handleSubmit = (e) => {
@@ -181,13 +172,7 @@ export default function Contact() {
               ======================================================================= */}
           <div className="lg:col-span-5 space-y-5">
             {/* PRIMARY EMAIL CARD */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="group relative rounded-2xl bg-zinc-950/80 backdrop-blur-xl border border-white/10 hover:border-cyan-500/40 p-6 transition-all duration-300 shadow-xl overflow-hidden"
-            >
+            <div className="group relative rounded-2xl bg-zinc-950/80 backdrop-blur-xl border border-white/10 hover:border-cyan-500/40 p-6 transition-all duration-300 shadow-xl overflow-hidden">
               <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/10 blur-[70px] rounded-full pointer-events-none group-hover:bg-cyan-500/20 transition-colors" />
 
               <div className="flex items-center justify-between mb-4">
@@ -271,16 +256,10 @@ export default function Contact() {
                   </a>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* LOCATION & TIMEZONE BENTO */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="rounded-2xl bg-zinc-950/80 backdrop-blur-xl border border-white/10 p-5 shadow-xl space-y-4"
-            >
+            <div className="rounded-2xl bg-zinc-950/80 backdrop-blur-xl border border-white/10 p-5 shadow-xl space-y-4">
               {/* Location & Status */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
@@ -308,41 +287,10 @@ export default function Contact() {
                   {currentTime || "12:00:00 AM"} UTC+5:30
                 </span>
               </div>
-
-              {/* Direct Phone Line */}
-              <div className="flex items-center justify-between p-3 rounded-xl bg-black/40 border border-white/5">
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-zinc-400" />
-                  <a
-                    href="tel:+919641665853"
-                    className="text-xs font-mono text-zinc-300 hover:text-white transition-colors"
-                  >
-                    +91 9641665853
-                  </a>
-                </div>
-                <button
-                  onClick={handleCopyPhone}
-                  className="p-1.5 rounded bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
-                  title="Copy Phone Number"
-                  aria-label="Copy Phone Number"
-                >
-                  {copiedPhone ? (
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  ) : (
-                    <Copy className="w-3.5 h-3.5" />
-                  )}
-                </button>
-              </div>
-            </motion.div>
+            </div>
 
             {/* SOCIAL NETWORKS & RESUME ACCESS */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="grid grid-cols-2 gap-3"
-            >
+            <div className="grid grid-cols-2 gap-3">
               {/* LinkedIn */}
               <a
                 href="https://www.linkedin.com/in/sautrik-roy-1779r"
@@ -380,19 +328,13 @@ export default function Contact() {
                   </div>
                 </div>
               </a>
-            </motion.div>
+            </div>
           </div>
 
           {/* =======================================================================
               RIGHT COLUMN: INTERACTIVE COMMUNICATION FORM (7 COLS)
               ======================================================================= */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-7 rounded-2xl bg-zinc-950/85 backdrop-blur-xl border border-white/10 hover:border-cyan-500/30 transition-all duration-300 p-6 sm:p-8 shadow-2xl flex flex-col justify-between relative overflow-hidden"
-          >
+          <div className="lg:col-span-7 rounded-2xl bg-zinc-950/85 backdrop-blur-xl border border-white/10 hover:border-cyan-500/30 transition-all duration-300 p-6 sm:p-8 shadow-2xl flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
 
             <div>
@@ -554,7 +496,7 @@ export default function Contact() {
               </span>
               <span>Chennai (IST)</span>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
