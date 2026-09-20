@@ -105,10 +105,12 @@ export default function Hero() {
               <span className="text-xs sm:text-[13px] font-mono font-medium tracking-[0.12em] text-zinc-300 uppercase">
                 PRODUCT BUILDER
               </span>
-              <span className="text-zinc-700 font-mono text-xs select-none">•</span>
-              <span className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-wider text-cyan-400 uppercase">
-                OPEN TO WORK
-              </span>
+              <div className="inline-flex items-center gap-1.5 ml-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(34,211,238,0.75)] animate-pulse shrink-0" />
+                <span className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-wider text-cyan-400 uppercase drop-shadow-[0_0_8px_rgba(34,211,238,0.25)]">
+                  OPEN TO WORK
+                </span>
+              </div>
               <div className="hidden sm:block h-[1px] w-12 bg-gradient-to-r from-cyan-400/50 to-transparent ml-1" />
             </div>
           </motion.div>
