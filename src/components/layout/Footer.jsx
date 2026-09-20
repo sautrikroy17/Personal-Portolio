@@ -90,7 +90,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Sautrik Roy. All rights reserved. Licensed under MIT.
           </p>
           <p className="flex items-center gap-1 text-zinc-400">
-            <span>Designed & Engineered in Chennai, India</span>
+            <span>Designed & Engineered by Sautrik Roy</span>
           </p>
         </div>
       </div>
