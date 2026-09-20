@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 export default function SpotlightCard({ children, className = "", spotLightColor = "rgba(255, 255, 255, 0.1)" }) {
@@ -8,13 +8,6 @@ export default function SpotlightCard({ children, className = "", spotLightColor
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
   const isMobile = useMediaQuery("(max-width: 768px)");
-
-  // 3D Tilt Physics
-  const x = useSpring(0, { stiffness: 400, damping: 30 });
-  const y = useSpring(0, { stiffness: 400, damping: 30 });
-
-  const rotateX = useTransform(y, [-0.5, 0.5], ["7deg", "-7deg"]);
-  const rotateY = useTransform(x, [-0.5, 0.5], ["-7deg", "7deg"]);
 
   const handleMouseMove = (e) => {
     if (!divRef.current || isFocused || isMobile) return;
@@ -26,12 +19,6 @@ export default function SpotlightCard({ children, className = "", spotLightColor
     const mouseY = e.clientY - rect.top;
 
     setPosition({ x: mouseX, y: mouseY });
-
-    const xPct = mouseX / rect.width - 0.5;
-    const yPct = mouseY / rect.height - 0.5;
-    
-    x.set(xPct);
-    y.set(yPct);
   };
 
   const handleFocus = () => {
@@ -50,8 +37,6 @@ export default function SpotlightCard({ children, className = "", spotLightColor
 
   const handleMouseLeave = () => {
     setOpacity(0);
-    x.set(0);
-    y.set(0);
   };
 
   return (
@@ -62,10 +47,7 @@ export default function SpotlightCard({ children, className = "", spotLightColor
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{
-        // Removed rotateX, rotateY, and preserve-3d for performance
-      }}
-      className={`relative overflow-hidden ${className} perspective-1000`}
+      className={`relative overflow-hidden ${className}`}
     >
       <div
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 z-10 mix-blend-overlay"
@@ -74,7 +56,7 @@ export default function SpotlightCard({ children, className = "", spotLightColor
           background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotLightColor}, transparent 40%)`,
         }}
       />
-      <div style={{ transform: "none" }} className="h-full">
+      <div className="h-full">
         {children}
       </div>
     </motion.div>

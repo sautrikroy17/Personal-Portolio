@@ -1,12 +1,8 @@
-import { motion, useAnimationControls } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 export default function PhysicsText({ text, className = "" }) {
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const controls = useAnimationControls();
-  const [isPlaying, setIsPlaying] = useState(false);
-
   const letters = Array.from(text);
 
   const rubberBand = () => {

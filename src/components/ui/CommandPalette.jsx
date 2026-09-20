@@ -35,8 +35,14 @@ export default function CommandPalette() {
     };
   }, []);
 
-  const navigateTo = (selector) => {
+  const closePalette = () => {
     setIsOpen(false);
+    setQuery("");
+    setSelectedIndex(0);
+  };
+
+  const navigateTo = (selector) => {
+    closePalette();
     if (selector === "#top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -54,25 +60,14 @@ export default function CommandPalette() {
     { id: "skills", name: "View Technical Skills & Stack", icon: Zap, action: () => navigateTo("#skills") },
     { id: "experience", name: "View Experience (MLSA, GSSoC, SIH)", icon: Briefcase, action: () => navigateTo("#experience") },
     { id: "contact", name: "Contact & Connect", icon: Mail, action: () => navigateTo("#contact") },
-    { id: "resume", name: "Open Official Resume (PDF)", icon: Download, action: () => { window.open("/resume.pdf", "_blank"); setIsOpen(false); } },
-    { id: "github", name: "Open GitHub Profile", icon: GithubIcon, action: () => { window.open("https://github.com/sautrikroy17", "_blank"); setIsOpen(false); } },
-    { id: "linkedin", name: "Open LinkedIn Profile", icon: Terminal, action: () => { window.open("https://www.linkedin.com/in/sautrik-roy-1779r", "_blank"); setIsOpen(false); } },
+    { id: "resume", name: "Open Official Resume (PDF)", icon: Download, action: () => { window.open("/resume.pdf", "_blank"); closePalette(); } },
+    { id: "github", name: "Open GitHub Profile", icon: GithubIcon, action: () => { window.open("https://github.com/sautrikroy17", "_blank"); closePalette(); } },
+    { id: "linkedin", name: "Open LinkedIn Profile", icon: Terminal, action: () => { window.open("https://www.linkedin.com/in/sautrik-roy-1779r", "_blank"); closePalette(); } },
   ];
 
   const filteredCommands = commands.filter((command) =>
     command.name.toLowerCase().includes(query.toLowerCase())
   );
-
-  useEffect(() => {
-    setSelectedIndex(0);
-  }, [query]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      setQuery("");
-      setSelectedIndex(0);
-    }
-  }, [isOpen]);
 
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown") {
@@ -83,7 +78,7 @@ export default function CommandPalette() {
       setSelectedIndex((prev) => (prev - 1 + filteredCommands.length) % filteredCommands.length);
     } else if (e.key === "Enter" && filteredCommands.length > 0) {
       e.preventDefault();
-      filteredCommands[selectedIndex].action();
+      filteredCommands[selectedIndex]?.action();
     }
   };
 
@@ -96,7 +91,7 @@ export default function CommandPalette() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="absolute inset-0 bg-zinc-950/80 backdrop-blur-sm"
-            onClick={() => setIsOpen(false)}
+            onClick={closePalette}
           />
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
@@ -112,7 +107,10 @@ export default function CommandPalette() {
                 type="text"
                 placeholder="Type a command or search..."
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSelectedIndex(0);
+                }}
                 onKeyDown={handleKeyDown}
                 className="w-full bg-transparent text-white text-lg placeholder:text-zinc-500 outline-none font-sans"
               />

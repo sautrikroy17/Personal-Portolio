@@ -115,13 +115,6 @@ const exploringPoints = [
   },
 ];
 
-const stats = [
-  { value: "20+", label: "Technologies" },
-  { value: "5+", label: "Domains" },
-  { value: "End-to-End", label: "Development" },
-  { value: "Cloud & AI", label: "Integration" },
-];
-
 export default function Skills() {
   return (
     <section id="skills" className="relative min-h-screen pt-10 md:pt-14 pb-16 md:pb-24 overflow-hidden bg-black text-white">

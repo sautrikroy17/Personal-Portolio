@@ -13,9 +13,6 @@ export default function ScrollProgressRing() {
     restDelta: 0.001
   });
 
-  // Calculate the stroke dashoffset based on progress
-  // Circumference of a circle with r=20 is 2 * Math.PI * 20 ~= 125.6
-  const strokeDashoffset = useTransform(smoothProgress, [0, 1], [125.6, 0]);
 
   useEffect(() => {
     return scrollYProgress.on("change", (latest) => {
