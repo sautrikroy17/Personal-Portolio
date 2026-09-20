@@ -75,17 +75,14 @@ export default function Navbar() {
             isScrolled && "border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.95)] bg-zinc-950/90"
           )}
         >
-          {/* Left: SR. Brand Identity + Sautrik Roy */}
+          {/* Left: SR. Brand Logo */}
           <a
             href="#top"
             onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-3 z-[70] outline-none select-none group shrink-0"
+            className="flex items-center z-[70] outline-none select-none group shrink-0"
             aria-label="Sautrik Roy Homepage"
           >
             <SRLogo />
-            <span className="hidden min-[480px]:inline-block text-sm sm:text-[15px] font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
-              Sautrik Roy
-            </span>
           </a>
 
           {/* Center: Portfolio Navigation Links */}
