@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Lightbulb, BookOpen, Users, Sprout, Layers } from "lucide-react";
+import { ArrowRight, Lightbulb, BookOpen, Users, Sprout, Layers, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   CppIcon,
   JavaIcon,
@@ -116,6 +117,14 @@ const exploringPoints = [
 ];
 
 export default function Skills() {
+  const [activeStage, setActiveStage] = useState("02");
+  const timelineStages = [
+    { num: "01", label: "Learn" },
+    { num: "02", label: "Build" },
+    { num: "03", label: "Ship" },
+    { num: "04", label: "Refine" },
+  ];
+
   return (
     <section id="skills" className="relative min-h-screen pt-10 md:pt-14 pb-16 md:pb-24 overflow-hidden bg-black text-white">
       {/* =========================================================================
@@ -169,10 +178,10 @@ export default function Skills() {
             <div>
               {/* Section Tracker Label: 03 / STACK */}
               <div className="flex items-center gap-3 mb-5">
-                <span className="font-mono text-xs md:text-sm tracking-widest text-zinc-400 font-semibold uppercase">
+                <span className="font-mono text-xs md:text-sm tracking-widest text-sky-400 font-bold uppercase drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">
                   03 / STACK
                 </span>
-                <div className="w-10 h-[1px] bg-zinc-700/60" />
+                <div className="w-10 h-[1px] bg-sky-500/40" />
               </div>
 
               {/* Main Headline */}
@@ -422,43 +431,81 @@ export default function Skills() {
           </a>
 
           {/* Interactive Timeline Journey: 01 Learn — 02 Build — 03 Ship — 04 Refine */}
-          <div className="flex items-center gap-4 sm:gap-6 font-mono text-[11px] text-zinc-400">
-            <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-zinc-600" />
-              <span className="text-zinc-500 font-bold">01</span>
-              <span className="text-zinc-400">Learn</span>
-            </div>
-            <div className="w-6 h-[1px] bg-zinc-800" />
-
-            <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8]" />
-              <span className="text-sky-400 font-bold">02</span>
-              <span className="text-white font-bold">Build</span>
-            </div>
-            <div className="w-6 h-[1px] bg-zinc-800" />
-
-            <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-zinc-600" />
-              <span className="text-zinc-500 font-bold">03</span>
-              <span className="text-zinc-400">Ship</span>
-            </div>
-            <div className="w-6 h-[1px] bg-zinc-800" />
-
-            <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-zinc-600" />
-              <span className="text-zinc-500 font-bold">04</span>
-              <span className="text-zinc-400">Refine</span>
-            </div>
+          <div className="flex items-center gap-2.5 sm:gap-6 font-mono text-[11px] text-zinc-400 select-none">
+            {timelineStages.map((stage, idx) => {
+              const isActive = activeStage === stage.num;
+              return (
+                <div key={stage.num} className="flex items-center gap-2.5 sm:gap-6">
+                  <div
+                    onClick={() => setActiveStage(stage.num)}
+                    className="group flex items-center gap-1.5 cursor-pointer transition-all duration-300 hover:scale-105"
+                  >
+                    <span
+                      className={`rounded-full transition-all duration-300 ${
+                        isActive
+                          ? "w-2 h-2 bg-sky-400 shadow-[0_0_10px_#38bdf8] animate-pulse"
+                          : "w-1.5 h-1.5 bg-zinc-600 group-hover:bg-sky-400 group-hover:shadow-[0_0_8px_#38bdf8]"
+                      }`}
+                    />
+                    <span
+                      className={`font-bold transition-colors duration-200 ${
+                        isActive
+                          ? "text-sky-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]"
+                          : "text-zinc-500 group-hover:text-sky-400 group-hover:drop-shadow-[0_0_8px_rgba(56,189,248,0.7)]"
+                      }`}
+                    >
+                      {stage.num}
+                    </span>
+                    <span
+                      className={`transition-colors duration-200 ${
+                        isActive
+                          ? "text-white font-bold"
+                          : "text-zinc-400 group-hover:text-white font-medium"
+                      }`}
+                    >
+                      {stage.label}
+                    </span>
+                  </div>
+                  {idx < timelineStages.length - 1 && (
+                    <div className="w-3 sm:w-6 h-[1px] bg-zinc-800" />
+                  )}
+                </div>
+              );
+            })}
           </div>
 
-          {/* Right: Next Section Link: 04 / EXPERIENCE -> */}
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-[1px] bg-zinc-700/60 hidden sm:block" />
+          {/* Right: Section Pagination (04 / 06) & Experience Link */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="flex items-center gap-2.5 sm:gap-3 text-xs font-mono">
+              <div className="flex items-center gap-1.5">
+                <span className="font-bold text-white">04</span>
+                <span className="text-zinc-600">/</span>
+                <span className="text-zinc-500">06</span>
+              </div>
+
+              {/* Progress Line */}
+              <div className="w-10 sm:w-12 h-[2px] bg-zinc-800 rounded-full overflow-hidden">
+                <div className="w-4/6 h-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
+              </div>
+
+              {/* Navigation Arrows */}
+              <div className="flex items-center gap-1 text-zinc-400">
+                <a href="#projects" className="p-1 hover:text-white transition-colors" aria-label="Previous section">
+                  <ChevronLeft className="w-4 h-4" />
+                </a>
+                <a href="#experience" className="p-1 hover:text-white transition-colors" aria-label="Next section">
+                  <ChevronRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
+            <div className="w-[1px] h-4 bg-zinc-800 hidden sm:block" />
+
             <a
               href="#experience"
-              className="inline-flex items-center gap-2 font-mono text-xs font-bold text-sky-400 hover:text-sky-300 transition-colors uppercase tracking-wider group"
+              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-sky-400 hover:text-sky-300 transition-colors uppercase tracking-wider group shrink-0"
             >
-              <span>04 / EXPERIENCE</span>
+              <span className="hidden min-[480px]:inline">04 / EXPERIENCE</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>

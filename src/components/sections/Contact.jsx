@@ -16,6 +16,8 @@ import {
   MessageSquare,
   CheckCircle2,
   Code2,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../ui/SocialIcons";
 
@@ -138,9 +140,12 @@ export default function Contact() {
           {/* Section Title & Number */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <p className="text-xs font-mono text-zinc-400 tracking-widest uppercase mb-1">
-                05 / CONTACT & CONNECT
-              </p>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="font-mono text-xs md:text-sm tracking-widest text-sky-400 font-bold uppercase drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">
+                  05 / CONTACT & CONNECT
+                </span>
+                <div className="w-10 h-[1px] bg-sky-500/40" />
+              </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
                 Let's build something{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 text-glow-blue">
@@ -498,6 +503,60 @@ export default function Contact() {
                 <span>Zero spam. Direct engineer response.</span>
               </span>
               <span>Chennai (IST)</span>
+            </div>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            BOTTOM METADATA BAR (Back to Top & Section 06 / 06 Pagination)
+            ========================================================================= */}
+        <div className="mt-12 md:mt-16 pt-7 border-t border-white/5 flex items-center justify-between gap-4 text-zinc-400">
+          {/* Back to top indicator */}
+          <a
+            href="#top"
+            className="group flex items-center gap-2.5 sm:gap-3 text-[11px] font-semibold tracking-widest uppercase hover:text-white transition-colors cursor-pointer"
+          >
+            <div className="w-4 h-6 rounded-full border border-white/25 group-hover:border-sky-400 flex items-start justify-center p-1 transition-colors">
+              <motion.div
+                animate={{ y: [6, 0, 6] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                className="w-1 h-1.5 rounded-full bg-cyan-400 group-hover:bg-sky-400"
+              />
+            </div>
+            <span className="font-mono tracking-widest uppercase text-[10px] text-zinc-400 group-hover:text-zinc-200">
+              BACK TO TOP
+            </span>
+            <div className="hidden sm:block w-10 h-[1px] bg-zinc-800 group-hover:bg-zinc-600 transition-colors" />
+          </a>
+
+          {/* Script Quote */}
+          <div className="hidden sm:block text-center">
+            <span className="font-['Caveat',cursive] text-2xl text-zinc-400 tracking-wide">
+              Ideas become reality.
+            </span>
+          </div>
+
+          {/* Section Pagination (06 / 06) */}
+          <div className="flex items-center gap-3 sm:gap-4 text-xs font-mono">
+            <div className="flex items-center gap-1.5">
+              <span className="font-bold text-white">06</span>
+              <span className="text-zinc-600">/</span>
+              <span className="text-zinc-500">06</span>
+            </div>
+
+            {/* Progress Line - 100% full for the final section */}
+            <div className="w-10 sm:w-12 h-[2px] bg-zinc-800 rounded-full overflow-hidden">
+              <div className="w-full h-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
+            </div>
+
+            {/* Navigation Arrows */}
+            <div className="flex items-center gap-1 text-zinc-400">
+              <a href="#experience" className="p-1 hover:text-white transition-colors" aria-label="Previous section">
+                <ChevronLeft className="w-4 h-4" />
+              </a>
+              <a href="#top" className="p-1 hover:text-white transition-colors" aria-label="Back to top">
+                <ChevronRight className="w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>

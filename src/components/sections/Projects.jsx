@@ -101,10 +101,10 @@ export default function Projects() {
           <div className="lg:col-span-5 flex flex-col justify-start pt-2 md:pt-4">
             {/* Section Tag */}
             <div className="flex items-center gap-3 mb-5">
-              <span className="font-mono text-xs md:text-sm tracking-widest text-zinc-400 font-semibold uppercase">
+              <span className="font-mono text-xs md:text-sm tracking-widest text-sky-400 font-bold uppercase drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">
                 02 / WORK
               </span>
-              <div className="w-12 h-[1px] bg-zinc-700/60" />
+              <div className="w-12 h-[1px] bg-sky-500/40" />
             </div>
 
             {/* Main Headline */}
@@ -177,6 +177,27 @@ export default function Projects() {
                   </span>
                 ))}
               </div>
+
+              {/* Loop Project Image Preview (Mobile & Tablet - Desktop is preserved as requested) */}
+              <a
+                href={featuredProject.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block lg:hidden relative rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 shadow-inner group/img aspect-video mb-6"
+              >
+                <img
+                  src={featuredProject.image}
+                  alt={featuredProject.title}
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/img:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end p-3.5">
+                  <span className="text-[11px] font-semibold text-white inline-flex items-center gap-1.5 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 shadow-lg">
+                    <ExternalLink className="w-3 h-3 text-sky-400" />
+                    Open Live
+                  </span>
+                </div>
+              </a>
 
               {/* Actions */}
               <div className="flex flex-wrap items-center gap-3.5">
@@ -301,11 +322,11 @@ export default function Projects() {
         {/* =========================================================================
             BOTTOM METADATA BAR (Scroll to Explore, Ideas Compound & Section 03 / 06)
             ========================================================================= */}
-        <div className="mt-14 md:mt-18 pt-7 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-14 md:mt-18 pt-7 border-t border-white/5 flex items-center justify-between gap-4 text-zinc-400">
           {/* Scroll to explore indicator */}
           <a
             href="#skills"
-            className="group flex items-center gap-3 text-[11px] font-semibold tracking-widest uppercase hover:text-white transition-colors cursor-pointer"
+            className="group flex items-center gap-2.5 sm:gap-3 text-[11px] font-semibold tracking-widest uppercase hover:text-white transition-colors cursor-pointer"
           >
             <div className="w-4 h-6 rounded-full border border-white/25 group-hover:border-sky-400 flex items-start justify-center p-1 transition-colors">
               <motion.div
@@ -321,16 +342,16 @@ export default function Projects() {
           </a>
 
           {/* Script Quote */}
-          <div className="text-center">
+          <div className="hidden lg:block text-center">
             <span className="font-['Caveat',cursive] text-2xl text-zinc-400 tracking-wide">
               Ideas compound.
             </span>
           </div>
 
           {/* Right: Section Tracker 03 / 06 & View All Projects Button */}
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-3 sm:gap-5">
             {/* Section Pagination matching About */}
-            <div className="hidden md:flex items-center gap-3.5 text-xs font-mono">
+            <div className="flex items-center gap-2.5 sm:gap-3.5 text-xs font-mono">
               <div className="flex items-center gap-1.5">
                 <span className="font-bold text-white">03</span>
                 <span className="text-zinc-600">/</span>
@@ -338,7 +359,7 @@ export default function Projects() {
               </div>
 
               {/* Progress Line */}
-              <div className="w-12 h-[2px] bg-zinc-800 rounded-full overflow-hidden">
+              <div className="w-10 sm:w-12 h-[2px] bg-zinc-800 rounded-full overflow-hidden">
                 <div className="w-3/6 h-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
               </div>
 
@@ -358,9 +379,10 @@ export default function Projects() {
               href="https://github.com/sautrikroy17?tab=repositories"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/25 text-white font-medium text-xs transition-all duration-300 group"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/25 text-white font-medium text-xs transition-all duration-300 group shrink-0"
             >
-              <span>View All Projects</span>
+              <span className="hidden min-[480px]:inline">View All Projects</span>
+              <span className="inline min-[480px]:hidden">All Projects</span>
               <ArrowRight className="w-3.5 h-3.5 text-zinc-300 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>

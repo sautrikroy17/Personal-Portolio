@@ -15,6 +15,8 @@ import {
   FileCode,
   CheckCircle2,
   Terminal,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { cn } from "../../lib/utils";
 
@@ -180,9 +182,12 @@ export default function Experience() {
             HEADER SECTION
             ========================================================================= */}
         <div className="mb-14 md:mb-16">
-          <p className="text-xs font-mono font-bold tracking-widest text-blue-400 uppercase mb-2">
-            04 / EXPERIENCE
-          </p>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="font-mono text-xs md:text-sm tracking-widest text-sky-400 font-bold uppercase drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">
+              04 / EXPERIENCE
+            </span>
+            <div className="w-10 h-[1px] bg-sky-500/40" />
+          </div>
 
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
             How I got{" "}
@@ -452,6 +457,60 @@ export default function Experience() {
                   );
                 })}
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            BOTTOM METADATA BAR (Scroll to Explore & Section 05 / 06 Pagination)
+            ========================================================================= */}
+        <div className="mt-14 md:mt-18 pt-7 border-t border-white/5 flex items-center justify-between gap-4 text-zinc-400">
+          {/* Scroll to explore indicator */}
+          <a
+            href="#contact"
+            className="group flex items-center gap-2.5 sm:gap-3 text-[11px] font-semibold tracking-widest uppercase hover:text-white transition-colors cursor-pointer"
+          >
+            <div className="w-4 h-6 rounded-full border border-white/25 group-hover:border-sky-400 flex items-start justify-center p-1 transition-colors">
+              <motion.div
+                animate={{ y: [0, 6, 0] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                className="w-1 h-1.5 rounded-full bg-cyan-400 group-hover:bg-sky-400"
+              />
+            </div>
+            <span className="font-mono tracking-widest uppercase text-[10px] text-zinc-400 group-hover:text-zinc-200">
+              SCROLL TO EXPLORE
+            </span>
+            <div className="hidden sm:block w-10 h-[1px] bg-zinc-800 group-hover:bg-zinc-600 transition-colors" />
+          </a>
+
+          {/* Script Quote */}
+          <div className="hidden sm:block text-center">
+            <span className="font-['Caveat',cursive] text-2xl text-zinc-400 tracking-wide">
+              Discipline builds freedom.
+            </span>
+          </div>
+
+          {/* Section Pagination (05 / 06) */}
+          <div className="flex items-center gap-3 sm:gap-4 text-xs font-mono">
+            <div className="flex items-center gap-1.5">
+              <span className="font-bold text-white">05</span>
+              <span className="text-zinc-600">/</span>
+              <span className="text-zinc-500">06</span>
+            </div>
+
+            {/* Progress Line */}
+            <div className="w-10 sm:w-12 h-[2px] bg-zinc-800 rounded-full overflow-hidden">
+              <div className="w-5/6 h-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
+            </div>
+
+            {/* Navigation Arrows */}
+            <div className="flex items-center gap-1 text-zinc-400">
+              <a href="#skills" className="p-1 hover:text-white transition-colors" aria-label="Previous section">
+                <ChevronLeft className="w-4 h-4" />
+              </a>
+              <a href="#contact" className="p-1 hover:text-white transition-colors" aria-label="Next section">
+                <ChevronRight className="w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>
