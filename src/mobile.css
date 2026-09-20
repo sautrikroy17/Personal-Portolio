@@ -132,8 +132,8 @@
   }
 
   /* 4. Seamless Mobile Section Blending (Flawless Transitions Between Pages)
-     Enforces unified deep black foundation, consistent atmospheric contrast,
-     and deep smooth edge gradients across all sections on mobile devices. */
+     Enforces unified deep black foundation, perfect focal-point alignment,
+     and soft edge gradients so every workspace flows into the next organically. */
   section,
   #top,
   #about,
@@ -146,43 +146,79 @@
     position: relative;
   }
 
-  /* Harmonized mobile section padding so content never collides with edge blends */
+  /* Harmonized mobile section padding - eliminates large empty voids between sections */
   #about {
-    padding-top: 4.5rem !important;
-    padding-bottom: 3.5rem !important;
+    padding-top: 3rem !important;
+    padding-bottom: 2.5rem !important;
   }
 
   #projects {
-    padding-top: 4.5rem !important;
-    padding-bottom: 4rem !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
   }
 
   #skills {
-    padding-top: 4.5rem !important;
-    padding-bottom: 4rem !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
   }
 
   #experience {
-    padding-top: 4.5rem !important;
-    padding-bottom: 4rem !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
   }
 
   #contact {
-    padding-top: 4.5rem !important;
-    padding-bottom: 4rem !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
   }
 
-  /* Deep, velvety edge blend transitions for mobile touch scrolling */
+  /* Soft, compact edge blend transitions for mobile touch scrolling */
   section .pointer-events-none > div[class*="bg-gradient-to-b from-black"],
   section .pointer-events-none > div[class*="bg-gradient-to-t from-black"] {
-    height: 7rem !important;
+    height: 5rem !important;
   }
 
-  /* Ensure background workspace images on mobile maintain uniform tone and zero abrupt shifts */
+  /* Disable horizontal desktop vignettes on mobile to prevent double-darkening */
+  section .pointer-events-none > div[class*="bg-gradient-to-r"] {
+    display: none !important;
+  }
+
+  /* Vibrant, rich mobile workspace image rendering with full natural contrast */
   section .pointer-events-none img,
   section .pointer-events-none picture img {
-    opacity: 0.8 !important;
-    filter: brightness(0.85) contrast(1.05);
+    opacity: 1 !important;
+    filter: contrast(1.1) saturate(1.15) !important;
+  }
+
+  /* Perfectly align each image's bright workspace subject (monitors, desk lamp, laptops) on mobile */
+  #top .object-cover {
+    object-position: 70% 30% !important;
+  }
+  #about .object-cover {
+    object-position: 68% 25% !important;
+  }
+  #projects .object-cover {
+    object-position: 65% 35% !important;
+  }
+  #skills .object-cover {
+    object-position: 70% 40% !important;
+  }
+  #experience .object-cover {
+    object-position: 75% 45% !important;
+  }
+  #contact .object-cover {
+    object-position: 50% 60% !important;
+  }
+
+  /* Smooth vertical atmospheric gradient on mobile: lets 55% of the luminous monitor and lamp glow shine through */
+  section .pointer-events-none > div[class*="sm:hidden"] {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.75) 0%,
+      rgba(0, 0, 0, 0.42) 28%,
+      rgba(0, 0, 0, 0.45) 70%,
+      rgba(0, 0, 0, 0.88) 100%
+    ) !important;
   }
 
   /* 5. iOS Safari Form Auto-Zoom Fix (16px base font rule prevents viewport zoom on focus) */
