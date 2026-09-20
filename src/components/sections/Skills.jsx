@@ -177,11 +177,17 @@ export default function Skills() {
           <div className="lg:col-span-3 flex flex-col justify-between pt-2">
             <div>
               {/* Section Tracker Label: 03 / STACK */}
-              <div className="flex items-center gap-3 mb-5">
-                <span className="font-mono text-xs md:text-sm tracking-widest text-sky-400 font-bold uppercase drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">
-                  03 / STACK
+              <div className="group inline-flex items-center gap-2.5 mb-5 cursor-default transition-all duration-300">
+                <span className="font-mono text-xs sm:text-sm font-bold tracking-widest text-sky-400 drop-shadow-[0_0_6px_rgba(56,189,248,0.4)] group-hover:text-sky-300 group-hover:drop-shadow-[0_0_14px_rgba(56,189,248,0.9)] transition-all duration-300">
+                  03
                 </span>
-                <div className="w-10 h-[1px] bg-sky-500/40" />
+                <span className="font-mono text-xs sm:text-sm font-medium tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors duration-300">
+                  /
+                </span>
+                <span className="font-mono text-xs sm:text-sm font-bold tracking-widest text-white uppercase group-hover:text-white group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.7)] transition-all duration-300">
+                  STACK
+                </span>
+                <div className="w-10 sm:w-12 h-[1px] bg-zinc-700/80 ml-1 group-hover:w-16 group-hover:bg-sky-400 group-hover:shadow-[0_0_8px_#38bdf8] transition-all duration-300" />
               </div>
 
               {/* Main Headline */}
@@ -503,10 +509,12 @@ export default function Skills() {
 
             <a
               href="#experience"
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-sky-400 hover:text-sky-300 transition-colors uppercase tracking-wider group shrink-0"
+              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider group shrink-0 transition-all duration-300"
             >
-              <span className="hidden min-[480px]:inline">04 / EXPERIENCE</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              <span className="text-sky-400 group-hover:text-sky-300 group-hover:drop-shadow-[0_0_8px_rgba(56,189,248,0.85)] transition-all">04</span>
+              <span className="text-zinc-600">/</span>
+              <span className="text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.7)] transition-all">EXPERIENCE</span>
+              <ArrowRight className="w-3.5 h-3.5 text-sky-400 group-hover:translate-x-1 group-hover:text-sky-300 transition-transform" />
             </a>
           </div>
         </div>

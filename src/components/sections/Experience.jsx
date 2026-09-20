@@ -182,11 +182,17 @@ export default function Experience() {
             HEADER SECTION
             ========================================================================= */}
         <div className="mb-14 md:mb-16">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="font-mono text-xs md:text-sm tracking-widest text-sky-400 font-bold uppercase drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">
-              04 / EXPERIENCE
+          <div className="group inline-flex items-center gap-2.5 mb-3 cursor-default transition-all duration-300">
+            <span className="font-mono text-xs sm:text-sm font-bold tracking-widest text-sky-400 drop-shadow-[0_0_6px_rgba(56,189,248,0.4)] group-hover:text-sky-300 group-hover:drop-shadow-[0_0_14px_rgba(56,189,248,0.9)] transition-all duration-300">
+              04
             </span>
-            <div className="w-10 h-[1px] bg-sky-500/40" />
+            <span className="font-mono text-xs sm:text-sm font-medium tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors duration-300">
+              /
+            </span>
+            <span className="font-mono text-xs sm:text-sm font-bold tracking-widest text-white uppercase group-hover:text-white group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.7)] transition-all duration-300">
+              EXPERIENCE
+            </span>
+            <div className="w-10 sm:w-12 h-[1px] bg-zinc-700/80 ml-1 group-hover:w-16 group-hover:bg-sky-400 group-hover:shadow-[0_0_8px_#38bdf8] transition-all duration-300" />
           </div>
 
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
