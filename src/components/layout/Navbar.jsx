@@ -99,11 +99,11 @@ export default function Navbar() {
           </div>
 
           {/* Right: Search Pill + Profile Avatar + Socials + Resume */}
-          <div className="flex items-center space-x-2.5 sm:space-x-3.5">
+          <div className="flex items-center gap-3 sm:gap-4 lg:gap-5">
             {/* Search Input Pill (Command Palette) */}
             <button
               onClick={handleOpenSearch}
-              className="hidden md:flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 hover:border-cyan-500/40 text-zinc-400 hover:text-zinc-200 transition-all text-xs group cursor-pointer shadow-inner"
+              className="hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 hover:border-cyan-500/40 text-zinc-400 hover:text-zinc-200 transition-all text-xs group cursor-pointer shadow-inner"
               title="Search portfolio (⌘K)"
               aria-label="Open Command Search Palette"
             >
@@ -119,7 +119,7 @@ export default function Navbar() {
             {/* Sautrik's Official Photo Avatar (Desktop Ring) */}
             <a
               href="#about"
-              className="relative group hidden sm:flex items-center justify-center select-none"
+              className="relative group hidden sm:flex items-center justify-center select-none mx-0.5"
               title="Sautrik Roy"
               aria-label="About Sautrik Roy"
             >
@@ -137,7 +137,7 @@ export default function Navbar() {
             </a>
 
             {/* Mobile Avatar & Search */}
-            <div className="flex items-center gap-2 md:hidden">
+            <div className="flex items-center gap-2.5 md:hidden">
               <a
                 href="#about"
                 className="w-7 h-7 rounded-full overflow-hidden border border-cyan-400/80 shadow-[0_0_8px_rgba(6,182,212,0.4)]"
@@ -161,8 +161,8 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Desktop Social Icons (Prominent, tactile glass buttons that use up space) */}
-            <div className="hidden lg:flex items-center space-x-2 text-zinc-300">
+            {/* Desktop Social Icons (Spread out with generous breathing room) */}
+            <div className="hidden lg:flex items-center gap-3 text-zinc-300">
               <a
                 href="https://github.com/sautrikroy17"
                 target="_blank"
@@ -195,7 +195,7 @@ export default function Navbar() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative hidden sm:inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-[13px] font-semibold text-white/95 transition-all duration-300 bg-slate-900/90 hover:bg-blue-950/70 border border-indigo-400/30 hover:border-blue-400 shadow-[0_0_12px_rgba(99,102,241,0.18)] hover:shadow-[0_0_18px_rgba(59,130,246,0.4)]"
+              className="group relative hidden sm:inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-[13px] font-semibold text-white/95 transition-all duration-300 bg-slate-900/90 hover:bg-blue-950/70 border border-indigo-400/30 hover:border-blue-400 shadow-[0_0_12px_rgba(99,102,241,0.18)] hover:shadow-[0_0_18px_rgba(59,130,246,0.4)] ml-1 sm:ml-2"
             >
               <span>Resume</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
