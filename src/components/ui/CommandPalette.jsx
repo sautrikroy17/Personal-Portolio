@@ -23,8 +23,16 @@ export default function CommandPalette() {
       }
       if (e.key === "Escape") setIsOpen(false);
     };
+
+    const handleCustomOpen = () => setIsOpen(true);
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("open-command-palette", handleCustomOpen);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("open-command-palette", handleCustomOpen);
+    };
   }, []);
 
   const navigateTo = (selector) => {
