@@ -16,7 +16,7 @@ const featuredProject = {
   subtitle: "A next-generation music experience, built for a more personal you.",
   description:
     "A modern, AI-powered music platform with personalized recommendations, live lyrics, immersive player experience and more.",
-  tags: ["React", "TypeScript", "Supabase", "Framer Motion"],
+  tags: ["React", "TypeScript", "Supabase", "PWA", "Framer Motion"],
   liveUrl: "https://loop-feel.vercel.app",
   githubUrl: "https://github.com/sautrikroy17/Loop-Beyond-Limits",
   image: "/loop.png",
@@ -38,7 +38,7 @@ const secondaryProjects = [
     number: "03",
     title: "Sentinel",
     subtitle: "Mental wellness platform for uniformed forces.",
-    tags: ["React 18", "Node.js", "Supabase", "WebRTC", "Capacitor"],
+    tags: ["React 18", "Node.js", "Supabase", "WebRTC", "Capacitor", "PWA"],
     image: "/sentinel.png",
     liveUrl: "https://sentinelsfrontend.onrender.com/",
     githubUrl: null,
