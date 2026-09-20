@@ -95,20 +95,21 @@ export default function Hero() {
           animate="visible"
           className="max-w-xl lg:max-w-2xl flex flex-col items-start text-left space-y-4 sm:space-y-6"
         >
-          {/* Simple, Minimalist & Impactful Badge */}
-          <motion.div variants={itemVariants}>
-            <div className="inline-flex flex-wrap items-center gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-slate-950/80 border border-white/15 backdrop-blur-xl shadow-lg">
-              <span className="text-xs sm:text-[13px] font-display font-bold tracking-[0.1em] text-white uppercase">
+          {/* Open, Minimalist & Unboxed Status Line */}
+          <motion.div variants={itemVariants} className="pt-1">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <span className="text-xs sm:text-[13px] font-mono font-bold tracking-[0.16em] text-white uppercase">
                 FULL STACK DEVELOPER
               </span>
-              <span className="text-zinc-600 font-mono text-xs select-none">&amp;</span>
-              <span className="text-xs sm:text-[13px] font-display font-medium tracking-wide text-zinc-300">
-                AI &amp; Product Builder
+              <span className="text-zinc-600 font-mono text-xs select-none">/</span>
+              <span className="text-xs sm:text-[13px] font-mono font-medium tracking-[0.12em] text-zinc-300 uppercase">
+                PRODUCT BUILDER
               </span>
-              <span className="w-1 h-1 rounded-full bg-zinc-600" />
+              <span className="text-zinc-700 font-mono text-xs select-none">•</span>
               <span className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-wider text-cyan-400 uppercase">
-                Open to work
+                OPEN TO WORK
               </span>
+              <div className="hidden sm:block h-[1px] w-12 bg-gradient-to-r from-cyan-400/50 to-transparent ml-1" />
             </div>
           </motion.div>
 
@@ -126,7 +127,7 @@ export default function Hero() {
           {/* Sub-headline description */}
           <motion.div variants={itemVariants}>
             <p className="text-sm sm:text-base md:text-lg text-zinc-300 font-normal leading-relaxed max-w-xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-              I build full-stack and AI-powered products that turn complex problems into elegant,
+              I build full-stack and digital products that turn complex problems into elegant,
               impactful experiences.
             </p>
           </motion.div>
