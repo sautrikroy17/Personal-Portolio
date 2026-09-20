@@ -133,6 +133,9 @@ export default function Skills() {
           />
         </picture>
 
+        {/* Mobile atmospheric contrast overlay: ensures crisp text readability while preserving the desk & monitor glow */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/55 to-black/90 sm:hidden pointer-events-none z-[1]" />
+
         {/* Seamless top blend with Projects section - perfectly connects the developer studio journey */}
         <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-black via-black/85 to-transparent z-10 pointer-events-none" />
 

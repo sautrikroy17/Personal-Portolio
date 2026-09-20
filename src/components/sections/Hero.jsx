@@ -61,7 +61,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-[100dvh] w-full flex flex-col justify-between overflow-hidden pt-20 sm:pt-28 pb-6 sm:pb-8 select-none"
+      className="relative min-h-[100dvh] w-full flex flex-col justify-between overflow-hidden pt-20 sm:pt-28 pb-6 sm:pb-8 select-none bg-black text-white"
     >
       {/* =========================================================================
           ATMOSPHERIC WORKSPACE BACKGROUND

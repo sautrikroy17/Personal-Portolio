@@ -131,7 +131,61 @@
     padding-bottom: 0.5rem !important;
   }
 
-  /* 4. iOS Safari Form Auto-Zoom Fix (16px base font rule prevents viewport zoom on focus) */
+  /* 4. Seamless Mobile Section Blending (Flawless Transitions Between Pages)
+     Enforces unified deep black foundation, consistent atmospheric contrast,
+     and deep smooth edge gradients across all sections on mobile devices. */
+  section,
+  #top,
+  #about,
+  #projects,
+  #skills,
+  #experience,
+  #contact,
+  footer {
+    background-color: #000000 !important;
+    position: relative;
+  }
+
+  /* Harmonized mobile section padding so content never collides with edge blends */
+  #about {
+    padding-top: 4.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  #projects {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  #skills {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  #experience {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  #contact {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  /* Deep, velvety edge blend transitions for mobile touch scrolling */
+  section .pointer-events-none > div[class*="bg-gradient-to-b from-black"],
+  section .pointer-events-none > div[class*="bg-gradient-to-t from-black"] {
+    height: 7rem !important;
+  }
+
+  /* Ensure background workspace images on mobile maintain uniform tone and zero abrupt shifts */
+  section .pointer-events-none img,
+  section .pointer-events-none picture img {
+    opacity: 0.8 !important;
+    filter: brightness(0.85) contrast(1.05);
+  }
+
+  /* 5. iOS Safari Form Auto-Zoom Fix (16px base font rule prevents viewport zoom on focus) */
   input,
   textarea,
   select {
@@ -139,7 +193,7 @@
     max-width: 100% !important;
   }
 
-  /* 5. Touch Targets & Interaction Polish */
+  /* 6. Touch Targets & Interaction Polish */
   * {
     -webkit-tap-highlight-color: transparent;
   }

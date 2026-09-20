@@ -99,7 +99,7 @@ export default function Navbar() {
           </div>
 
           {/* Right: Search Pill + Profile Avatar + Socials + Resume */}
-          <div className="flex items-center gap-3 sm:gap-4 lg:gap-5">
+          <div className="flex items-center gap-3.5 sm:gap-4.5 lg:gap-6">
             {/* Search Input Pill (Command Palette) */}
             <button
               onClick={handleOpenSearch}
@@ -119,11 +119,11 @@ export default function Navbar() {
             {/* Sautrik's Official Photo Avatar (Desktop Ring) */}
             <a
               href="#about"
-              className="relative group hidden sm:flex items-center justify-center select-none mx-0.5"
+              className="relative group hidden sm:flex items-center justify-center select-none mx-1 sm:mx-1.5"
               title="Sautrik Roy"
               aria-label="About Sautrik Roy"
             >
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-cyan-400/80 shadow-[0_0_14px_rgba(6,182,212,0.5)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.8)] group-hover:scale-105 transition-all duration-200 ring-2 ring-cyan-500/20">
+              <div className="w-8.5 h-8.5 sm:w-9.5 sm:h-9.5 rounded-full overflow-hidden border-2 border-cyan-400/80 shadow-[0_0_14px_rgba(6,182,212,0.5)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.8)] group-hover:scale-105 transition-all duration-200 ring-2 ring-cyan-500/20">
                 <img
                   src="/sautrik-avatar.jpg"
                   alt="Sautrik Roy"
@@ -161,32 +161,32 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Desktop Social Icons (Spread out with generous breathing room) */}
-            <div className="hidden lg:flex items-center gap-3 text-zinc-300">
+            {/* Desktop Social Icons (Noticeably bigger & spread out with generous breathing room) */}
+            <div className="hidden lg:flex items-center gap-3.5 xl:gap-4.5 text-zinc-300">
               <a
                 href="https://github.com/sautrikroy17"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub Profile"
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/30 flex items-center justify-center text-zinc-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all hover:scale-105 shadow-sm"
+                className="w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/30 flex items-center justify-center text-zinc-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.6)] transition-all hover:scale-110 shadow-sm"
               >
-                <GithubIcon className="w-4.5 h-4.5" />
+                <GithubIcon className="w-5 h-5" />
               </a>
               <a
                 href="https://www.linkedin.com/in/sautrik-roy-1779r"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn Profile"
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/30 flex items-center justify-center text-zinc-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all hover:scale-105 shadow-sm"
+                className="w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/30 flex items-center justify-center text-zinc-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.6)] transition-all hover:scale-110 shadow-sm"
               >
-                <LinkedinIcon className="w-4.5 h-4.5" />
+                <LinkedinIcon className="w-5 h-5" />
               </a>
               <a
                 href="mailto:sautrikroy2006@gmail.com"
                 aria-label="Email Sautrik Roy"
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/30 flex items-center justify-center text-zinc-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all hover:scale-105 shadow-sm"
+                className="w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/30 flex items-center justify-center text-zinc-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.6)] transition-all hover:scale-110 shadow-sm"
               >
-                <Mail className="w-4.5 h-4.5" />
+                <Mail className="w-5 h-5" />
               </a>
             </div>
 
@@ -195,7 +195,7 @@ export default function Navbar() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative hidden sm:inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-[13px] font-semibold text-white/95 transition-all duration-300 bg-slate-900/90 hover:bg-blue-950/70 border border-indigo-400/30 hover:border-blue-400 shadow-[0_0_12px_rgba(99,102,241,0.18)] hover:shadow-[0_0_18px_rgba(59,130,246,0.4)] ml-1 sm:ml-2"
+              className="group relative hidden sm:inline-flex items-center gap-1.5 px-3.5 sm:px-4.5 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-semibold text-white/95 transition-all duration-300 bg-slate-900/90 hover:bg-blue-950/70 border border-indigo-400/30 hover:border-blue-400 shadow-[0_0_12px_rgba(99,102,241,0.18)] hover:shadow-[0_0_18px_rgba(59,130,246,0.4)] ml-2 sm:ml-3 lg:ml-4"
             >
               <span>Resume</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
