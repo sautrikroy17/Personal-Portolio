@@ -1,12 +1,8 @@
-import { ArrowUp, Heart } from "lucide-react";
 import SRLogo from "../ui/SRLogo";
 import { GithubIcon, LinkedinIcon } from "../ui/SocialIcons";
 import { Mail } from "lucide-react";
 
 export default function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <footer className="relative z-20 bg-black text-white border-t border-white/10 overflow-hidden">
@@ -71,16 +67,6 @@ export default function Footer() {
             >
               <Mail className="w-4 h-4" />
             </a>
-
-            {/* Back to top */}
-            <button
-              onClick={scrollToTop}
-              className="group p-2.5 rounded-full bg-blue-950/60 hover:bg-blue-900/80 border border-blue-500/30 text-blue-300 hover:text-white transition-all shadow-[0_0_15px_rgba(59,130,246,0.2)] active:scale-90 ml-2"
-              title="Back to Top"
-              aria-label="Back to Top"
-            >
-              <ArrowUp className="w-4 h-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
-            </button>
           </div>
         </div>
 
