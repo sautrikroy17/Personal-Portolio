@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Lightbulb, BookOpen, Users, Sprout, Layers, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Lightbulb, BookOpen, Users, Sprout, Layers } from "lucide-react";
 import {
   CppIcon,
   JavaIcon,
@@ -220,46 +220,35 @@ export default function Skills() {
                 key={cat.number}
                 className="relative rounded-2xl border border-white/10 bg-zinc-950/75 backdrop-blur-xl p-4 sm:p-5 hover:border-cyan-500/35 transition-all duration-300 group shadow-lg"
               >
-                {/* Header row: Number + Name + Description + Arrow Button */}
-                <div className="flex items-center justify-between mb-3">
-                  <div>
-                    <div className="flex items-center gap-2.5">
-                      <span className="font-mono text-xs font-bold text-sky-400">
-                        {cat.number}
-                      </span>
-                      <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
-                        {cat.name}
-                      </h3>
-                    </div>
-                    <p className="text-[11px] sm:text-xs text-zinc-400 mt-0.5 font-normal">
-                      {cat.description}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <span className="hidden sm:inline font-mono text-[10px] text-zinc-600 select-none">
-                      /////
+                {/* Header row: Number + Name + Description */}
+                <div className="mb-3">
+                  <div className="flex items-center gap-2.5">
+                    <span className="font-mono text-xs font-bold text-sky-400">
+                      {cat.number}
                     </span>
-                    <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-sky-500/25 bg-sky-500/10 group-hover:bg-sky-500 group-hover:text-black flex items-center justify-center text-sky-400 transition-all shadow-sm">
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </div>
+                    <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                      {cat.name}
+                    </h3>
                   </div>
+                  <p className="text-[11px] sm:text-xs text-zinc-400 mt-0.5 font-normal">
+                    {cat.description}
+                  </p>
                 </div>
 
                 {/* Tech icons row */}
-                <div className="grid grid-cols-4 min-[420px]:grid-cols-5 sm:grid-cols-6 gap-2 sm:gap-2.5 pt-1">
+                <div className="grid grid-cols-3 min-[400px]:grid-cols-4 sm:grid-cols-5 gap-2 sm:gap-2.5 pt-1">
                   {cat.skills.map((skill) => {
                     const IconComponent = skill.icon;
                     return (
                       <div
                         key={skill.name}
-                        className="flex flex-col items-center justify-center p-2 rounded-xl border border-white/5 bg-zinc-900/50 hover:bg-zinc-800/80 hover:border-cyan-500/40 hover:scale-105 transition-all duration-200 group/icon cursor-default shadow-sm"
+                        className="flex flex-col items-center justify-center p-2 rounded-xl border border-white/5 bg-zinc-900/50 hover:bg-zinc-800/80 hover:border-cyan-500/40 hover:scale-105 transition-all duration-200 group/icon cursor-default shadow-sm min-h-[64px]"
                         title={skill.name}
                       >
                         <div className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center">
                           <IconComponent className="w-full h-full object-contain" />
                         </div>
-                        <span className="text-[10px] sm:text-[11px] font-medium text-zinc-300 mt-1.5 text-center truncate max-w-full">
+                        <span className="text-[10px] sm:text-[11px] font-medium text-zinc-300 mt-1.5 text-center leading-tight">
                           {skill.name}
                         </span>
                       </div>

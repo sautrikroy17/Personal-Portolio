@@ -173,14 +173,23 @@ export default function About() {
               </div>
             </div>
 
-            {/* Title & Subtitle */}
-            <div className="relative z-10 mb-4">
-              <h3 className="text-lg font-bold text-white tracking-tight leading-snug">
-                Full-stack products + AI experiences.
-              </h3>
-              <p className="text-xs font-medium text-zinc-400">
-                SRMIST &bull; Chennai
-              </p>
+            {/* Title & Subtitle with Sautrik's Photo */}
+            <div className="relative z-10 mb-4 flex items-center gap-3.5">
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-cyan-400/80 shadow-[0_0_16px_rgba(6,182,212,0.45)] ring-2 ring-cyan-500/20 shrink-0">
+                <img
+                  src="/sautrik-avatar.jpg"
+                  alt="Sautrik Roy"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+              <div>
+                <h3 className="text-base sm:text-lg font-bold text-white tracking-tight leading-snug">
+                  Full-stack products + AI experiences.
+                </h3>
+                <p className="text-xs font-medium text-cyan-400">
+                  Sautrik Roy &bull; SRMIST Chennai
+                </p>
+              </div>
             </div>
 
             {/* Activities List */}

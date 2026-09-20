@@ -98,8 +98,8 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right: Search Pill + Socials + Resume */}
-          <div className="flex items-center space-x-3 sm:space-x-4">
+          {/* Right: Search Pill + Profile Avatar + Socials + Resume */}
+          <div className="flex items-center space-x-2.5 sm:space-x-3.5">
             {/* Search Input Pill (Command Palette) */}
             <button
               onClick={handleOpenSearch}
@@ -116,17 +116,48 @@ export default function Navbar() {
               </kbd>
             </button>
 
-            {/* Mobile Search Button */}
-            <button
-              onClick={handleOpenSearch}
-              className="md:hidden p-2 rounded-full bg-zinc-900/80 border border-white/10 text-zinc-300 hover:text-white active:scale-95"
-              aria-label="Search"
+            {/* Sautrik's Official Photo Avatar (Desktop Ring) */}
+            <a
+              href="#about"
+              className="relative group hidden sm:flex items-center justify-center select-none"
+              title="Sautrik Roy"
+              aria-label="About Sautrik Roy"
             >
-              <Search className="w-4 h-4 text-zinc-300" />
-            </button>
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-cyan-400/60 shadow-[0_0_12px_rgba(6,182,212,0.4)] group-hover:shadow-[0_0_18px_rgba(6,182,212,0.7)] group-hover:scale-105 transition-all duration-200 ring-2 ring-cyan-500/20">
+                <img
+                  src="/sautrik-avatar.jpg"
+                  alt="Sautrik Roy"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+              {/* Online indicator dot */}
+              <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 border border-zinc-950 shadow-[0_0_6px_#10b981]" />
+            </a>
+
+            {/* Mobile Avatar & Search */}
+            <div className="flex items-center gap-2 md:hidden">
+              <a
+                href="#about"
+                className="w-7 h-7 rounded-full overflow-hidden border border-cyan-400/60 shadow-[0_0_8px_rgba(6,182,212,0.4)]"
+                aria-label="About Sautrik Roy"
+              >
+                <img
+                  src="/sautrik-avatar.jpg"
+                  alt="Sautrik Roy"
+                  className="w-full h-full object-cover object-center"
+                />
+              </a>
+              <button
+                onClick={handleOpenSearch}
+                className="p-1.5 rounded-full bg-zinc-900/80 border border-white/10 text-zinc-300 hover:text-white active:scale-95"
+                aria-label="Search"
+              >
+                <Search className="w-4 h-4 text-zinc-300" />
+              </button>
+            </div>
 
             {/* Desktop Social Icons */}
-            <div className="hidden md:flex items-center space-x-3 text-zinc-300">
+            <div className="hidden lg:flex items-center space-x-2.5 text-zinc-300">
               <a
                 href="https://github.com/sautrikroy17"
                 target="_blank"
@@ -187,9 +218,18 @@ export default function Navbar() {
             animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[55] bg-zinc-950/95 flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[55] bg-zinc-950/95 flex flex-col items-center justify-center overflow-y-auto py-8"
           >
-            <div className="flex flex-col items-center space-y-6 p-6 w-full max-w-sm">
+            <div className="flex flex-col items-center space-y-5 p-6 w-full max-w-sm">
+              {/* Profile Card Header in Mobile Drawer */}
+              <div className="flex flex-col items-center mb-1 select-none">
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.5)] mb-2.5">
+                  <img src="/sautrik-avatar.jpg" alt="Sautrik Roy" className="w-full h-full object-cover object-center" />
+                </div>
+                <h3 className="text-xl font-bold text-white tracking-tight">Sautrik Roy</h3>
+                <p className="text-xs font-mono text-cyan-400 tracking-wider uppercase">Full Stack & AI Developer</p>
+              </div>
+
               {navLinks.map((link, idx) => (
                 <motion.a
                   key={link.name}
@@ -204,7 +244,7 @@ export default function Navbar() {
                 </motion.a>
               ))}
 
-              <div className="flex items-center space-x-6 pt-4 text-zinc-400">
+              <div className="flex items-center space-x-6 pt-2 text-zinc-400">
                 <a
                   href="https://github.com/sautrikroy17"
                   target="_blank"
@@ -240,7 +280,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="mt-4 px-8 py-2.5 text-base font-semibold text-white transition-all bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 rounded-full shadow-[0_0_20px_rgba(59,130,246,0.4)] active:scale-95 flex items-center gap-2"
+                className="mt-2 px-8 py-2.5 text-base font-semibold text-white transition-all bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 rounded-full shadow-[0_0_20px_rgba(59,130,246,0.4)] active:scale-95 flex items-center gap-2"
               >
                 <span>Resume</span>
                 <ArrowRight className="w-4 h-4" />
