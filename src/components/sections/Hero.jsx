@@ -1,14 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Mail, Lightbulb, Code2, Box, BarChart3, MapPin, Sparkles } from "lucide-react";
-
-// Rotating titles to spice up the hero badge
-const ROLES = [
-  "Full Stack Developer",
-  "AI & Product Engineer",
-  "Systems Architect",
-  "Creative Technologist",
-];
+import { motion } from "framer-motion";
+import { ArrowRight, Mail, Lightbulb, Code2, Box, BarChart3, MapPin } from "lucide-react";
 
 // The 4 interactive bento tiles from the reference mockup
 const bentoCards = [
@@ -67,15 +58,6 @@ const itemVariants = {
 };
 
 export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % ROLES.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section
       id="top"
@@ -113,37 +95,19 @@ export default function Hero() {
           animate="visible"
           className="max-w-xl lg:max-w-2xl flex flex-col items-start text-left space-y-4 sm:space-y-6"
         >
-          {/* Spiced-Up Interactive Status & Dynamic Role Badge */}
-          <motion.div variants={itemVariants} className="pt-0.5">
-            <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1.5 rounded-full bg-slate-950/85 border border-cyan-500/35 hover:border-cyan-400/60 backdrop-blur-xl shadow-[0_0_20px_rgba(6,182,212,0.22)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all duration-300 group cursor-default">
-              {/* Pulsing Live Radar Beacon */}
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+          {/* Simple, Minimalist & Impactful Badge */}
+          <motion.div variants={itemVariants}>
+            <div className="inline-flex flex-wrap items-center gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-slate-950/80 border border-white/15 backdrop-blur-xl shadow-lg">
+              <span className="text-xs sm:text-[13px] font-display font-bold tracking-[0.1em] text-white uppercase">
+                FULL STACK DEVELOPER
               </span>
-
-              {/* Glowing Sparkle Icon */}
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse flex-shrink-0" />
-
-              {/* Dynamic Rotating Role Title */}
-              <div className="h-5 overflow-hidden flex items-center min-w-[150px] sm:min-w-[185px]">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={roleIndex}
-                    initial={{ y: 12, opacity: 0, filter: "blur(4px)" }}
-                    animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                    exit={{ y: -12, opacity: 0, filter: "blur(4px)" }}
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-[11px] sm:text-[13px] font-display font-bold tracking-[0.12em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-blue-300 uppercase select-none whitespace-nowrap"
-                  >
-                    {ROLES[roleIndex]}
-                  </motion.span>
-                </AnimatePresence>
-              </div>
-
-              {/* Availability Status Badge */}
-              <span className="hidden min-[480px]:inline-flex items-center text-[9.5px] font-mono font-medium px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 group-hover:text-zinc-300 transition-colors">
-                OPEN TO WORK
+              <span className="text-zinc-600 font-mono text-xs select-none">&amp;</span>
+              <span className="text-xs sm:text-[13px] font-display font-medium tracking-wide text-zinc-300">
+                AI &amp; Product Builder
+              </span>
+              <span className="w-1 h-1 rounded-full bg-zinc-600" />
+              <span className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-wider text-cyan-400 uppercase">
+                Open to work
               </span>
             </div>
           </motion.div>

@@ -3,17 +3,17 @@ import { motion } from "framer-motion";
 export default function SRLogo({ className = "" }) {
   return (
     <motion.div
-      className={`inline-flex items-center select-none cursor-pointer group ${className}`}
+      className={`flex items-baseline font-black tracking-tight select-none cursor-pointer group ${className}`}
       whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: 0.96 }}
       transition={{ type: "spring", stiffness: 400, damping: 20 }}
     >
-      {/* Bold White SR */}
-      <span className="text-xl sm:text-2xl font-black text-white tracking-tighter font-sans leading-none">
+      <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-display transition-colors duration-200 group-hover:text-white">
         SR
       </span>
-      {/* Official Cyan Square Dot (as shown in reference) */}
-      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#00e5ff] inline-block ml-0.5 self-end mb-0.5 shadow-[0_0_10px_rgba(0,229,255,0.9)]" />
+      <span className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 drop-shadow-[0_0_12px_rgba(59,130,246,0.9)] ml-[1px]">
+        .
+      </span>
     </motion.div>
   );
 }

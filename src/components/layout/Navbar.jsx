@@ -75,18 +75,26 @@ export default function Navbar() {
             isScrolled && "border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.95)] bg-zinc-950/90"
           )}
         >
-          {/* Left: SR. Brand Identity */}
+          {/* Left: SR. Brand Identity + Name to use space */}
           <a
             href="#top"
             onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center space-x-2 z-[70] outline-none select-none"
+            className="flex items-center gap-2.5 z-[70] outline-none select-none group shrink-0"
             aria-label="Sautrik Roy Homepage"
           >
             <SRLogo />
+            <div className="hidden min-[480px]:flex flex-col text-left">
+              <span className="text-xs sm:text-[13px] font-bold text-white tracking-tight leading-none group-hover:text-cyan-300 transition-colors">
+                Sautrik Roy
+              </span>
+              <span className="text-[10px] font-mono text-zinc-400 tracking-wider uppercase leading-none mt-1">
+                Portfolio
+              </span>
+            </div>
           </a>
 
           {/* Center: Portfolio Navigation Links */}
-          <div className="hidden md:flex items-center space-x-7 lg:space-x-9">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -123,28 +131,33 @@ export default function Navbar() {
               title="Sautrik Roy"
               aria-label="About Sautrik Roy"
             >
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-cyan-400/60 shadow-[0_0_12px_rgba(6,182,212,0.4)] group-hover:shadow-[0_0_18px_rgba(6,182,212,0.7)] group-hover:scale-105 transition-all duration-200 ring-2 ring-cyan-500/20">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-cyan-400/80 shadow-[0_0_14px_rgba(6,182,212,0.5)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.8)] group-hover:scale-105 transition-all duration-200 ring-2 ring-cyan-500/20">
                 <img
                   src="/sautrik-avatar.jpg"
                   alt="Sautrik Roy"
                   className="w-full h-full object-cover object-center"
+                  onError={(e) => {
+                    e.currentTarget.src = "/sautrik-photo.jpg";
+                  }}
                 />
               </div>
-              {/* Online indicator dot */}
-              <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 border border-zinc-950 shadow-[0_0_6px_#10b981]" />
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-zinc-950 shadow-[0_0_6px_#10b981]" />
             </a>
 
             {/* Mobile Avatar & Search */}
             <div className="flex items-center gap-2 md:hidden">
               <a
                 href="#about"
-                className="w-7 h-7 rounded-full overflow-hidden border border-cyan-400/60 shadow-[0_0_8px_rgba(6,182,212,0.4)]"
+                className="w-7 h-7 rounded-full overflow-hidden border border-cyan-400/80 shadow-[0_0_8px_rgba(6,182,212,0.4)]"
                 aria-label="About Sautrik Roy"
               >
                 <img
                   src="/sautrik-avatar.jpg"
                   alt="Sautrik Roy"
                   className="w-full h-full object-cover object-center"
+                  onError={(e) => {
+                    e.currentTarget.src = "/sautrik-photo.jpg";
+                  }}
                 />
               </a>
               <button
@@ -156,32 +169,32 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Desktop Social Icons */}
-            <div className="hidden lg:flex items-center space-x-2.5 text-zinc-300">
+            {/* Desktop Social Icons (Prominent, tactile glass buttons that use up space) */}
+            <div className="hidden lg:flex items-center space-x-2 text-zinc-300">
               <a
                 href="https://github.com/sautrikroy17"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub Profile"
-                className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all p-1"
+                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/30 flex items-center justify-center text-zinc-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all hover:scale-105 shadow-sm"
               >
-                <GithubIcon className="w-4 h-4" />
+                <GithubIcon className="w-4.5 h-4.5" />
               </a>
               <a
                 href="https://www.linkedin.com/in/sautrik-roy-1779r"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn Profile"
-                className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all p-1"
+                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/30 flex items-center justify-center text-zinc-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all hover:scale-105 shadow-sm"
               >
-                <LinkedinIcon className="w-4 h-4" />
+                <LinkedinIcon className="w-4.5 h-4.5" />
               </a>
               <a
                 href="mailto:sautrikroy2006@gmail.com"
                 aria-label="Email Sautrik Roy"
-                className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all p-1"
+                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/30 flex items-center justify-center text-zinc-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all hover:scale-105 shadow-sm"
               >
-                <Mail className="w-4 h-4" />
+                <Mail className="w-4.5 h-4.5" />
               </a>
             </div>
 
@@ -190,10 +203,10 @@ export default function Navbar() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold text-white/95 transition-all duration-300 bg-slate-900/80 hover:bg-blue-950/60 border border-indigo-400/30 hover:border-blue-400 shadow-[0_0_12px_rgba(99,102,241,0.15)] hover:shadow-[0_0_18px_rgba(59,130,246,0.35)]"
+              className="group relative inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-[13px] font-semibold text-white/95 transition-all duration-300 bg-slate-900/90 hover:bg-blue-950/70 border border-indigo-400/30 hover:border-blue-400 shadow-[0_0_12px_rgba(99,102,241,0.18)] hover:shadow-[0_0_18px_rgba(59,130,246,0.4)]"
             >
               <span>Resume</span>
-              <ArrowRight className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-0.5" />
+              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
             </a>
 
             {/* Mobile Menu Hamburger Toggle */}
