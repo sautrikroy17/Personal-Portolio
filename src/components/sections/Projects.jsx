@@ -41,7 +41,7 @@ const secondaryProjects = [
     tags: ["React 18", "Node.js", "Supabase", "WebRTC", "Capacitor", "PWA"],
     image: "/sentinel.png",
     liveUrl: "https://sentinelsfrontend.onrender.com/",
-    githubUrl: null,
+    githubUrl: "https://github.com/sautrikroy17/Sentinel_SIH",
     glowColor: "rgba(16, 185, 129, 0.2)",
     accentColor: "from-emerald-500 to-teal-600",
   },
